@@ -1,0 +1,20 @@
+{
+  "author": "linterhub",
+  "name": "@linterhub/usage-parser",
+  "version": "0.0.0-development",
+  "description": "",
+  "homepage": "https://github.com/linterhub/usage-parser.git",
+  "license": "MIT",
+  "contributors": [],
+  "keywords": [],
+  "repository": "linterhub/usage-parser",
+  "bugs": "https://github.com/linterhub/usage-parser/issues",
+  "main": "index.js",
+  "scripts": {
+    "parse": "node index.js"
+  },
+  "devDependencies": {
+    "eslint": "^5.0.1",
+    "eslint-config-google": "^0.9.1"
+  }
+}
