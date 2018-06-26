@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "ban.spellright",
+        "eg2.vscode-npm-script"
+    ]
+}
