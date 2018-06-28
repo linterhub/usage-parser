@@ -1,6 +1,8 @@
-const parser = (string) => {
-    // TODO: create implementation
-    return JSON.parse(string);
+const parser = (help) => {
+    const handle = require('./handle.js');
+    const templatizer = require('./templatizer.js');
+
+    return templatizer(handle(help));
 };
 
 module.exports = parser;
