@@ -19,8 +19,18 @@ const parseSection = (sectionName, help) => {
 };
 
 const splitSection = (section) => {
-    //TODO: create implementation
     let split = [];
+    const regularExp = "\n[ \t]*";
+    let splitTmp = section.split(regularExp).slice(1);
+    let j = 0;
+    splitTmp.forEach(splitTmp => {
+        if (splitTmp.indexOf("-") === 0 && j > 0) {
+            split.push(splitTmp);
+            j++;
+        } else {
+            split[j - 1] = split[j - 1] + splitTmp;
+        }
+    });
     return split;
 };
 
