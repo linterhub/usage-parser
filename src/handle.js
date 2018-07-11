@@ -13,9 +13,9 @@ const handle = (help) => {
 };
 
 const parseSection = (sectionName, help) => {
-    //TODO: create implementation
-    let section = [];
-    return section;
+    let regularExp = new RegExp(`[^\n]*${sectionName}[^\n]*\n?(?:[ \t].*?(?:\n|$))*`);
+    let matches = help.match(regularExp);
+    return matches.map(match => match.trim());
 };
 
 const splitSection = (section) => {
