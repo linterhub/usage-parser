@@ -15,28 +15,72 @@ const handle = (help) => {
 const parseSection = (sectionName, help) => {
     let regularExp = new RegExp(`[^\n]*${sectionName}[^\n]*\n?(?:[ \t].*?(?:\n|$))*`);
     let matches = help.match(regularExp);
+
     return matches.map(match => match.trim());
 };
 
 const splitSection = (section) => {
     let split = [];
-    const regularExp = "\n[ \t]*";
-    let splitTmp = section.split(regularExp).slice(1);
+    let splitTmp = section.split("\n").slice(1);
+
     let j = 0;
+
     splitTmp.forEach(splitTmp => {
-        if (splitTmp.indexOf("-") === 0 && j > 0) {
+        splitTmp = splitTmp.trim();
+
+        if (splitTmp.indexOf("-") === 0) {
             split.push(splitTmp);
             j++;
-        } else {
+        } else if (j > 0) {
             split[j - 1] = split[j - 1] + splitTmp;
         }
     });
+
     return split;
 };
 
 const parseOption = (option) => {
-    //TODO: create implementation
-    return [];
+    let argument = {
+        shortName: null,
+        longName: null,
+        defaultValue: false,
+        description: null
+    };
+
+    option.trim().split(/\s\s+/, 2).map((section, index) => {
+        index === 0 ? setArgument(section, argument) : setDescription(section, argument);
+    });
+
+    return argument;
+};
+
+const setArgument = (section, argument) => {
+    const argumentPrefix = /^-*/i;
+
+    section = RemoveExtraCharacters(section);
+    section.split(/\s+/).map(arg => {
+        switch(argumentPrefix.exec(arg).toString()) {
+            case "--":
+                argument.longName = arg;
+                break;
+            case "-":
+                argument.shortName = arg;
+                break;
+        }
+    });
+};
+
+const setDescription = (section, argument) => {
+    argument.description = section;
+    //TODO: add other patterns for default value parsing
+    const defaultValues = section.match(/\[default: (.*?)\]/i);
+    argument.defaultValue = defaultValues ? defaultValues[1] : "";
+};
+
+const RemoveExtraCharacters = (args) => {
+    args = args.replace(/=/g, " ");
+    args = args.replace(/,/g, " ");
+    return args;
 };
 
 module.exports = handle;
