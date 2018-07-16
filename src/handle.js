@@ -1,13 +1,30 @@
+const argumentTemplate = {
+    shortName: null,
+    longName: null,
+    isFlag: true,
+    default: false,
+    description: null
+};
+
 const handle = (help) => {
-    const sectionName = "Options:";
+    const sectionName = {
+        options: "Options:",
+        usage: "Usage:"
+    };
     let options = [];
 
-    parseSection(sectionName, help).forEach(section => {
+    parseSection(sectionName.options, help).forEach(section => {
         splitSection(section).forEach(option => {
             if (option.indexOf("-") === 0) {
                 options.push(parseOption(option));
             }
         });
+    });
+
+    parseSection(sectionName.usage, help).forEach(section => {
+        let argument = Object.assign({}, argumentTemplate);
+        argument.longName = "";
+        section.match(/file|path/i) ? options.push(argument) : "";
     });
     return options;
 };
@@ -40,13 +57,7 @@ const splitSection = (section) => {
 };
 
 const parseOption = (option) => {
-    let argument = {
-        shortName: null,
-        longName: null,
-        isFlag: true,
-        defaultValue: false,
-        description: null
-    };
+    let argument = Object.assign({}, argumentTemplate);
 
     option.trim().split(/\s\s+/, 2).map((section, index) => {
         index === 0 ? setArgument(section, argument) : setDescription(section, argument);

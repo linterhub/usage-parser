@@ -7,14 +7,34 @@ const templatizer = (options) => {
         let optionSchema = Object.assign({}, optionTemplate);
         const argumentName = option.longName;
         switch (argumentName){
-            //TODO: arguments with prefix linterhub:
+            case "--version":
+                optionSchema.id = "linterhub:version";
+                optionSchema.type = "null";
+                break;
+            case "--help":
+                optionSchema.id = "linterhub:help";
+                optionSchema.type = "null";
+                break;
+            case "--config":
+                optionSchema.id = "linterhub:config";
+                break;
+            case "--stdin":
+                optionSchema.id = "linterhub:stdin";
+                break;
+            case "--stdin-filename":
+            case "--stdin-filepath":
+                optionSchema.id = "linterhub:filename";
+                break;
+            case "":
+                optionSchema.id = "linterhub:path";
+                optionSchema.description = "Path to file or folder to analyze";
+                break;
             default:
                 optionSchema.id = (!option.isFlag ? "args:" : "") + option.longName;
                 //TODO: argument types
-                optionSchema.type = "string";
-                optionSchema.description = option.description;
-                optionSchema.default = option.defaultValue;
         }
+        optionSchema.description = option.description;
+        optionSchema.default = option.default;
         result.definitions.arguments.properties[argumentName] = optionSchema;
     });
 
