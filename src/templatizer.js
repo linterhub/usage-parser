@@ -9,7 +9,7 @@ const templatizer = (options) => {
         switch (argumentName){
             //TODO: arguments with prefix linterhub:
             default:
-                optionSchema.id = option.longName;
+                optionSchema.id = (!option.isFlag ? "args:" : "") + option.longName;
                 //TODO: argument types
                 optionSchema.type = "string";
                 optionSchema.description = option.description;

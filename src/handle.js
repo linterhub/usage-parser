@@ -43,6 +43,7 @@ const parseOption = (option) => {
     let argument = {
         shortName: null,
         longName: null,
+        isFlag: true,
         defaultValue: false,
         description: null
     };
@@ -66,6 +67,9 @@ const setArgument = (section, argument) => {
             case "-":
                 argument.shortName = arg;
                 break;
+            default:
+                argument.isFlag = false;
+                break;
         }
     });
 };
@@ -74,7 +78,10 @@ const setDescription = (section, argument) => {
     argument.description = section;
     //TODO: add other patterns for default value parsing
     const defaultValues = section.match(/\[default: (.*?)\]/i);
-    argument.defaultValue = defaultValues ? defaultValues[1] : "";
+    if (defaultValues) {
+        argument.defaultValue = defaultValues[1];
+        argument.isFlag = false;
+    }
 };
 
 const RemoveExtraCharacters = (args) => {
