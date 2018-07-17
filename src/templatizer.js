@@ -1,3 +1,5 @@
+'use strict';
+
 const templatizer = (context) => {
     const argumentsTemplate = require('./template/args.json');
     const optionTemplate = require('./template/option.json');

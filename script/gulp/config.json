@@ -1,0 +1,8 @@
+{
+  "src": {
+    "js": "**/*.js",
+    "exclude": {
+      "node": "!**/node_modules/**",
+    }
+  }
+ }

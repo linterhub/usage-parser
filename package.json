@@ -11,10 +11,14 @@
   "bugs": "https://github.com/linterhub/usage-parser/issues",
   "main": "index.js",
   "scripts": {
-    "parse": "node index.js"
+    "parse": "node index.js",
+    "gulp": "./node_modules/gulp/bin/gulp.js"
   },
   "devDependencies": {
-    "eslint": "^5.0.1",
-    "eslint-config-google": "^0.9.1"
+    "eslint": "^5.1.0",
+    "eslint-config-google": "^0.9.1",
+    "gulp": "^4.0.0",
+    "gulp-eslint": "^5.0.0",
+    "gulp-hub": "^0.8.0"
   }
 }
