@@ -7,26 +7,41 @@ const argumentTemplate = {
 };
 
 const handle = (help) => {
-    const sectionName = {
-        options: "Options:",
-        usage: "Usage:"
+    const context = {
+        section: {
+            options: "Options:",
+            usage: "Usage:",
+            examples: "Examples:"
+        },
+        options: [],
+        delimiter: "",
     };
-    let options = [];
 
-    parseSection(sectionName.options, help).forEach(section => {
+    parseSection(context.section.options, help).forEach(section => {
         splitSection(section).forEach(option => {
             if (option.indexOf("-") === 0) {
-                options.push(parseOption(option));
+                context.options.push(parseOption(option));
             }
         });
     });
 
-    parseSection(sectionName.usage, help).forEach(section => {
+    parseSection(context.section.usage, help).forEach(section => {
         let argument = Object.assign({}, argumentTemplate);
         argument.longName = "";
-        section.match(/file|path/i) ? options.push(argument) : "";
+        section.match(/file|path/i) ? context.options.push(argument) : "";
     });
-    return options;
+
+    parseSection(context.section.examples, help).forEach(section => {
+        const defaultDelimiter = "=";
+        const delimitersTemplate = [" ", "="];
+        delimitersTemplate.forEach(delimiter => {
+            const regularExp = new RegExp(`-[^ \t\n]+${delimiter}[^ \t\n-]`);
+            section.match(regularExp) ? context.delimiter = delimiter : "";
+        });
+        context.delimiter === "" ? context.delimiter = defaultDelimiter : "";
+    });
+
+    return context;
 };
 
 const parseSection = (sectionName, help) => {

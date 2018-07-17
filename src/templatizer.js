@@ -1,9 +1,9 @@
-const templatizer = (options) => {
+const templatizer = (context) => {
     const argumentsTemplate = require('./template/args.json');
     const optionTemplate = require('./template/option.json');
 
     let result = argumentsTemplate;
-    options.map(option => {
+    context.options.map(option => {
         let optionSchema = Object.assign({}, optionTemplate);
         const argumentName = option.longName;
         switch (argumentName){
@@ -38,6 +38,7 @@ const templatizer = (options) => {
         result.definitions.arguments.properties[argumentName] = optionSchema;
     });
 
+    result.delimiter = context.delimiter;
     return result;
 };
 
