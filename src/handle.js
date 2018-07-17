@@ -1,3 +1,5 @@
+'use strict';
+
 const argumentTemplate = {
     shortName: null,
     longName: null,
