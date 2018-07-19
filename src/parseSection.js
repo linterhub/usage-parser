@@ -49,13 +49,11 @@ const splitSection = (section) => {
                 result[j - 1] = result[j - 1] + str;
             }
         });
-
         return result;
     } catch (error) {
         throw error;
     }
 };
-
 
 exports = module.exports = {
     options: options,

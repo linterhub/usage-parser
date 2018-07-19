@@ -7,13 +7,14 @@ const handle = (help, config) => {
     try {
         Object.keys(context.section).forEach((sectionName) => {
             let section = context.section[sectionName];
-            section.data = findSection(section.name, help);
+            let sectionTitle = config.section[sectionName].name;
+            section.data = findSection(sectionTitle, help);
             if (section.data) {
                 section.data.forEach((data) =>
                     section.func(data, context, argumentTemplate));
             } else if (section.required) {
                 const sectionNotFound
-                    = new Error(`Required section ${section.name} not found`);
+                    = new Error(`Required section ${sectionTitle} not found`);
                 throw sectionNotFound;
             }
         });
@@ -25,8 +26,8 @@ const handle = (help, config) => {
 
 const findSection = (sectionName, help) => {
     try {
-        const regularExp =
-            new RegExp(`[^\n]*${sectionName}[^\n]*\n?(?:[ \t].*?(?:\n|$))*`);
+        const regularExp = new
+            RegExp(`[^\n]*${sectionName}[^\n]*\n?(?:[ \t].*?(?:\n|$))*`, 'gi');
         const matches = help.match(regularExp);
         return matches ? matches.map((match) => match.trim()) : [];
     } catch (error) {
