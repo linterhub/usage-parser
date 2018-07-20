@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-06/schema#",
+    "$version": "0.0.0",
+    "title": "Validation of config",
+    "description": "Validation of config",
+    "type": "object",
+    "properties": {
+        "section": {
+            "title": "Sections",
+            "description": "Sections of help",
+            "$ref": "#/definitions/section"
+        },
+        "delimiter": {
+            "title": "Delimiter",
+            "description": "Default delimiter",
+            "type": "string",
+            "maxLength": 1
+        }
+    },
+    "definitions" : {
+        "section": {
+            "title": "Sections",
+            "description": "Sections of help",
+            "type": "object",
+            "properties": {
+                "options": {
+                    "$ref": "#/definitions/section:default"
+                },
+                "usage": {
+                    "$ref": "#/definitions/section:default"
+                },
+                "examples": {
+                    "$ref": "#/definitions/section:default"
+                }
+            },
+            "additionalProperties": false
+        },
+        "section:default": {
+            "title": "Section",
+            "description": "Section of help",
+            "properties": {
+                "name": {
+                    "title": "Name",
+                    "description": "Name of section",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name"
+            ],
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}
