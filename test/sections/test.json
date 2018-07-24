@@ -1,0 +1,41 @@
+{
+    "description": "tests of exceptions",
+    "tests": [
+        {
+            "description": "with all sections",
+            "$ref": "./test/sections/files/full.valid.txt",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "without options section",
+            "$ref": "./test/sections/files/options.absent.txt",
+            "valid": false,
+            "object": "exception"
+        },
+        {
+            "description": "without usage section",
+            "$ref": "./test/sections/files/usage.absent.txt",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "without examples section",
+            "$ref": "./test/sections/files/examples.absent.txt",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "with other sections",
+            "$ref": "./test/sections/files/other.exist.txt",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "invalid section options",
+            "$ref": "./test/sections/files/options.invalid.txt",
+            "valid": true,
+            "object": "exception"
+        }
+    ]
+}

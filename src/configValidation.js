@@ -12,7 +12,7 @@ const schemaValidating = (config) => {
     const validatingResult = validate(config, configSchema).errors;
 
     if (validatingResult.length) {
-        throw new Error(`Validation of config.json passed with errors: 
+        throw new TypeError(`Validation of config.json passed with errors: 
         ${validatingResult}`);
     }
 };
