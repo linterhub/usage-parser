@@ -9,12 +9,12 @@ const handle = (help, config) => {
             let section = context.section[sectionName];
             let sectionTitle = config.section[sectionName].name;
             section.data = findSection(sectionTitle, help);
-            if (section.data) {
+            if (section.data.length > 0) {
                 section.data.forEach((data) =>
                     section.func(data, context, argumentTemplate));
             } else if (section.required) {
-                const sectionNotFound
-                    = new Error(`Required section ${sectionTitle} not found`);
+                const sectionNotFound =
+                    new TypeError(`Required section ${sectionName} not found`);
                 throw sectionNotFound;
             }
         });
