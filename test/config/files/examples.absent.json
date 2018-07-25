@@ -1,0 +1,11 @@
+{
+    "section": {
+        "options": {
+            "name": "Options"
+        },
+        "usage": {
+            "name": "Usage"
+        }
+    },
+    "delimiter": " "
+}
