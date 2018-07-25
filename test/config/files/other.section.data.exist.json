@@ -1,0 +1,15 @@
+{
+    "section": {
+        "options": {
+            "name": "Options",
+            "number": 5
+        },
+        "usage": {
+            "name": "Usage"
+        },
+        "examples": {
+            "name": "Examples"
+        }
+    },
+    "delimiter": " "
+}

@@ -1,0 +1,71 @@
+{
+    "description": "tests of exceptions",
+    "tests": [
+        {
+            "description": "without delimiter",
+            "$ref": "./files/delimiter.absent.json",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "empty config",
+            "$ref": "./files/empty.valid.json",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "without examples section",
+            "$ref": "./files/examples.absent.json",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "with full data",
+            "$ref": "./files/full.valid.json",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "without name in section",
+            "$ref": "./files/name.absent.json",
+            "valid": false,
+            "object": "exception"
+        },
+        {
+            "description": "without options section",
+            "$ref": "./files/options.absent.json",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "with other data in config",
+            "$ref": "./files/other.data.exist.json",
+            "valid": false,
+            "object": "exception"
+        },
+        {
+            "description": "with other data in section",
+            "$ref": "./files/other.section.data.exist.json",
+            "valid": false,
+            "object": "exception"
+        },
+        {
+            "description": "with other section",
+            "$ref": "./files/other.section.exist.json",
+            "valid": false,
+            "object": "exception"
+        },
+        {
+            "description": "without section",
+            "$ref": "./files/section.absent.json",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "without usage section",
+            "$ref": "./files/usage.absent.json",
+            "valid": true,
+            "object": "exception"
+        }
+    ]
+}
