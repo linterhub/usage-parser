@@ -21,7 +21,9 @@ const options = (section, context, argumentTemplate) => {
 const usage = (section, context, argumentTemplate) => {
     let argument = Object.assign({}, argumentTemplate);
     argument.longName = '';
-    context.options.push(section.match(/file|path/i) ? argument : {});
+    if (section.match(/file|path/i)) {
+        context.options.push(argument);
+    }
 };
 
 const examples = (section, context) => {
