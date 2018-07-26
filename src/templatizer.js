@@ -1,9 +1,10 @@
 'use strict';
+const fs = require('fs');
+const argumentsTemplate = JSON.parse(fs.readFileSync('./src/template/args.json'));
+const optionTemplate = require('./template/option.json');
 
 const templatizer = (context) => {
-    const argumentsTemplate = require('./template/args.json');
-    const optionTemplate = require('./template/option.json');
-
+    argumentsTemplate.definitions.arguments.properties = {};
     let result = argumentsTemplate;
     context.options.map((option) => {
         let optionSchema = Object.assign({}, optionTemplate);
@@ -37,7 +38,7 @@ const templatizer = (context) => {
                 // TODO: argument types
         }
         optionSchema.description = option.description;
-        optionSchema.default = option.defaultValues;
+        optionSchema.default = option.defaultValue;
         result.definitions.arguments.properties[argumentName] = optionSchema;
     });
 
