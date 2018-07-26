@@ -8,7 +8,8 @@ const templatizer = (context) => {
     let result = argumentsTemplate;
     context.options.map((option) => {
         let optionSchema = Object.assign({}, optionTemplate);
-        const argumentName = option.longName;
+        const argumentName = option.longName ? option.longName :
+                (option.shortName ? option.shortName : '');
         switch (argumentName) {
             case '--version':
                 optionSchema.id = 'linterhub:version';
@@ -33,6 +34,8 @@ const templatizer = (context) => {
                 option.description = 'Path to file or folder to analyze';
                 break;
             default:
+                option.longName =
+                    option.longName ? option.longName : option.shortName;
                 optionSchema.id = (!option.isFlag ? 'args:' : '')
                     + option.longName;
                 // TODO: argument types
