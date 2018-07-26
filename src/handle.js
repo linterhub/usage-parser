@@ -5,17 +5,16 @@ const context = require('./template/context.js');
 
 const handle = (help, config) => {
     try {
+        context.options = [];
         Object.keys(context.section).forEach((sectionName) => {
             let section = context.section[sectionName];
             let sectionTitle = config.section[sectionName].name;
-            section.data = findSection(sectionTitle, help);
-            if (section.data.length > 0) {
-                section.data.forEach((data) =>
-                    section.func(data, context, argumentTemplate));
+            const data = findSection(sectionTitle, help);
+            if (data.length > 0) {
+                data.forEach((object) =>
+                    section.func(object, context, argumentTemplate));
             } else if (section.required) {
-                const sectionNotFound =
-                    new TypeError(`Required section ${sectionName} not found`);
-                throw sectionNotFound;
+                throw new Error(`Required section ${sectionName} not found`);
             }
         });
         return context;
