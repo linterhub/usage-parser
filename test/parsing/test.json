@@ -1,0 +1,96 @@
+{
+    "description": "tests of parsing",
+    "tests": [
+        {
+            "description": "example have delimiter \"=\"",
+            "$ref": "./test/parsing/files/example.delimiter1.txt",
+            "result": "./files/example.delimiter1.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "example have space delimiter",
+            "$ref": "./test/parsing/files/example.delimiter2.txt",
+            "result": "./files/example.delimiter2.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "example have any other delimiter",
+            "$ref": "./test/parsing/files/example.delimiter3.txt",
+            "result": "./files/example.delimiter3.json",
+            "valid": false,
+            "object": "result"
+        },
+        {
+            "description": "example have no delimiters",
+            "$ref": "./test/parsing/files/example.no-delimiter.txt",
+            "result": "./files/example.no-delimiter.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "full test",
+            "$ref": "./test/parsing/files/full.valid.txt",
+            "result": "./files/full.valid.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "option with prefix args",
+            "$ref": "./test/parsing/files/option.args.txt",
+            "result": "./files/option.args.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "option with default value",
+            "$ref": "./test/parsing/files/option.default.txt",
+            "result": "./files/option.default.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "option with only long name",
+            "$ref": "./test/parsing/files/option.longname.txt",
+            "result": "./files/option.longname.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "option with multiline description what have more than one space",
+            "$ref": "./test/parsing/files/option.multiline.txt",
+            "result": "./files/option.multiline.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "option with only short name",
+            "$ref": "./test/parsing/files/option.shortname.txt",
+            "result": "./files/option.shortname.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "simple option",
+            "$ref": "./test/parsing/files/option.simple.txt",
+            "result": "./files/option.simple.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "usage haven't got path/file (no linterhub:path in result)",
+            "$ref": "./test/parsing/files/usage.no-path.txt",
+            "result": "./files/usage.no-path.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "usage have path/file (adds linterhub:path to result)",
+            "$ref": "./test/parsing/files/usage.path.txt",
+            "result": "./files/usage.path.json",
+            "valid": true,
+            "object": "result"
+        }
+    ]
+}
