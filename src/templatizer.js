@@ -30,7 +30,7 @@ const templatizer = (context) => {
                 break;
             case '':
                 optionSchema.id = 'linterhub:path';
-                optionSchema.description = 'Path to file or folder to analyze';
+                option.description = 'Path to file or folder to analyze';
                 break;
             default:
                 optionSchema.id = (!option.isFlag ? 'args:' : '')
