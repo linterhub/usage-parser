@@ -1,0 +1,2 @@
+  Options:
+  --ignore          Additional paths to ignore [Can be set multiple times]

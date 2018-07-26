@@ -1,0 +1,2 @@
+  Options:
+    --space           Use space indent instead of tabs [Default: 2]

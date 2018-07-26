@@ -1,0 +1,40 @@
+{
+   "$schema": "https://repometric.github.io/linterhub/schema/args.json",
+   "name": "",
+   "type": "object",
+   "allOf": [
+      {
+         "$ref": "#/definitions/arguments"
+      }
+   ],
+   "delimiter": "=",
+   "definitions": {
+      "arguments": {
+         "type": "object",
+         "properties": {
+            "--space": {
+               "id": "args:--space",
+               "type": "string",
+               "description": "Use space indent instead of tabs [Default: 2]",
+               "default": "2"
+            }
+         }
+      },
+      "section": {
+         "type": "object",
+         "description": "The engine configuration section",
+         "properties": {
+            "name": {
+               "type": "string",
+               "description": "The engine name",
+               "enum": ""
+            },
+            "options": {
+               "type": "object",
+               "description": "The engine configuration",
+               "$ref": "#/definitions/arguments"
+            }
+         }
+      }
+   }
+}
