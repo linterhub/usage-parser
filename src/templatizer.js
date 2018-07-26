@@ -37,7 +37,7 @@ const templatizer = (context) => {
                 // TODO: argument types
         }
         optionSchema.description = option.description;
-        optionSchema.default = option.default;
+        optionSchema.default = option.defaultValues;
         result.definitions.arguments.properties[argumentName] = optionSchema;
     });
 
