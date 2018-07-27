@@ -21,7 +21,7 @@ const options = (section, context, argumentTemplate) => {
 const usage = (section, context, argumentTemplate) => {
     let argument = Object.assign({}, argumentTemplate);
     argument.longName = '';
-    if (section.match(/file|path/i)) {
+    if (section.match(/file|path/gi)) {
         context.options.push(argument);
     }
 };
@@ -29,7 +29,7 @@ const usage = (section, context, argumentTemplate) => {
 const examples = (section, context) => {
     const delimitersTemplate = [' ', '='];
     delimitersTemplate.forEach((delimiter) => {
-        const regularExp = new RegExp(`-[^ \t\n]+${delimiter}[^ \t\n-]`);
+        const regularExp = new RegExp(`-[^ \t\n]+${delimiter}[^ \t\n-]`, 'gi');
         section.match(regularExp) ? context.delimiter = delimiter : '';
     });
 };
