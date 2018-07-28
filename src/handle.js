@@ -6,6 +6,7 @@ const context = require('./template/context.js');
 const handle = (help, config) => {
     try {
         context.options = [];
+        context.delimiter = config.delimiter;
         Object.keys(context.section).forEach((sectionName) => {
             let section = context.section[sectionName];
             let sectionTitle = config.section[sectionName].name;
