@@ -1,0 +1,11 @@
+  Options:
+   --ignore, -i          Additional paths to ignore [Can be set multiple times]
+
+  Examples:
+    $ xo index.js
+
+  Examples:
+    $ xo *.js !foo.js
+
+  Examples:
+    $ xo --env node --env mocha

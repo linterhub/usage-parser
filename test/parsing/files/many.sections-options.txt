@@ -1,0 +1,12 @@
+  Options:
+    --init            Add XO to your project
+    --fix             Automagically fix issues
+
+   Options:
+    --prettier        Conform to Prettier code style [default: true]
+    --node-version    Range of Node.js version to support
+
+   Options:
+    --plugin          Include third-party plugins [Can be set multiple times]
+    --cwd=<dir>       Working directory for files
+    --stdin           Validate/fix code from stdin

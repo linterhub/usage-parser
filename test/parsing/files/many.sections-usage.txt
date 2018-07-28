@@ -1,0 +1,11 @@
+  Usage:
+    $ xo [options]
+
+  Usage:
+    $ xo [flags]
+
+  Usage:
+    $ xo [<file|glob> ...]
+
+  Options:
+   --ignore, -i          Additional paths to ignore [Can be set multiple times]
