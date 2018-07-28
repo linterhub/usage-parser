@@ -30,9 +30,37 @@
             "object": "result"
         },
         {
+            "description": "full test with CAPITALIZED help",
+            "$ref": "./test/parsing/files/full.CAPS.txt",
+            "result": "./files/full.CAPS.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
             "description": "full test",
             "$ref": "./test/parsing/files/full.valid.txt",
             "result": "./files/full.valid.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "many sections Examples",
+            "$ref": "./test/parsing/files/many.sections-examples.txt",
+            "result": "./files/many.sections-examples.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "many sections Options",
+            "$ref": "./test/parsing/files/many.sections-options.txt",
+            "result": "./files/many.sections-options.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "many sections Usage",
+            "$ref": "./test/parsing/files/many.sections-usage.txt",
+            "result": "./files/many.sections-usage.json",
             "valid": true,
             "object": "result"
         },
