@@ -18,6 +18,21 @@
         }
     },
     "definitions" : {
+        "default:string": {
+            "title": "String",
+            "description": "Default string",
+            "type": "string"
+        },
+        "default:array": {
+            "title": "Array",
+            "description": "Default array of strings",
+            "type":"array",
+            "items": [
+                {
+                "$ref": "#/definitions/default:string"
+                }
+            ]
+        },
         "section": {
             "title": "Sections",
             "description": "Sections of help",
@@ -39,14 +54,33 @@
             "title": "Section",
             "description": "Section of help",
             "properties": {
-                "name": {
-                    "title": "Name",
-                    "description": "Name of section",
-                    "type": "string"
+                "names": {
+                    "title": "Names",
+                    "description": "Names of section",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/default:string"
+                        },
+                        {
+                            "$ref": "#/definitions/default:array"
+                        }
+                    ]
+                },
+                "postfix": {
+                    "title": "Postfixes",
+                    "description": "Postfixes, that will be added to a names if no names found",
+                    "oneOf": [
+                        {
+                            "$ref": "#/definitions/default:string"
+                        },
+                        {
+                            "$ref": "#/definitions/default:array"
+                        }
+                    ]
                 }
             },
             "required": [
-                "name"
+                "names"
             ],
             "additionalProperties": false
         }
