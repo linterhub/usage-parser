@@ -1,13 +1,34 @@
 {
     "section": {
         "options": {
-            "name": "Options:"
+            "names": [
+                "Options"
+            ],
+            "postfix": [
+                ":",
+                "\n",
+                ":\n"
+            ]
         },
         "usage": {
-            "name": "Usage:"
+            "names": [
+                "Usage"
+                ],
+            "postfix": [
+                ":",
+                "\n",
+                ":\n"
+            ]
         },
         "examples": {
-            "name": "Examples:"
+            "names": [
+                "Examples:"
+                ],
+            "postfix": [
+                ":",
+                "\n",
+                ":\n"
+            ]
         }
     },
     "delimiter": "="
