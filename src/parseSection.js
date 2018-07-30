@@ -5,11 +5,19 @@ const options = (section, context, argumentTemplate) => {
         splitSection(section).forEach((option) => {
             if (option.indexOf('-') === 0) {
                 let argument = Object.assign({}, argumentTemplate);
+                let argumentNames = '';
+                let argumentDescription = '';
 
-                option.trim().split(/\s\s+/, 2).map((section, index) => {
-                    index === 0 ? argumentsFill.setArgument(section, argument)
-                        : argumentsFill.setDescription(section, argument);
+                option.trim().split(/\s\s+/).map((section, index) => {
+                    if (index === 0) {
+                        argumentNames = section;
+                    } else {
+                        argumentDescription += argumentDescription ?
+                            ' ' + section : section;
+                    }
                 });
+                argumentsFill.setArgument(argumentNames, argument);
+                argumentsFill.setDescription(argumentDescription, argument);
                 context.options.push(argument);
             }
         });
@@ -48,7 +56,7 @@ const splitSection = (section) => {
                 result.push(str);
                 j++;
             } else if (j > 0) {
-                result[j - 1] = result[j - 1] + str;
+                result[j - 1] = result[j - 1] + ' ' + str;
             }
         });
         return result;
