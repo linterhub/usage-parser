@@ -1,0 +1,5 @@
+   Options
+    --prettier        Conform to Prettier code style [default: true]
+
+   Option
+    --cwd=<dir>       Working directory for files

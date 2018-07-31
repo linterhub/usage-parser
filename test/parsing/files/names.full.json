@@ -1,0 +1,76 @@
+{
+    "$schema": "https://repometric.github.io/linterhub/schema/args.json",
+    "name": "",
+    "type": "object",
+    "allOf": [
+        {
+            "$ref": "#/definitions/arguments"
+        }
+    ],
+    "delimiter": "=",
+    "definitions": {
+        "arguments": {
+            "type": "object",
+            "properties": {
+                "--prettier": {
+                    "id": "args:--prettier",
+                    "type": "string",
+                    "description": "Conform to Prettier code style [default: true]",
+                    "default": "true"
+                },
+                "--node-version": {
+                    "id": "--node-version",
+                    "type": "string",
+                    "description": "Range of Node.js version to support",
+                    "default": null
+                },
+                "--cwd": {
+                    "id": "args:--cwd",
+                    "type": "string",
+                    "description": "Working directory for files",
+                    "default": null
+                },
+                "--stdin": {
+                    "id": "linterhub:stdin",
+                    "type": "string",
+                    "description": "Validate/fix code from stdin",
+                    "default": null
+                },
+                "--init": {
+                    "id": "--init",
+                    "type": "string",
+                    "description": "Add XO to your project",
+                    "default": null
+                },
+                "--fix": {
+                    "id": "--fix",
+                    "type": "string",
+                    "description": "Automagically fix issues",
+                    "default": null
+                },
+                "--plugin": {
+                    "id": "--plugin",
+                    "type": "string",
+                    "description": "Include third-party plugins [Can be set multiple times]",
+                    "default": null
+                }
+            }
+        },
+        "section": {
+            "type": "object",
+            "description": "The engine configuration section",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "The engine name",
+                    "enum": ""
+                },
+                "options": {
+                    "type": "object",
+                    "description": "The engine configuration",
+                    "$ref": "#/definitions/arguments"
+                }
+            }
+        }
+    }
+}

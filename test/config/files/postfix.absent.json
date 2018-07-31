@@ -8,16 +8,21 @@
         "usage": {
             "names": [
                 "Usage"
+            ],
+            "postfix": [
+                ":",
+                "\n",
+                ":\n"
             ]
         },
         "examples": {
             "names": [
                 "Examples:"
-            ]
-        },
-        "tips": {
-            "names": [
-                "Tips"
+            ],
+            "postfix": [
+                ":",
+                "\n",
+                ":\n"
             ]
         }
     },
