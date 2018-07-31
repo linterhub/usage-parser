@@ -28,6 +28,8 @@ const handle = (help, config) => {
             if (data.length > 0) {
                 data.forEach((object) =>
                     contextSection.func(object, context, argumentTemplate));
+            } else if (configSection.parseWhole) {
+                contextSection.func(help, context, argumentTemplate);
             } else if (contextSection.required) {
                 throw new Error(`Required section ${sectionName} not found`);
             }
