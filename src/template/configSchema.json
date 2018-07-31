@@ -77,6 +77,11 @@
                             "$ref": "#/definitions/default:array"
                         }
                     ]
+                },
+                "parseWhole": {
+                    "title": "Parse whole help",
+                    "description": "Parsing whole help if sections with names wasn't found",
+                    "type": "boolean"
                 }
             },
             "required": [
