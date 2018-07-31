@@ -1,10 +1,14 @@
 {
     "section": {
         "usage": {
-            "name": "Usage"
+            "names": [
+                "Usage"
+            ]
         },
         "examples": {
-            "name": "Examples"
+            "names": [
+                "Examples:"
+            ]
         }
     },
     "delimiter": " "

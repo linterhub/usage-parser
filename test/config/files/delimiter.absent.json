@@ -1,13 +1,19 @@
 {
     "section": {
         "options": {
-            "name": "Options"
+            "names": [
+                "Options"
+            ]
         },
         "usage": {
-            "name": "Usage"
+            "names": [
+                "Usage"
+            ]
         },
         "examples": {
-            "name": "Examples"
+            "names": [
+                "Examples:"
+            ]
         }
     }
 }
