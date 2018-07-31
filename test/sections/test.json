@@ -11,6 +11,7 @@
             "description": "without options section",
             "$ref": "./test/sections/files/options.absent.txt",
             "valid": false,
+            "config": "./files/config.options.absent.json",
             "object": "exception"
         },
         {

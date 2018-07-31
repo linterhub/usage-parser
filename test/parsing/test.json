@@ -5,7 +5,6 @@
             "description": "example have delimiter \"=\"",
             "$ref": "./test/parsing/files/example.delimiter1.txt",
             "result": "./files/example.delimiter1.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -13,7 +12,6 @@
             "description": "example have space delimiter",
             "$ref": "./test/parsing/files/example.delimiter2.txt",
             "result": "./files/example.delimiter2.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -21,7 +19,6 @@
             "description": "example have any other delimiter",
             "$ref": "./test/parsing/files/example.delimiter3.txt",
             "result": "./files/example.delimiter3.json",
-            "config": "",
             "valid": false,
             "object": "result"
         },
@@ -29,7 +26,6 @@
             "description": "example have no delimiters",
             "$ref": "./test/parsing/files/example.no-delimiter.txt",
             "result": "./files/example.no-delimiter.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -37,7 +33,6 @@
             "description": "full test with CAPITALIZED help",
             "$ref": "./test/parsing/files/full.CAPS.txt",
             "result": "./files/full.CAPS.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -45,7 +40,6 @@
             "description": "full test",
             "$ref": "./test/parsing/files/full.valid.txt",
             "result": "./files/full.valid.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -53,7 +47,6 @@
             "description": "many sections Examples",
             "$ref": "./test/parsing/files/many.sections-examples.txt",
             "result": "./files/many.sections-examples.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -61,7 +54,6 @@
             "description": "many sections Options",
             "$ref": "./test/parsing/files/many.sections-options.txt",
             "result": "./files/many.sections-options.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -69,7 +61,6 @@
             "description": "many sections Usage",
             "$ref": "./test/parsing/files/many.sections-usage.txt",
             "result": "./files/many.sections-usage.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -85,7 +76,6 @@
             "description": "option with prefix args",
             "$ref": "./test/parsing/files/option.args.txt",
             "result": "./files/option.args.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -93,7 +83,6 @@
             "description": "option with default value",
             "$ref": "./test/parsing/files/option.default.txt",
             "result": "./files/option.default.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -101,7 +90,6 @@
             "description": "option with only long name",
             "$ref": "./test/parsing/files/option.longname.txt",
             "result": "./files/option.longname.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -109,7 +97,6 @@
             "description": "option with multiline description what have more than one space",
             "$ref": "./test/parsing/files/option.multiline.txt",
             "result": "./files/option.multiline.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -117,7 +104,6 @@
             "description": "option with description on next line",
             "$ref": "./test/parsing/files/option.nextline.txt",
             "result": "./files/option.nextline.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -125,7 +111,6 @@
             "description": "option with only short name",
             "$ref": "./test/parsing/files/option.shortname.txt",
             "result": "./files/option.shortname.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -133,8 +118,23 @@
             "description": "simple option",
             "$ref": "./test/parsing/files/option.simple.txt",
             "result": "./files/option.simple.json",
-            "config": "",
             "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "help without options and parseWhole true",
+            "$ref": "./test/parsing/files/parseWhole.valid.txt",
+            "result": "./files/parseWhole.full.json",
+            "config": "./files/config.parseWhole.full.json",
+            "valid": true,
+            "object": "result"
+        },
+        {
+            "description": "help with options and parseWhole true (only options should be parsed)",
+            "$ref": "./test/parsing/files/parseWhole.invalid.txt",
+            "result": "./files/parseWhole.full.json",
+            "config": "./files/config.parseWhole.full.json",
+            "valid": false,
             "object": "result"
         },
         {
@@ -157,7 +157,6 @@
             "description": "usage haven't got path/file (no linterhub:path in result)",
             "$ref": "./test/parsing/files/usage.no-path.txt",
             "result": "./files/usage.no-path.json",
-            "config": "",
             "valid": true,
             "object": "result"
         },
@@ -165,7 +164,6 @@
             "description": "usage have path/file (adds linterhub:path to result)",
             "$ref": "./test/parsing/files/usage.path.txt",
             "result": "./files/usage.path.json",
-            "config": "",
             "valid": true,
             "object": "result"
         }
