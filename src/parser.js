@@ -6,7 +6,8 @@ const validate = require('./configValidation.js');
 
 const parser = (help, config) => {
     config = validate(config);
-    return templatizer(handle(help, config));
+    const context = handle(help, config);
+    return templatizer(context, config);
 };
 
 module.exports = parser;

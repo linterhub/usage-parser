@@ -15,6 +15,11 @@
             "description": "Default delimiter",
             "type": "string",
             "maxLength": 1
+        },
+        "prefixes": {
+            "title": "Prefixes",
+            "description": "Prefixes for custom and non-flag options",
+            "$ref": "#/definitions/prefixes"
         }
     },
     "definitions" : {
@@ -85,6 +90,23 @@
                 }
             },
             "additionalProperties": false
+        },
+        "prefixes": {
+            "title": "Prefixes",
+            "description": "Prefixes for custom and non-flag options",
+            "type": "object",
+            "properties": {
+                "custom": {
+                    "title": "Custom prefix",
+                    "description": "Prefix for custom options (--help, --version, etc.)",
+                    "type": "string"
+                },
+                "nonFlag": {
+                    "title": "Non-flag prefix",
+                    "description": "Prefix for non-flag options",
+                    "type": "string"
+                }
+            }
         }
     },
     "additionalProperties": false

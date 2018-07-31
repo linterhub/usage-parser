@@ -34,5 +34,9 @@
             "parseWhole": false
         }
     },
-    "delimiter": "="
+    "delimiter": "=",
+    "prefixes": {
+        "custom": "linterhub:",
+        "nonFlag": "args:"
+    }
 }
