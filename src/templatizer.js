@@ -38,7 +38,6 @@ const templatizer = (context) => {
                     option.longName ? option.longName : option.shortName;
                 optionSchema.id = (!option.isFlag ? 'args:' : '')
                     + option.longName;
-                // TODO: argument types
         }
         optionSchema.description = option.description;
         optionSchema.default = option.defaultValue ? option.defaultValue : null;

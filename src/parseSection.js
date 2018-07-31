@@ -17,7 +17,8 @@ const options = (section, context, argumentTemplate) => {
                     }
                 });
                 argumentsFill.setArgument(argumentNames, argument);
-                argumentsFill.setDescription(argumentDescription, argument);
+                argumentsFill.setDescription(argumentDescription,
+                    argument, context);
                 context.options.push(argument);
             }
         });
@@ -29,7 +30,8 @@ const options = (section, context, argumentTemplate) => {
 const usage = (section, context, argumentTemplate) => {
     let argument = Object.assign({}, argumentTemplate);
     argument.longName = '';
-    if (section.match(/file|path/gi)) {
+    const regularExp = new RegExp(context.regexp.filePath, 'gi');
+    if (section.match(regularExp)) {
         context.options.push(argument);
     }
 };
@@ -37,7 +39,8 @@ const usage = (section, context, argumentTemplate) => {
 const examples = (section, context) => {
     const delimitersTemplate = [' ', '='];
     delimitersTemplate.forEach((delimiter) => {
-        const regularExp = new RegExp(`-[^ \t\n]+${delimiter}[^ \t\n-]`, 'gi');
+        const regularExp = new RegExp(context.regexp.delimiter.start +
+            delimiter + context.regexp.delimiter.end, 'gi');
         section.match(regularExp) ? context.delimiter = delimiter : '';
     });
 };
