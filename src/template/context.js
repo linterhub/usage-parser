@@ -15,6 +15,18 @@ const context = {
             func: parseSection.examples,
         },
     },
+    regexp: {
+        defaultValue: '\\[default: (.*?)\\]',
+        findSection: {
+            start: '[\\s]+',
+            end: '[\n]+\n?(?:[ \t].*?(?:\n|$))*',
+        },
+        filePath: 'file|path',
+        delimiter: {
+            start: '-[^ \t\n]+',
+            end: '[^ \t\n-]',
+        },
+    },
     options: [],
     delimiter: '',
 };

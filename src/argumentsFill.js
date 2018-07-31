@@ -17,10 +17,9 @@ const setArgument = (section, argument) => {
     });
 };
 
-const setDescription = (section, argument) => {
+const setDescription = (section, argument, context) => {
     argument.description = section;
-    // TODO: add other patterns for default value parsing
-    const regularExp = new RegExp('\\[default: (.*?)\\]', 'gim');
+    const regularExp = new RegExp(context.regexp.defaultValue, 'gim');
     const defaultValues = regularExp.exec(section);
     if (defaultValues) {
         argument.defaultValue = defaultValues[1];

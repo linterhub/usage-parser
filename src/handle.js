@@ -12,12 +12,12 @@ const handle = (help, config) => {
             let configSection = config.section[sectionName];
             let data = [];
             configSection.names.some((name) => {
-                let section = findSection(name, help);
+                let section = findSection(name, help, context);
                 if (section.length > 0) {
                     data = data.concat(section);
                 } else {
                     configSection.postfix.some((postfix) => {
-                        section = findSection(name + postfix, help);
+                        section = findSection(name + postfix, help, context);
                         if (section.length > 0) {
                             data = data.concat(section);
                             return false;
@@ -40,10 +40,10 @@ const handle = (help, config) => {
     }
 };
 
-const findSection = (sectionName, help) => {
+const findSection = (sectionName, help, context) => {
     try {
-        const regularExp = new
-            RegExp(`[\\s]+${sectionName}[\n]+\n?(?:[ \t].*?(?:\n|$))*`, 'gmi');
+        const regularExp = new RegExp(context.regexp.findSection.start +
+            sectionName + context.regexp.findSection.end, 'gmi');
         const matches = help.match(regularExp);
         return matches ? matches.map((match) => match.trim()) : [];
     } catch (error) {
