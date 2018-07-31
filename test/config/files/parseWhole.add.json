@@ -19,19 +19,17 @@
                 ":",
                 "\n",
                 ":\n"
-            ],
-            "parseWhole": false
+            ]
         },
         "examples": {
             "names": [
-                "Examples"
+                "Examples:"
             ],
             "postfix": [
                 ":",
                 "\n",
                 ":\n"
-            ],
-            "parseWhole": false
+            ]
         }
     },
     "delimiter": " "

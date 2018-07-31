@@ -62,6 +62,12 @@
             "object": "exception"
         },
         {
+            "description": "with parseWhole property",
+            "$ref": "./files/parseWhole.add.json",
+            "valid": true,
+            "object": "exception"
+        },
+        {
             "description": "without postfix",
             "$ref": "./files/postfix.absent.json",
             "valid": true,
@@ -83,6 +89,12 @@
             "description": "without usage section",
             "$ref": "./files/usage.absent.json",
             "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "with wrong types",
+            "$ref": "./files/wrong.type.json",
+            "valid": false,
             "object": "exception"
         }
     ]
