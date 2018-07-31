@@ -84,9 +84,6 @@
                     "type": "boolean"
                 }
             },
-            "required": [
-                "names"
-            ],
             "additionalProperties": false
         }
     },
