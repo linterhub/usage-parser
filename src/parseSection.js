@@ -59,7 +59,7 @@ const splitSection = (section) => {
                 result.push(str);
                 j++;
             } else if (j > 0) {
-                result[j - 1] = result[j - 1] + ' ' + str;
+                result[j - 1] = result[j - 1] + '  ' + str;
             }
         });
         return result;

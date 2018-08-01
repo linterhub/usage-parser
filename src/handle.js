@@ -11,20 +11,23 @@ const handle = (help, config) => {
             let contextSection = context.section[sectionName];
             let configSection = config.section[sectionName];
             let data = [];
-            configSection.names.some((name) => {
-                let section = findSection(name, help, context);
-                if (section.length > 0) {
-                    data = data.concat(section);
-                } else {
-                    configSection.postfix.some((postfix) => {
-                        section = findSection(name + postfix, help, context);
-                        if (section.length > 0) {
-                            data = data.concat(section);
-                            return false;
-                        }
-                    });
+            if (Array.isArray(configSection.names)) {
+                for (let name of configSection.names) {
+                    data = setSectionByNames(
+                        name,
+                        data,
+                        help,
+                        context,
+                        configSection);
                 }
-            });
+            } else {
+                data = setSectionByNames(
+                    configSection.names,
+                    data,
+                    help,
+                    context,
+                    configSection);
+            }
             if (data.length > 0) {
                 data.forEach((object) =>
                     contextSection.func(object, context, argumentTemplate));
@@ -49,6 +52,36 @@ const findSection = (sectionName, help, context) => {
     } catch (error) {
         throw error;
     }
+};
+
+const setSectionByNames = (name, data, help, context, configSection) => {
+    let section = findSection(name, help, context);
+    return validateSection(section) ? data.concat(section) :
+            Array.isArray(configSection.postfix) ?
+                setSectionWithPostfixArray(
+                    name, help, context, configSection, data) :
+                setSectionWithPostfixSingle(
+                    name, help, context, configSection.postfix, data);
+};
+
+const validateSection = (section) => {
+        return section.length > 0;
+};
+
+const setSectionWithPostfixArray =
+    (name, help, context, configSection, data) => {
+    for (let postfix of configSection.postfix) {
+        let section = findSection(name + postfix, help, context);
+        if (validateSection(section)) {
+            data = data.concat(section);
+        }
+    }
+    return data;
+};
+
+const setSectionWithPostfixSingle = (name, help, context, postfix, data) => {
+    let section = findSection(name + postfix, help, context);
+    return validateSection(section) ? data.concat(section) : data;
 };
 
 module.exports = handle;
