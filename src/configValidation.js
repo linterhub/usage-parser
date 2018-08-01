@@ -19,7 +19,8 @@ const schemaValidating = (config) => {
 
 const fillingWithDefaults = (defaults, config) => {
     Object.keys(defaults).forEach((key) => {
-        !config[key] ? config[key] = defaults[key] : '';
+        config[key] =
+            typeof(config[key]) !== 'undefined' ? config[key] : defaults[key];
          Object.keys(defaults[key])[0] !== '0'
              ? fillingWithDefaults(defaults[key], config[key]) : '';
     });
