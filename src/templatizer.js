@@ -4,46 +4,38 @@ const argumentsTemplate = JSON.parse(fs.readFileSync('./src/template/args.json')
 const optionTemplate = require('./template/option.json');
 
 const templatizer = (context, config) => {
-    argumentsTemplate.definitions.arguments.properties = {};
+    argumentsTemplate.definitions.object.properties = {};
     let result = argumentsTemplate;
-    const customPrefix = config.prefixes.custom;
-    const nonFlagPrefix = config.prefixes.nonFlag;
     context.options.map((option) => {
         let optionSchema = Object.assign({}, optionTemplate);
         const argumentName = option.longName ? option.longName :
                 (option.shortName ? option.shortName : '');
         switch (argumentName) {
             case '--version':
-                optionSchema.id = customPrefix + 'version';
                 optionSchema.type = 'null';
+                optionSchema.usage = 'version';
                 break;
             case '--help':
-                optionSchema.id = customPrefix + 'help';
                 optionSchema.type = 'null';
+                optionSchema.usage = 'help';
                 break;
             case '--config':
-                optionSchema.id = customPrefix + 'config';
+                optionSchema.usage = 'config';
                 break;
             case '--stdin':
-                optionSchema.id = customPrefix + 'stdin';
-                break;
-            case '--stdin-filename':
-            case '--stdin-filepath':
-                optionSchema.id = customPrefix + 'filename';
+                optionSchema.usage = 'stdin';
                 break;
             case '':
-                optionSchema.id = customPrefix + 'path';
-                option.description = 'Path to file or folder to analyze';
+                optionSchema.named = false;
+                optionSchema.usage = 'none';
                 break;
             default:
-                option.longName =
-                    option.longName ? option.longName : option.shortName;
-                optionSchema.id = (!option.isFlag ? nonFlagPrefix : '')
-                    + option.longName;
+                optionSchema.usage = 'arg';
+                optionSchema.named = true;
         }
         optionSchema.description = option.description;
         optionSchema.default = option.defaultValue ? option.defaultValue : null;
-        result.definitions.arguments.properties[argumentName] = optionSchema;
+        result.definitions.object.properties[argumentName] = optionSchema;
     });
 
     result.delimiter = context.delimiter;

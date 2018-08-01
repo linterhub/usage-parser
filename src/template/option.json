@@ -1,6 +1,7 @@
 {
-    "id": "",
-    "type": "string",
     "description": "",
-    "default": ""
+    "type": "string",
+    "named": true,
+    "usage": "arg",
+    "default": null
 }

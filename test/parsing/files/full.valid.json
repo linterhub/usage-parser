@@ -1,124 +1,127 @@
 {
-   "$schema": "https://repometric.github.io/linterhub/schema/args.json",
-   "name": "",
-   "type": "object",
-   "allOf": [
-      {
-         "$ref": "#/definitions/arguments"
-      }
-   ],
-   "delimiter": "=",
-   "definitions": {
-      "arguments": {
-         "type": "object",
-         "properties": {
-            "--ignore": {
-               "id": "--ignore",
-               "type": "string",
-               "description": "Additional paths to ignore [Can be set multiple times]",
-               "default": null
-            },
-            "--space": {
-               "id": "args:--space",
-               "type": "string",
-               "description": "Use space indent instead of tabs [Default: 2]",
-               "default": "2"
-            },
-            "--no-semicolon": {
-               "id": "--no-semicolon",
-               "type": "string",
-               "description": "Prevent use of semicolons",
-               "default": null
-            },
-            "--prettier": {
-               "id": "--prettier",
-               "type": "string",
-               "description": "Conform to Prettier code style",
-               "default": null
-            },
-            "--node-version": {
-               "id": "--node-version",
-               "type": "string",
-               "description": "Range of Node.js version to support",
-               "default": null
-            },
-            "--plugin": {
-               "id": "--plugin",
-               "type": "string",
-               "description": "Include third-party plugins [Can be set multiple times]",
-               "default": null
-            },
-            "--extend": {
-               "id": "--extend",
-               "type": "string",
-               "description": "Extend defaults with a custom config [Can be set multiple times]",
-               "default": null
-            },
-            "--open": {
-               "id": "--open",
-               "type": "string",
-               "description": "Open files with issues in your editor",
-               "default": null
-            },
-            "--quiet": {
-               "id": "--quiet",
-               "type": "string",
-               "description": "Show only errors and no warnings",
-               "default": null
-            },
-            "--extension": {
-               "id": "--extension",
-               "type": "string",
-               "description": "Additional extension to lint [Can be set multiple times]",
-               "default": null
-            },
-            "--no-esnext": {
-               "id": "--no-esnext",
-               "type": "string",
-               "description": "Don't enforce ES2015+ rules",
-               "default": null
-            },
-            "--cwd": {
-               "id": "args:--cwd",
-               "type": "string",
-               "description": "Working directory for files",
-               "default": null
-            },
-            "--stdin": {
-               "id": "linterhub:stdin",
-               "type": "string",
-               "description": "Validate/fix code from stdin",
-               "default": null
-            },
-            "--stdin-filename": {
-               "id": "linterhub:filename",
-               "type": "string",
-               "description": "Specify a filename for the --stdin option",
-               "default": null
-            },
-            "": {
-               "id": "linterhub:path",
-               "type": "string",
-               "description": "Path to file or folder to analyze",
-               "default": null
+    "$schema": "https://schema.linterhub.com/args.json",
+    "$id": "https://hub.com",
+    "$version": "1.0.0",
+    "package": "",
+    "description": "",
+    "delimiter": "=",
+    "allOf": [
+        {
+            "$ref": "https://schema.linterhub.com/schemaver.json"
+        },
+        {
+            "$ref": "#/definitions/object"
+        }
+    ],
+    "definitions": {
+        "object": {
+            "properties": {
+                "--ignore": {
+                    "description": "Additional paths to ignore [Can be set multiple times]",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--space": {
+                    "description": "Use space indent instead of tabs [Default: 2]",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": "2"
+                },
+                "--no-semicolon": {
+                    "description": "Prevent use of semicolons",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--prettier": {
+                    "description": "Conform to Prettier code style",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--node-version": {
+                    "description": "Range of Node.js version to support",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--plugin": {
+                    "description": "Include third-party plugins [Can be set multiple times]",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--extend": {
+                    "description": "Extend defaults with a custom config [Can be set multiple times]",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--open": {
+                    "description": "Open files with issues in your editor",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--quiet": {
+                    "description": "Show only errors and no warnings",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--extension": {
+                    "description": "Additional extension to lint [Can be set multiple times]",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--no-esnext": {
+                    "description": "Don't enforce ES2015+ rules",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--cwd": {
+                    "description": "Working directory for files",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "--stdin": {
+                    "description": "Validate/fix code from stdin",
+                    "type": "string",
+                    "named": true,
+                    "usage": "stdin",
+                    "default": null
+                },
+                "--stdin-filename": {
+                    "description": "Specify a filename for the --stdin option",
+                    "type": "string",
+                    "named": true,
+                    "usage": "arg",
+                    "default": null
+                },
+                "": {
+                    "description": "Path to file or folder to analyze",
+                    "type": "string",
+                    "named": false,
+                    "usage": "none",
+                    "default": null
+                }
             }
-         }
-      },
-      "section": {
-         "type": "object",
-         "description": "The engine configuration section",
-         "properties": {
-            "name": {
-               "type": "string",
-               "description": "The engine name",
-               "enum": ""
-            },
-            "options": {
-               "type": "object",
-               "description": "The engine configuration",
-               "$ref": "#/definitions/arguments"
-            }
-         }
-      }
-   }
+        }
+    }
 }

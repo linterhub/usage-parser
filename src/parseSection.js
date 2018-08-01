@@ -30,6 +30,7 @@ const options = (section, context, argumentTemplate) => {
 const usage = (section, context, argumentTemplate) => {
     let argument = Object.assign({}, argumentTemplate);
     argument.longName = '';
+    argument.description = 'Path to file or folder to analyze';
     const regularExp = new RegExp(context.regexp.filePath, 'gi');
     if (section.match(regularExp)) {
         context.options.push(argument);
