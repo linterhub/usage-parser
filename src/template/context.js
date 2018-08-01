@@ -18,7 +18,7 @@ const context = {
     regexp: {
         defaultValue: '\\[default: (.*?)\\]',
         findSection: {
-            start: '[\\s]+',
+            start: '\\s[\\s]+',
             end: '[\n]+\n?(?:[ \t].*?(?:\n|$))*',
         },
         filePath: 'file|path',
