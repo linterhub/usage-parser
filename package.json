@@ -14,13 +14,19 @@
         "gulp": "./node_modules/gulp/bin/gulp.js",
         "test": "mocha"
     },
+    "husky": {
+        "hooks": {
+          "pre-commit": "npm run test"
+        }
+    },
     "devDependencies": {
-        "eslint": "^5.1.0",
         "eslint-config-google": "^0.9.1",
-        "gulp": "^4.0.0",
         "gulp-eslint": "^5.0.0",
+        "jsonschema": "^1.2.4",
         "gulp-hub": "^0.8.0",
-        "jsonschema": "^1.2.4"
+        "eslint": "^5.1.0",
+        "husky": "^0.14.3",
+        "gulp": "^4.0.0"
     },
     "dependencies": {
         "chai": "^4.1.2",
