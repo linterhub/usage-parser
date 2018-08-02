@@ -1,31 +1,30 @@
 {
-  "author": "linterhub",
-  "name": "@linterhub/usage-parser",
-  "version": "0.0.0-development",
-  "description": "",
-  "homepage": "https://github.com/linterhub/usage-parser.git",
-  "license": "MIT",
-  "contributors": [],
-  "keywords": [],
-  "repository": "linterhub/usage-parser",
-  "bugs": "https://github.com/linterhub/usage-parser/issues",
-  "main": "index.js",
-  "scripts": {
-    "parse": "node index.js",
-    "gulp": "./node_modules/gulp/bin/gulp.js",
-    "test": "mocha"
-  },
-  "devDependencies": {
-    "eslint": "^5.1.0",
-    "eslint-config-google": "^0.9.1",
-    "gulp": "^4.0.0",
-    "gulp-eslint": "^5.0.0",
-    "gulp-hub": "^0.8.0",
-    "jsonschema": "^1.2.4"
-  },
-  "dependencies": {
-    "chai": "^4.1.2",
-    "mocha": "^5.2.0",
-    "yargs": "^12.0.1"
-  }
+    "author": "linterhub",
+    "name": "@linterhub/usage-parser",
+    "version": "0.0.0-development",
+    "description": "Simple parser for usage page",
+    "license": "MIT",
+    "repository": "linterhub/usage-parser",
+    "bugs": "https://github.com/linterhub/usage-parser/issues",
+    "bin": {
+        "usage-parser": "index.js"
+    },
+    "scripts": {
+        "parse": "node index.js",
+        "gulp": "./node_modules/gulp/bin/gulp.js",
+        "test": "mocha"
+    },
+    "devDependencies": {
+        "eslint": "^5.1.0",
+        "eslint-config-google": "^0.9.1",
+        "gulp": "^4.0.0",
+        "gulp-eslint": "^5.0.0",
+        "gulp-hub": "^0.8.0",
+        "jsonschema": "^1.2.4"
+    },
+    "dependencies": {
+        "chai": "^4.1.2",
+        "commander": "^2.16.0",
+        "mocha": "^5.2.0"
+    }
 }
