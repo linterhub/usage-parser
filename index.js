@@ -1,17 +1,30 @@
-'use strict';
+#!/usr/bin/env node
 
-const parser = require('./src/parser.js');
+const parser = require('./src/parser');
 const configDefault = require('./src/template/configDefault.json');
-const argv = require('yargs').argv;
-const noDocsError = new Error('No documentation passed');
+const {execSync} = require('child_process');
+const version = require('./package.json').version;
+const program = require('commander');
 
-const docs = argv.docs ? argv.docs : '';
-const config = argv.config ? argv.config : configDefault;
+program
+    .version(version)
+    .option(
+        '-c, --config <config>',
+        'Custom config in json format',
+        configDefault)
+    .option(
+        '-d, --docs <docs>',
+        'The help page content (pass without <binary> argument)',
+        undefined)
+    .arguments('<binary>')
+    .action(function(binary) {
+        program.docs = execSync(`${binary} --help`).toString();
+    })
+    .description('Parse help page specifying binary as argument or content as option')
+    .parse(process.argv);
 
-
-if (docs) {
-    const result = parser(docs, config);
-    console.log(result);
+if (program.docs) {
+    console.log(JSON.stringify(parser(program.docs, program.config), null, 2));
 } else {
-    throw noDocsError;
+    program.help();
 }
