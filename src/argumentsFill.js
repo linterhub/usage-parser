@@ -22,7 +22,7 @@ const setDescription = (section, argument, context) => {
     const regularExp = new RegExp(context.regexp.defaultValue, 'gim');
     const defaultValues = regularExp.exec(section);
     if (defaultValues) {
-        argument.defaultValue = defaultValues[1];
+        argument.defaultValue = defaultValues[2];
         argument.isFlag = false;
     }
 };
