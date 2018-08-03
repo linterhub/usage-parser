@@ -1,2 +1,4 @@
   Options:
-    --space           Use space indent instead of tabs [Default: 2]
+    --space1           Use space indent instead of tabs [Default: 2]
+    --space2           Use space indent instead of tabs (Default: 2)
+    --space3           Use space indent instead of tabs Default: 2
