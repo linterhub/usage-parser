@@ -3,12 +3,16 @@
     "name": "@linterhub/usage-parser",
     "version": "0.0.0-development",
     "description": "Simple parser for usage page",
+    "homepage": "https://github.com/linterhub/usage-parser.git",
     "license": "MIT",
     "repository": "linterhub/usage-parser",
     "bugs": "https://github.com/linterhub/usage-parser/issues",
+    "contributors": [],
+    "keywords": [],
     "bin": {
-        "usage-parser": "index.js"
+        "usage-parser": "bin.js"
     },
+    "main": "index.js",
     "scripts": {
         "parse": "node index.js",
         "gulp": "./node_modules/gulp/bin/gulp.js",
