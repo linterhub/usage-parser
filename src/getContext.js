@@ -3,7 +3,7 @@
 const argumentTemplate = require('./template/argument.json');
 const context = require('./template/context.js');
 
-const handle = (help, config) => {
+const getContext = (help, config) => {
     try {
         context.options = [];
         context.delimiter = config.delimiter;
@@ -84,4 +84,4 @@ const setSectionWithPostfixSingle = (name, help, context, postfix, data) => {
     return validateSection(section) ? data.concat(section) : data;
 };
 
-module.exports = handle;
+module.exports = getContext;
