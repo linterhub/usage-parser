@@ -1,2 +1,0 @@
-  Options:
-    --cwd <dir>       Working directory for files
