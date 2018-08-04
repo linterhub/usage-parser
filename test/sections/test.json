@@ -2,40 +2,38 @@
     "description": "tests of exceptions",
     "tests": [
         {
-            "description": "with all sections",
-            "$ref": "./test/sections/files/full.valid.txt",
+            "description": "without examples section",
+            "$ref": "./test/sections/files/examples.absent.valid.txt",
             "valid": true,
+            "config": "./config.json",
+            "object": "exception"
+        },
+        {
+            "description": "with all sections",
+            "$ref": "./test/sections/files/full.sections.valid.txt",
+            "valid": true,
+            "config": "./config.json",
             "object": "exception"
         },
         {
             "description": "without options section",
-            "$ref": "./test/sections/files/options.absent.txt",
+            "$ref": "./test/sections/files/options.absent.invalid.txt",
             "valid": false,
-            "config": "./files/config.options.absent.json",
-            "object": "exception"
-        },
-        {
-            "description": "without usage section",
-            "$ref": "./test/sections/files/usage.absent.txt",
-            "valid": true,
-            "object": "exception"
-        },
-        {
-            "description": "without examples section",
-            "$ref": "./test/sections/files/examples.absent.txt",
-            "valid": true,
+            "config": "./config.json",
             "object": "exception"
         },
         {
             "description": "with other sections",
-            "$ref": "./test/sections/files/other.exist.txt",
+            "$ref": "./test/sections/files/other.sections.valid.txt",
             "valid": true,
+            "config": "./config.json",
             "object": "exception"
         },
         {
-            "description": "invalid section options",
-            "$ref": "./test/sections/files/options.invalid.txt",
+            "description": "without usage section",
+            "$ref": "./test/sections/files/usage.absent.valid.txt",
             "valid": true,
+            "config": "./config.json",
             "object": "exception"
         }
     ]

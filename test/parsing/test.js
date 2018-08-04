@@ -8,7 +8,7 @@ const assert = require('assert');
 const main = () => {
     testsData.tests.forEach((test) => {
         const doc = fs.readFileSync(test.$ref, 'utf8');
-        mocha.it(`test ${test.description}`, () => {
+        mocha.it(`${test.description}`, () => {
             const config = test.config ? require(test.config) : configDefault;
             const parserResult =
                 JSON.stringify(parser(doc, config), '', '    ');
