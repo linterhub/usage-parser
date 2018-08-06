@@ -3,37 +3,47 @@
     "tests": [
         {
             "description": "with equal delimiter",
-            "$ref": "./test/parsing/files/delimiter.equal.valid.txt",
-            "result": "./files/delimiter.equal.valid.json",
+            "data": {
+                "doc": "./test/parsing/files/delimiter.equal.valid.txt",
+                "result": "./parsing/files/delimiter.equal.valid.json"
+            },
             "valid": true,
             "object": "result"
         },
         {
             "description": "with space delimiter",
-            "$ref": "./test/parsing/files/delimiter.space.valid.txt",
-            "result": "./files/delimiter.space.valid.json",
+            "data": {
+                "doc": "./test/parsing/files/delimiter.space.valid.txt",
+                "result": "./parsing/files/delimiter.space.valid.json"
+            },
             "valid": true,
             "object": "result"
         },
         {
             "description": "full test",
-            "$ref": "./test/parsing/files/full.example.valid.txt",
-            "result": "./files/full.example.valid.json",
-            "config": "./config.json",
+            "data": {
+                "doc": "./test/parsing/files/full.example.valid.txt",
+                "result": "./parsing/files/full.example.valid.json",
+                "config": "./parsing/config.json"
+            },
             "valid": true,
             "object": "result"
         },
         {
             "description": "usage haven't got path/file",
-            "$ref": "./test/parsing/files/path.usage.absent.txt",
-            "result": "./files/path.usage.absent.json",
+            "data": {
+                "doc": "./test/parsing/files/path.usage.absent.txt",
+                "result": "./parsing/files/path.usage.absent.json"
+            },
             "valid": true,
             "object": "result"
         },
         {
             "description": "without sections in documentation",
-            "$ref": "./test/parsing/files/sections.absent.valid.txt",
-            "result": "./files/sections.absent.valid.json",
+            "data": {
+                "doc": "./test/parsing/files/sections.absent.valid.txt",
+                "result": "./parsing/files/sections.absent.valid.json"
+            },
             "valid": true,
             "object": "result"
         }
