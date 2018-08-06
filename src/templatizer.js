@@ -1,4 +1,5 @@
 'use strict';
+
 const fs = require('fs');
 const argumentsTemplate = JSON.parse(fs.readFileSync('./src/template/args.json'));
 const optionTemplate = require('./template/option.json');
@@ -43,6 +44,7 @@ const templatizer = (context, config) => {
         }
         optionSchema.description = option.description;
         optionSchema.default = option.defaultValue ? option.defaultValue : null;
+        if (option.enum) optionSchema.enum = option.enum;
         result.definitions.arguments.properties[argumentName] = optionSchema;
     });
 
