@@ -1,0 +1,40 @@
+  JavaScript happiness style linter ❤️
+
+  Usage:
+    $ xo [flags]
+
+  USAGE:
+    $ xo [<file|glob> ...]
+
+
+
+  Options
+    --extension             Additional extension
+       to lint [Can be set multiple times]
+    --no-esnext
+       Don't enforce ES2015+ rules
+    -p, --prettier          Conform to Prettier code style
+    --cwd <dir>             Working directory for files
+
+  Flags
+    --ignore          Additional paths to ignore [Can be set multiple times]
+    -i                Additional paths to ignore [Can be set multiple times]
+
+  Options:
+
+    --ext [String]     Specify JavaScript file extensions - [default: .js]
+    --stdin            Lint code provided on <STDIN> - (default: false)
+    --SPACE            USE SPACE INDENT INSTEAD OF TABS DEFAULT: 2
+
+  Examples:
+    $ xo
+
+  Examples:
+    $ xo index.js
+    $ xo *.js !foo.js
+    $ xo --space
+    $ xo --env=node --env=mocha
+    $ xo --init --space
+    $ xo --plugin=react
+    $ xo --plugin=html --extension=html
+    $ echo 'const x=true' | xo --stdin --fix

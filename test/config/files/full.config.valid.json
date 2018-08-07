@@ -3,22 +3,22 @@
         "options": {
             "names": [
                 "Options"
-            ]
-        },
-        "usage": {
-            "names": [
-                "Usage"
             ],
             "postfix": [
                 ":",
                 "\n",
                 ":\n"
-            ]
+            ],
+            "parseWhole": true
+        },
+        "usage": {
+            "names": [
+                "Usage"
+            ],
+            "postfix": ":"
         },
         "examples": {
-            "names": [
-                "Examples:"
-            ],
+            "names": "Examples",
             "postfix": [
                 ":",
                 "\n",

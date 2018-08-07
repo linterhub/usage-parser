@@ -3,15 +3,14 @@
         "options": {
             "names": [
                 "Option",
-                "Flag",
-                "Configuration"
+                "Flags"
             ],
             "postfix": [
                 ":",
                 "s",
                 "s:",
-                ":\n",
-                "s::s"
+                "s\n",
+                "s:\n"
             ]
         }
     }

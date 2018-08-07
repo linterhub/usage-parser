@@ -2,168 +2,38 @@
     "description": "tests of parsing",
     "tests": [
         {
-            "description": "example have delimiter \"=\"",
-            "$ref": "./test/parsing/files/example.delimiter1.txt",
-            "result": "./files/example.delimiter1.json",
+            "description": "with equal delimiter",
+            "$ref": "./test/parsing/files/delimiter.equal.valid.txt",
+            "result": "./files/delimiter.equal.valid.json",
             "valid": true,
             "object": "result"
         },
         {
-            "description": "example have space delimiter",
-            "$ref": "./test/parsing/files/example.delimiter2.txt",
-            "result": "./files/example.delimiter2.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "example have any other delimiter",
-            "$ref": "./test/parsing/files/example.delimiter3.txt",
-            "result": "./files/example.delimiter3.json",
-            "valid": false,
-            "object": "result"
-        },
-        {
-            "description": "example have no delimiters",
-            "$ref": "./test/parsing/files/example.no-delimiter.txt",
-            "result": "./files/example.no-delimiter.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "full test with CAPITALIZED help",
-            "$ref": "./test/parsing/files/full.CAPS.txt",
-            "result": "./files/full.CAPS.json",
+            "description": "with space delimiter",
+            "$ref": "./test/parsing/files/delimiter.space.valid.txt",
+            "result": "./files/delimiter.space.valid.json",
             "valid": true,
             "object": "result"
         },
         {
             "description": "full test",
-            "$ref": "./test/parsing/files/full.valid.txt",
-            "result": "./files/full.valid.json",
+            "$ref": "./test/parsing/files/full.example.valid.txt",
+            "result": "./files/full.example.valid.json",
+            "config": "./config.json",
             "valid": true,
             "object": "result"
         },
         {
-            "description": "many sections Examples",
-            "$ref": "./test/parsing/files/many.sections-examples.txt",
-            "result": "./files/many.sections-examples.json",
+            "description": "usage haven't got path/file",
+            "$ref": "./test/parsing/files/path.usage.absent.txt",
+            "result": "./files/path.usage.absent.json",
             "valid": true,
             "object": "result"
         },
         {
-            "description": "many sections Options",
-            "$ref": "./test/parsing/files/many.sections-options.txt",
-            "result": "./files/many.sections-options.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "many sections Usage",
-            "$ref": "./test/parsing/files/many.sections-usage.txt",
-            "result": "./files/many.sections-usage.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "many sections with different names from config",
-            "$ref": "./test/parsing/files/names.full.txt",
-            "result": "./files/names.full.json",
-            "config": "./files/config.names.full.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "option with prefix args",
-            "$ref": "./test/parsing/files/option.args.txt",
-            "result": "./files/option.args.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "options with different default values",
-            "$ref": "./test/parsing/files/option.default.txt",
-            "result": "./files/option.default.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "option with only long name",
-            "$ref": "./test/parsing/files/option.longname.txt",
-            "result": "./files/option.longname.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "option with multiline description what have more than one space",
-            "$ref": "./test/parsing/files/option.multiline.txt",
-            "result": "./files/option.multiline.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "option with description on next line",
-            "$ref": "./test/parsing/files/option.nextline.txt",
-            "result": "./files/option.nextline.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "option with only short name",
-            "$ref": "./test/parsing/files/option.shortname.txt",
-            "result": "./files/option.shortname.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "simple option",
-            "$ref": "./test/parsing/files/option.simple.txt",
-            "result": "./files/option.simple.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "help without options and parseWhole true",
-            "$ref": "./test/parsing/files/parseWhole.valid.txt",
-            "result": "./files/parseWhole.full.json",
-            "config": "./files/config.parseWhole.full.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "help with options and parseWhole true (only options should be parsed)",
-            "$ref": "./test/parsing/files/parseWhole.invalid.txt",
-            "result": "./files/parseWhole.full.json",
-            "config": "./files/config.parseWhole.full.json",
-            "valid": false,
-            "object": "result"
-        },
-        {
-            "description": "many sections with different names and different postfixes from config",
-            "$ref": "./test/parsing/files/postfixes.full.txt",
-            "result": "./files/postfixes.full.json",
-            "config": "./files/config.postfixes.full",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "section with prefix and section without prefix [output is only section without prefix]",
-            "$ref": "./test/parsing/files/postfixes.invalid.txt",
-            "result": "./files/postfixes.invalid.json",
-            "config": "./files/config.postfixes.invalid.json",
-            "valid": false,
-            "object": "result"
-        },
-        {
-            "description": "usage haven't got path/file (no linterhub:path in result)",
-            "$ref": "./test/parsing/files/usage.no-path.txt",
-            "result": "./files/usage.no-path.json",
-            "valid": true,
-            "object": "result"
-        },
-        {
-            "description": "usage have path/file (adds linterhub:path to result)",
-            "$ref": "./test/parsing/files/usage.path.txt",
-            "result": "./files/usage.path.json",
+            "description": "without sections in documentation",
+            "$ref": "./test/parsing/files/sections.absent.valid.txt",
+            "result": "./files/sections.absent.valid.json",
             "valid": true,
             "object": "result"
         }
