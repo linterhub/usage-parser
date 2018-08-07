@@ -7,7 +7,7 @@ const mocha = require('mocha');
 
 const main = () => {
     testsData.tests.forEach((test) => {
-        mocha.it(`test ${test.description}`, (done) => {
+        mocha.it(`${test.description}`, (done) => {
             const config = test.config ? require(test.config) : configDefault;
             runTest(test, config, done);
         });

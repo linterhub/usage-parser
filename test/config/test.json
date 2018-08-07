@@ -3,98 +3,57 @@
     "tests": [
         {
             "description": "without delimiter",
-            "$ref": "./files/delimiter.absent.json",
+            "$ref": "./files/delimiter.absent.valid.json",
             "valid": true,
             "object": "exception"
         },
+
         {
-            "description": "empty config",
-            "$ref": "./files/empty.valid.json",
-            "valid": true,
-            "object": "exception"
-        },
-        {
-            "description": "without examples section",
-            "$ref": "./files/examples.absent.json",
-            "valid": true,
-            "object": "exception"
-        },
-        {
-            "description": "with full data",
-            "$ref": "./files/full.valid.json",
+            "description": "with full config",
+            "$ref": "./files/full.config.valid.json",
             "valid": true,
             "object": "exception"
         },
         {
             "description": "without names in section",
-            "$ref": "./files/names.absent.json",
+            "$ref": "./files/names.absent.valid.json",
             "valid": true,
             "object": "exception"
         },
         {
-            "description": "names is string",
-            "$ref": "./files/names.string.json",
-            "valid": true,
-            "object": "exception"
-        },
-        {
-            "description": "without options section",
-            "$ref": "./files/options.absent.json",
-            "valid": true,
-            "object": "exception"
-        },
-        {
-            "description": "with other data in config",
-            "$ref": "./files/other.data.exist.json",
+            "description": "with other data",
+            "$ref": "./files/other.data.invalid.json",
             "valid": false,
-            "object": "exception"
-        },
-        {
-            "description": "with other data in section",
-            "$ref": "./files/other.section.data.exist.json",
-            "valid": false,
-            "object": "exception"
-        },
-        {
-            "description": "with other section",
-            "$ref": "./files/other.section.exist.json",
-            "valid": false,
-            "object": "exception"
-        },
-        {
-            "description": "with parseWhole property",
-            "$ref": "./files/parseWhole.add.json",
-            "valid": true,
             "object": "exception"
         },
         {
             "description": "without postfix",
-            "$ref": "./files/postfix.absent.json",
-            "valid": true,
-            "object": "exception"
-        },
-        {
-            "description": "postfix is string",
-            "$ref": "./files/postfix.string.json",
+            "$ref": "./files/postfix.absent.valid.json",
             "valid": true,
             "object": "exception"
         },
         {
             "description": "without section",
-            "$ref": "./files/section.absent.json",
+            "$ref": "./files/section.absent.valid.json",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "without examples section",
+            "$ref": "./files/section.examples.absent.json",
+            "valid": true,
+            "object": "exception"
+        },
+        {
+            "description": "without options section",
+            "$ref": "./files/section.options.absent.json",
             "valid": true,
             "object": "exception"
         },
         {
             "description": "without usage section",
-            "$ref": "./files/usage.absent.json",
+            "$ref": "./files/section.usage.absent.json",
             "valid": true,
-            "object": "exception"
-        },
-        {
-            "description": "with wrong types",
-            "$ref": "./files/wrong.type.json",
-            "valid": false,
             "object": "exception"
         }
     ]

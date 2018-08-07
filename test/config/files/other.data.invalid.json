@@ -3,16 +3,12 @@
         "options": {
             "names": [
                 "Options"
-            ]
+            ],
+            "number": 5
         },
-        "usage": {
+        "tips": {
             "names": [
-                "Usage"
-            ]
-        },
-        "examples": {
-            "names": [
-                "Examples:"
+                "Tips"
             ]
         }
     },

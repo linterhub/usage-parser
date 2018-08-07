@@ -2,12 +2,12 @@ const fs = require('fs');
 const parser = require('./../../src/parser.js');
 const chai = require('chai');
 const testsData = require('./test.json');
-const doc = fs.readFileSync('./test/sections/files/full.valid.txt', 'utf8');
+const doc = fs.readFileSync('./test/config/doc.txt', 'utf8');
 const mocha = require('mocha');
 
 const main = () => {
     testsData.tests.forEach((test) => {
-        mocha.it(`test ${test.description}`, (done) => {
+        mocha.it(`${test.description}`, (done) => {
             runTest(test, done);
         });
     });

@@ -1,0 +1,94 @@
+{
+   "$schema": "https://repometric.github.io/linterhub/schema/args.json",
+   "name": "",
+   "type": "object",
+   "allOf": [
+      {
+         "$ref": "#/definitions/arguments"
+      }
+   ],
+   "delimiter": "=",
+   "definitions": {
+      "arguments": {
+         "type": "object",
+         "properties": {
+            "--extension": {
+               "id": "--extension",
+               "type": "string",
+               "description": "Additional extension to lint [Can be set multiple times]",
+               "default": null
+            },
+            "--no-esnext": {
+               "id": "--no-esnext",
+               "type": "string",
+               "description": "Don't enforce ES2015+ rules",
+               "default": null
+            },
+            "--prettier": {
+               "id": "--prettier",
+               "type": "string",
+               "description": "Conform to Prettier code style",
+               "default": null
+            },
+            "--cwd": {
+               "id": "args:--cwd",
+               "type": "string",
+               "description": "Working directory for files",
+               "default": null
+            },
+            "--ext": {
+               "id": "args:--ext",
+               "type": "string",
+               "description": "Specify JavaScript file extensions - [default: .js]",
+               "default": ".js"
+            },
+            "--stdin": {
+               "id": "linterhub:stdin",
+               "type": "string",
+               "description": "Lint code provided on <STDIN> - (default: false)",
+               "default": "false"
+            },
+            "--SPACE": {
+               "id": "args:--SPACE",
+               "type": "string",
+               "description": "USE SPACE INDENT INSTEAD OF TABS DEFAULT: 2",
+               "default": "2"
+            },
+            "--ignore": {
+               "id": "--ignore",
+               "type": "string",
+               "description": "Additional paths to ignore [Can be set multiple times]",
+               "default": null
+            },
+            "-i": {
+               "id": "-i",
+               "type": "string",
+               "description": "Additional paths to ignore [Can be set multiple times]",
+               "default": null
+            },
+            "": {
+               "id": "linterhub:path",
+               "type": "string",
+               "description": "Path to file or folder to analyze",
+               "default": null
+            }
+         }
+      },
+      "section": {
+         "type": "object",
+         "description": "The engine configuration section",
+         "properties": {
+            "name": {
+               "type": "string",
+               "description": "The engine name",
+               "enum": ""
+            },
+            "options": {
+               "type": "object",
+               "description": "The engine configuration",
+               "$ref": "#/definitions/arguments"
+            }
+         }
+      }
+   }
+}
