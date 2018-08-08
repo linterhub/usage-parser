@@ -1,5 +1,7 @@
+// Import function
 const parseSection = require('./../parseSection.js');
 
+// Internal configuration with parsed arguments
 const context = {
     section: {
         options: {
