@@ -1,8 +1,17 @@
 'use strict';
 
+// Import template
 const argumentTemplate = require('./template/argument.json');
+
+// Import internal config
 const context = require('./template/context.js');
 
+/**
+ * Parse whole documentation and fill context
+ * @param {string} help - documentation of cli
+ * @param {object} config - user config of parser
+ * @return {object} context - internal config with parsed documentation
+ */
 const getContext = (help, config) => {
     try {
         context.options = [];
@@ -43,6 +52,13 @@ const getContext = (help, config) => {
     }
 };
 
+/**
+ * Search for all sections with given name in documentation and return it
+ * @param {string} sectionName - name of section
+ * @param {string} help - documentation of cli
+ * @param {object} context - internal config
+ * @return {array} - found sections
+ */
 const findSection = (sectionName, help, context) => {
     try {
         const regularExp = new RegExp(context.regexp.findSection.start +
@@ -54,6 +70,16 @@ const findSection = (sectionName, help, context) => {
     }
 };
 
+/**
+ * Searches for section by name, validate it and adds it to data
+ * If no sections found - use postfixes
+ * @param {string} name - name of section from user config
+ * @param {array} data - data from context where all found sections are added
+ * @param {string} help - documentation of cli
+ * @param {object} context - internal config
+ * @param {object} configSection - section from user configuration
+ * @return {array} data - data from context where all found sections are added
+ */
 const setSectionByNames = (name, data, help, context, configSection) => {
     let section = findSection(name, help, context);
     return validateSection(section) ? data.concat(section) :
@@ -64,10 +90,24 @@ const setSectionByNames = (name, data, help, context, configSection) => {
                     name, help, context, configSection.postfix, data);
 };
 
+/**
+ * Check if found section contains text
+ * @param {string} section - found section
+ * @return {boolean} - is section valid
+ */
 const validateSection = (section) => {
         return section.length > 0;
 };
 
+/**
+ * Searches for section by name + all postfixes and adds it to data [Postfix is array]
+ * @param {string} name - name of section
+ * @param {string} help - documentation of cli
+ * @param {object} context - internal config
+ * @param {object} configSection - section from user configuration
+ * @param {array} data - data from context where all found sections are added
+ * @return {array} data - data from context where all found sections are added
+ */
 const setSectionWithPostfixArray =
     (name, help, context, configSection, data) => {
     for (let postfix of configSection.postfix) {
@@ -79,9 +119,19 @@ const setSectionWithPostfixArray =
     return data;
 };
 
+/**
+ * Searches for section by name + postfix and adds it to data [Postfix is string]
+ * @param {string} name - name of section
+ * @param {string} help - documentation of cli
+ * @param {object} context - internal config
+ * @param {object} postfix - postfix for name from user configuration
+ * @param {array} data - data from context where all found sections are added
+ * @return {array} data - data from context where all found sections are added
+ */
 const setSectionWithPostfixSingle = (name, help, context, postfix, data) => {
     let section = findSection(name + postfix, help, context);
     return validateSection(section) ? data.concat(section) : data;
 };
 
+// Export function
 module.exports = getContext;
