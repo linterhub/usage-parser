@@ -15,6 +15,10 @@ const options = (section, context, argumentTemplate) => {
                 let argumentNames = '';
                 let argumentDescription = '';
 
+                const argumentEnumValues = getEnum(option, context);
+                if (argumentEnumValues.length !== 0) {
+                    argument.enum = argumentEnumValues;
+                }
                 option.trim().split(/\s\s+/).map((section, index) => {
                     if (index === 0) {
                         argumentNames = section;
@@ -90,6 +94,18 @@ const splitSection = (section) => {
     } catch (error) {
         throw error;
     }
+};
+
+/**
+ * Searches for enum values of an argument
+ * @param {string} option - argument with description from Options section
+ * @param {object} context - internal config
+ * @return {array} - enum values of argument
+ */
+const getEnum = (option, context) => {
+    const match = option.match(context.regexp.enumValues.enum);
+    return match ?
+        match[1].split(context.regexp.enumValues.split) : [];
 };
 
 // Export functions
