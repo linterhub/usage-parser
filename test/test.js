@@ -39,7 +39,7 @@ const runTest = (testsData) => {
 };
 
 /**
- * Check validity of tests for exeptions
+ * Check validity of tests for exceptions
  * @param {bool} valid - is test should be valid or not
  * @param {string} doc - documentation of cli
  * @param {object} config - user config

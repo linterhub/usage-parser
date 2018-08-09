@@ -1,8 +1,5 @@
 'use strict';
 
-// Import template
-const argumentTemplate = require('./template/argument.json');
-
 // Import internal config
 const context = require('./template/context.js');
 
@@ -39,9 +36,9 @@ const getContext = (help, config) => {
             }
             if (data.length > 0) {
                 data.forEach((object) =>
-                    contextSection.func(object, context, argumentTemplate));
+                    contextSection.func(object, context));
             } else if (configSection.parseWhole) {
-                contextSection.func(help, context, argumentTemplate);
+                contextSection.func(help, context);
             } else if (contextSection.required) {
                 throw new Error(`Required section ${sectionName} not found`);
             }
@@ -92,8 +89,8 @@ const setSectionByNames = (name, data, help, context, configSection) => {
 
 /**
  * Check if found section contains text
- * @param {string} section - found section
- * @return {boolean} - is section valid
+ * @param {String} section - found section
+ * @return {Boolean} - is section valid
  */
 const validateSection = (section) => {
     return section.length > 0;

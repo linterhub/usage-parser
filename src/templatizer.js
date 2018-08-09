@@ -1,11 +1,5 @@
 'use strict';
 
-// Import module
-const fs = require('fs');
-
-// Import templates
-const optionTemplate = require('./template/option.json');
-
 /**
  * Fill template schema with parsed arguments and return it
  * @param {object} context - internal config with parsed arguments
@@ -13,12 +7,11 @@ const optionTemplate = require('./template/option.json');
  * @return {object} - filled template schema with parsed arguments
  */
 const templatizer = (context, config) => {
-    const argumentsTemplate = getArgumentsTemplate();
-    let result = argumentsTemplate;
+    let result = context.get.template.args();
     const customPrefix = config.prefixes.custom;
     const nonFlagPrefix = config.prefixes.nonFlag;
     context.options.map((option) => {
-        let optionSchema = Object.assign({}, optionTemplate);
+        let optionSchema = context.get.template.option();
         const argumentName = option.longName ? option.longName :
             (option.shortName ? option.shortName : '');
         switch (argumentName) {
@@ -58,11 +51,6 @@ const templatizer = (context, config) => {
 
     result.delimiter = context.delimiter;
     return result;
-};
-
-// Getting arguments template
-const getArgumentsTemplate = () => {
-    return JSON.parse(fs.readFileSync('./src/template/args.json'));
 };
 
 // Export function
