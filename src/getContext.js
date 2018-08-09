@@ -83,11 +83,11 @@ const findSection = (sectionName, help, context) => {
 const setSectionByNames = (name, data, help, context, configSection) => {
     let section = findSection(name, help, context);
     return validateSection(section) ? data.concat(section) :
-            Array.isArray(configSection.postfix) ?
-                setSectionWithPostfixArray(
-                    name, help, context, configSection, data) :
-                setSectionWithPostfixSingle(
-                    name, help, context, configSection.postfix, data);
+        Array.isArray(configSection.postfix) ?
+            setSectionWithPostfixArray(
+                name, help, context, configSection, data) :
+            setSectionWithPostfixSingle(
+                name, help, context, configSection.postfix, data);
 };
 
 /**
@@ -96,11 +96,12 @@ const setSectionByNames = (name, data, help, context, configSection) => {
  * @return {boolean} - is section valid
  */
 const validateSection = (section) => {
-        return section.length > 0;
+    return section.length > 0;
 };
 
 /**
- * Searches for section by name + all postfixes and adds it to data [Postfix is array]
+ * Searches for section by name + all postfixes and
+ * adds it to data [Postfix is array]
  * @param {string} name - name of section
  * @param {string} help - documentation of cli
  * @param {object} context - internal config
@@ -110,17 +111,18 @@ const validateSection = (section) => {
  */
 const setSectionWithPostfixArray =
     (name, help, context, configSection, data) => {
-    for (let postfix of configSection.postfix) {
-        let section = findSection(name + postfix, help, context);
-        if (validateSection(section)) {
-            data = data.concat(section);
+        for (let postfix of configSection.postfix) {
+            let section = findSection(name + postfix, help, context);
+            if (validateSection(section)) {
+                data = data.concat(section);
+            }
         }
-    }
-    return data;
-};
+        return data;
+    };
 
 /**
- * Searches for section by name + postfix and adds it to data [Postfix is string]
+ * Searches for section by name + postfix and
+ * adds it to data [Postfix is string]
  * @param {string} name - name of section
  * @param {string} help - documentation of cli
  * @param {object} context - internal config

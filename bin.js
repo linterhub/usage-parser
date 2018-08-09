@@ -20,7 +20,8 @@ program
     .action(function(binary) {
         program.docs = execSync(`${binary} --help`).toString();
     })
-    .description('Parse help page specifying binary as argument or content as option')
+    .description(
+        'Parse help page specifying binary as argument or content as option')
     .parse(process.argv);
 
 if (program.docs) {

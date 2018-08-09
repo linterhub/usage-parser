@@ -4,7 +4,6 @@
 const fs = require('fs');
 
 // Import templates
-const argumentsTemplate = JSON.parse(fs.readFileSync('./src/template/args.json'));
 const optionTemplate = require('./template/option.json');
 
 /**
@@ -14,14 +13,14 @@ const optionTemplate = require('./template/option.json');
  * @return {object} - filled template schema with parsed arguments
  */
 const templatizer = (context, config) => {
-    argumentsTemplate.definitions.arguments.properties = {};
+    const argumentsTemplate = getArgumentsTemplate();
     let result = argumentsTemplate;
     const customPrefix = config.prefixes.custom;
     const nonFlagPrefix = config.prefixes.nonFlag;
     context.options.map((option) => {
         let optionSchema = Object.assign({}, optionTemplate);
         const argumentName = option.longName ? option.longName :
-                (option.shortName ? option.shortName : '');
+            (option.shortName ? option.shortName : '');
         switch (argumentName) {
             case '--version':
                 optionSchema.id = customPrefix + 'version';
@@ -59,6 +58,11 @@ const templatizer = (context, config) => {
 
     result.delimiter = context.delimiter;
     return result;
+};
+
+// Getting arguments template
+const getArgumentsTemplate = () => {
+    return JSON.parse(fs.readFileSync('./src/template/args.json'));
 };
 
 // Export function
