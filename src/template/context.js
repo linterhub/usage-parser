@@ -28,6 +28,10 @@ const context = {
             start: '-[^ \t\n]+',
             end: '[^ \t\n-]',
         },
+        enumValues: {
+            enum: '<(([\\w]+\\|)+[\\w]+)>',
+            split: '|',
+        },
     },
     options: [],
     delimiter: '',
