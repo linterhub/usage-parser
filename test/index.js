@@ -1,16 +1,19 @@
-const sections = require('./sections/test.js');
-const config = require('./config/test.js');
-const parsing = require('./parsing/test.js');
+// Import tests data
+const sections = require('./sections/test.json');
+const config = require('./config/test.json');
+const parsing = require('./parsing/test.json');
+
+// Import npm package
 const mocha = require('mocha');
 
-mocha.describe('Sections test', () => {
-    sections();
-});
+// Import function
+const test = require('./test.js');
 
-mocha.describe('Config test', () => {
-    config();
-});
+// Run config tests
+mocha.describe('Config test', () => test(config));
 
-mocha.describe('Parsing test', () => {
-    parsing();
-});
+// Run sections tests
+mocha.describe('Sections test', () => test(sections));
+
+// Run parsing tests
+mocha.describe('Parsing test', () => test(parsing));
