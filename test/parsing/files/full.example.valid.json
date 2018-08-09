@@ -54,6 +54,37 @@
                "description": "USE SPACE INDENT INSTEAD OF TABS DEFAULT: 2",
                "default": "2"
             },
+            "--parser": {
+               "id": "args:--parser",
+               "type": "string",
+               "description": "Which parser to use. <flow|babylon|typescript|css|less|scss|json|json5|json-stringify|graphql|markdown|vue|yaml>",
+               "default": null,
+               "enum": [
+                  "flow",
+                  "babylon",
+                  "typescript",
+                  "css",
+                  "less",
+                  "scss",
+                  "json",
+                  "json5",
+                  "json-stringify",
+                  "graphql",
+                  "markdown",
+                  "vue",
+                  "yaml"
+               ]
+            },
+            "--arrow-parens": {
+               "id": "args:--arrow-parens",
+               "type": "string",
+               "description": "Include parentheses around a sole arrow function parameter. Defaults to avoid.",
+               "default": null,
+               "enum": [
+                  "avoid",
+                  "always"
+               ]
+            },
             "--ignore": {
                "id": "--ignore",
                "type": "string",
