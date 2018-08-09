@@ -19,8 +19,7 @@
                 ":",
                 "\n",
                 ":\n"
-            ],
-            "parseWhole": false
+            ]
         },
         "examples": {
             "names": [
@@ -30,8 +29,7 @@
                 ":",
                 "\n",
                 ":\n"
-            ],
-            "parseWhole": false
+            ]
         }
     },
     "delimiter": "=",
