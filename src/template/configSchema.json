@@ -32,9 +32,31 @@
             "title": "Array",
             "description": "Default array of strings",
             "type":"array",
-            "items": [
+            "items": {
+                "type": "string"
+            }
+        },
+        "section:names": {
+            "title": "Names",
+            "description": "Names of section",
+            "oneOf": [
                 {
-                "$ref": "#/definitions/default:string"
+                    "$ref": "#/definitions/default:string"
+                },
+                {
+                    "$ref": "#/definitions/default:array"
+                }
+            ]
+        },
+        "section:postfix": {
+            "title": "Postfixes",
+            "description": "Postfixes, that will be added to a names if no names found",
+            "oneOf": [
+                {
+                    "$ref": "#/definitions/default:string"
+                },
+                {
+                    "$ref": "#/definitions/default:array"
                 }
             ]
         },
@@ -44,44 +66,39 @@
             "type": "object",
             "properties": {
                 "options": {
-                    "$ref": "#/definitions/section:default"
+                    "$ref": "#/definitions/section:options"
                 },
                 "usage": {
-                    "$ref": "#/definitions/section:default"
+                    "$ref": "#/definitions/section:optional"
                 },
                 "examples": {
-                    "$ref": "#/definitions/section:default"
+                    "$ref": "#/definitions/section:optional"
                 }
             },
             "additionalProperties": false
         },
-        "section:default": {
-            "title": "Section",
-            "description": "Section of help",
+        "section:optional": {
+            "title": "Optional section",
+            "description": "Optional section of config",
             "properties": {
                 "names": {
-                    "title": "Names",
-                    "description": "Names of section",
-                    "oneOf": [
-                        {
-                            "$ref": "#/definitions/default:string"
-                        },
-                        {
-                            "$ref": "#/definitions/default:array"
-                        }
-                    ]
+                    "$ref": "#/definitions/section:names"
                 },
                 "postfix": {
-                    "title": "Postfixes",
-                    "description": "Postfixes, that will be added to a names if no names found",
-                    "oneOf": [
-                        {
-                            "$ref": "#/definitions/default:string"
-                        },
-                        {
-                            "$ref": "#/definitions/default:array"
-                        }
-                    ]
+                    "$ref": "#/definitions/section:postfix"
+                }
+            },
+            "additionalProperties": false
+        },
+        "section:options": {
+            "title": "Section Options",
+            "description": "Section Options of config",
+            "properties": {
+                "names": {
+                    "$ref": "#/definitions/section:names"
+                },
+                "postfix": {
+                    "$ref": "#/definitions/section:postfix"
                 },
                 "parseWhole": {
                     "title": "Parse whole help",
