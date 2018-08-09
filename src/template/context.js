@@ -1,5 +1,7 @@
+// Import function
 const parseSection = require('./../parseSection.js');
 
+// Internal configuration with parsed arguments
 const context = {
     section: {
         options: {
@@ -25,6 +27,10 @@ const context = {
         delimiter: {
             start: '-[^ \t\n]+',
             end: '[^ \t\n-]',
+        },
+        enumValues: {
+            enum: '<(([\\w]+\\|)+[\\w]+)>',
+            split: '|',
         },
     },
     options: [],

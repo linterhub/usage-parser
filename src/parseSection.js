@@ -1,5 +1,12 @@
+// Import functions
 const argumentsFill = require('./argumentsFill.js');
 
+/**
+ * Parse section Options and add arguments to context
+ * @param {string} section - section Options
+ * @param {object} context - internal config
+ * @param {object} argumentTemplate - template of parsed argument
+ */
 const options = (section, context, argumentTemplate) => {
     try {
         splitSection(section).forEach((option) => {
@@ -8,6 +15,10 @@ const options = (section, context, argumentTemplate) => {
                 let argumentNames = '';
                 let argumentDescription = '';
 
+                const argumentEnumValues = getEnum(option, context);
+                if (argumentEnumValues.length !== 0) {
+                    argument.enum = argumentEnumValues;
+                }
                 option.trim().split(/\s\s+/).map((section, index) => {
                     if (index === 0) {
                         argumentNames = section;
@@ -27,15 +38,27 @@ const options = (section, context, argumentTemplate) => {
     }
 };
 
+/**
+ * Parse section Usage and add argument "path" to context
+ * @param {string} section - section Usage
+ * @param {object} context - internal config
+ * @param {object} argumentTemplate - template of parsed argument
+ */
 const usage = (section, context, argumentTemplate) => {
     let argument = Object.assign({}, argumentTemplate);
     argument.longName = '';
+    argument.description = 'Path to file or folder to analyze';
     const regularExp = new RegExp(context.regexp.filePath, 'gi');
     if (section.match(regularExp)) {
         context.options.push(argument);
     }
 };
 
+/**
+ * Parse section Examples and set delimiter in context
+ * @param {string} section - section Usage
+ * @param {object} context - internal config
+ */
 const examples = (section, context) => {
     const delimitersTemplate = [' ', '='];
     delimitersTemplate.forEach((delimiter) => {
@@ -45,6 +68,11 @@ const examples = (section, context) => {
     });
 };
 
+/**
+ * Split section Options for array of arguments (argument + decription)
+ * @param {string} section - section Options
+ * @return {Array} - arguments from Options
+ */
 const splitSection = (section) => {
     try {
         let result = [];
@@ -68,6 +96,19 @@ const splitSection = (section) => {
     }
 };
 
+/**
+ * Searches for enum values of an argument
+ * @param {string} option - argument with description from Options section
+ * @param {object} context - internal config
+ * @return {array} - enum values of argument
+ */
+const getEnum = (option, context) => {
+    const match = option.match(context.regexp.enumValues.enum);
+    return match ?
+        match[1].split(context.regexp.enumValues.split) : [];
+};
+
+// Export functions
 exports = module.exports = {
     options: options,
     usage: usage,

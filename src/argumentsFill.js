@@ -1,3 +1,8 @@
+/**
+ * Set argument names and determine whether argument is flag
+ * @param {string} section - one argument from Options without description
+ * @param {object} argument - template of argument
+ */
 const setArgument = (section, argument) => {
     const argumentPrefix = /^-*/i;
 
@@ -17,6 +22,12 @@ const setArgument = (section, argument) => {
     });
 };
 
+/**
+ * Set argument description and default value
+ * @param {string} section - one argument from Options with only description
+ * @param {object} argument - template of argument
+ * @param {object} context - internal config
+ */
 const setDescription = (section, argument, context) => {
     argument.description = section;
     const regularExp = new RegExp(context.regexp.defaultValue, 'gim');
@@ -27,12 +38,18 @@ const setDescription = (section, argument, context) => {
     }
 };
 
+/**
+ * Remove extra characters from argument name
+ * @param {string} args - one argument without description
+ * @return {string} args - argument without extra characters
+ */
 const removeExtraCharacters = (args) => {
     args = args.replace(/=/g, ' ');
     args = args.replace(/,/g, ' ');
     return args;
 };
 
+// Export functions
 exports = module.exports = {
     setArgument, setDescription,
 };

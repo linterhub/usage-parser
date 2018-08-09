@@ -1,8 +1,18 @@
 'use strict';
+
+// Import module
 const fs = require('fs');
+
+// Import templates
 const argumentsTemplate = JSON.parse(fs.readFileSync('./src/template/args.json'));
 const optionTemplate = require('./template/option.json');
 
+/**
+ * Fill template schema with parsed arguments and return it
+ * @param {object} context - internal config with parsed arguments
+ * @param {object} config - user config
+ * @return {object} - filled template schema with parsed arguments
+ */
 const templatizer = (context, config) => {
     argumentsTemplate.definitions.arguments.properties = {};
     let result = argumentsTemplate;
@@ -43,6 +53,7 @@ const templatizer = (context, config) => {
         }
         optionSchema.description = option.description;
         optionSchema.default = option.defaultValue ? option.defaultValue : null;
+        if (option.enum) optionSchema.enum = option.enum;
         result.definitions.arguments.properties[argumentName] = optionSchema;
     });
 
@@ -50,4 +61,5 @@ const templatizer = (context, config) => {
     return result;
 };
 
+// Export function
 module.exports = templatizer;
