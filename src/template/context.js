@@ -26,7 +26,8 @@ const context = {
         },
     },
     regexp: {
-        defaultValue: '(\\[|\\(|[\\s]+)default: (.*?)(\\]|\\)|([\\s]+|$))',
+        defaultValue: '(\\[|\\(|[\\s]+)default(s|)' +
+        '(:|[\\s](to|at|is))[\\s]+(.*?)(\\]|\\)|([\\s]+|$))',
         findSection: {
             start: '\\s[\\s]+',
             end: '[(\n|\r\n)]+(\n|\r\n)?(?:[ \t].*?(?:(\n|\r\n)|$))*',

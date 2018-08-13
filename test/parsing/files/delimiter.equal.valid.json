@@ -15,8 +15,7 @@
             "--ignore": {
                "id": "--ignore",
                "type": "string",
-               "description": "Additional paths to ignore [Can be set multiple times]",
-               "default": null
+               "description": "Additional paths to ignore [Can be set multiple times]"
             }
          }
       },
