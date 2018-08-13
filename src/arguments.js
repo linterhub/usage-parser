@@ -10,16 +10,16 @@ const getArgumentObject = (object, context) => {
     let argument = context.get.template.argument();
     object.arg = removeExtraCharacters(object.arg);
     argument = {
-        enum: getEnum(object.arg, context),
+        enum: getEnum(object.arg + object.description, context),
         longName: getPropertyName(object.arg, context.regexp.argument.long),
         shortName: getPropertyName(object.arg, context.regexp.argument.short),
         defaultValue: getDefaultValue(
             object.description, context.regexp.defaultValue),
         description: object.description.trim(),
     };
-    argument.isFlag = isDefaultBollean(argument.defaultValue)
-        && !isPropertyTyped(object.arg);
-
+    argument.isFlag = !isPropertyTyped(object.arg)
+        && isFieldBoolean(argument.defaultValue)
+        && (argument.enum === null);
     return argument;
 };
 
@@ -68,11 +68,11 @@ const getPropertyName = (string, regexp) => {
 };
 
 /**
- * Checks default values on bollean
- * @param {string} string - default value
- * @return {bollean} - result of check
+ * Checks is given property of argument boolean
+ * @param {string} string - value of property
+ * @return {boolean} - result of check
  */
-const isDefaultBollean = (string) => {
+const isFieldBoolean = (string) => {
     return string && !(string === 'true' || string === 'false' ) ? false : true;
 };
 
@@ -80,7 +80,7 @@ const isDefaultBollean = (string) => {
  * Checks if argument string has any types by
  * additional chars after property name
  * @param {string} string - argument string without description
- * @return {bollean} - result of check
+ * @return {bool} - result of check
  */
 const isPropertyTyped = (string) => {
     let isType = false;

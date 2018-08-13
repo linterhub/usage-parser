@@ -34,7 +34,7 @@ const context = {
         filePath: 'file|path',
         delimiter: '-[^ \t(\n|\r\n)]+(\\s|=)[^ \t(\n|\r\n)-]',
         enumValues: {
-            enum: '<(([\\w]+\\|)+[\\w]+)>',
+            enum: '<(([\\S]+\\|)+[\\S]+)>',
             split: '|',
         },
         argument: {
