@@ -15,26 +15,22 @@
             "--extension": {
                "id": "--extension",
                "type": "string",
-               "description": "Additional extension to lint [Can be set multiple times]",
-               "default": null
+               "description": "Additional extension to lint [Can be set multiple times]"
             },
             "--no-esnext": {
                "id": "--no-esnext",
                "type": "string",
-               "description": "Don't enforce ES2015+ rules",
-               "default": null
+               "description": "Don't enforce ES2015+ rules"
             },
             "--prettier": {
                "id": "--prettier",
                "type": "string",
-               "description": "Conform to Prettier code style",
-               "default": null
+               "description": "Conform to Prettier code style"
             },
             "--cwd": {
                "id": "args:--cwd",
                "type": "string",
-               "description": "Working directory for files",
-               "default": null
+               "description": "Working directory for files"
             },
             "--ext": {
                "id": "args:--ext",
@@ -45,20 +41,19 @@
             "--stdin": {
                "id": "linterhub:stdin",
                "type": "string",
-               "description": "Lint code provided on <STDIN> - (default: false)",
+               "description": "Lint code provided on <STDIN> - (default is false)",
                "default": "false"
             },
             "--SPACE": {
                "id": "args:--SPACE",
                "type": "string",
-               "description": "USE SPACE INDENT INSTEAD OF TABS DEFAULT: 2",
+               "description": "USE SPACE INDENT INSTEAD OF TABS DEFAULTS TO 2",
                "default": "2"
             },
             "--parser": {
                "id": "args:--parser",
                "type": "string",
                "description": "Which parser to use. <flow|babylon|typescript|css|less|scss|json|json5|json-stringify|graphql|markdown|vue|yaml>",
-               "default": null,
                "enum": [
                   "flow",
                   "babylon",
@@ -79,7 +74,7 @@
                "id": "args:--arrow-parens",
                "type": "string",
                "description": "Include parentheses around a sole arrow function parameter. Defaults to avoid",
-               "default": null,
+               "default": "avoid",
                "enum": [
                   "avoid",
                   "always"
@@ -88,20 +83,17 @@
             "--ignore": {
                "id": "--ignore",
                "type": "string",
-               "description": "Additional paths to ignore [Can be set multiple times]",
-               "default": null
+               "description": "Additional paths to ignore [Can be set multiple times]"
             },
             "-i": {
                "id": "-i",
                "type": "string",
-               "description": "Additional paths to ignore [Can be set multiple times]",
-               "default": null
+               "description": "Additional paths to ignore [Can be set multiple times]"
             },
             "": {
                "id": "linterhub:path",
                "type": "string",
-               "description": "Path to file or folder to analyze",
-               "default": null
+               "description": "Path to file or folder to analyze"
             }
          }
       },

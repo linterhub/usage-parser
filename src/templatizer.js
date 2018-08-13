@@ -44,7 +44,7 @@ const templatizer = (context, config) => {
                     + option.longName;
         }
         optionSchema.description = option.description;
-        optionSchema.default = option.defaultValue ? option.defaultValue : null;
+        if (option.defaultValue) optionSchema.default = option.defaultValue;
         if (option.enum) optionSchema.enum = option.enum;
         result.definitions.arguments.properties[argumentName] = optionSchema;
     });

@@ -18,7 +18,7 @@ const getArgumentObject = (object, context) => {
         description: unifyDescription(object.description),
     };
     argument.isFlag = !isPropertyTyped(object.arg)
-        && isFieldBoolean(argument.defaultValue)
+        && isValueBoolean(argument.defaultValue)
         && (argument.enum === null);
     return argument;
 };
@@ -32,8 +32,7 @@ const unifyDescription = (description) => {
     if (typeof description !== 'string' && description.length === 0) return '';
     let result = description.trim();
     result = result.charAt(0).toUpperCase() + result.slice(1);
-    return result.charAt(result.length - 1) === '.' ?
-        result.slice(0, result.length - 1) : result;
+    return deleteDotAtTheEnd(result);
 };
 
 /**
@@ -44,7 +43,7 @@ const unifyDescription = (description) => {
  */
 const getDefaultValue = (description, regexp) => {
     const result = getValueByRegexp(description, regexp);
-    return result ? result[2].trim() : null;
+    return result ? deleteDotAtTheEnd(result[5].trim()) : null;
 };
 
 /**
@@ -85,7 +84,7 @@ const getPropertyName = (string, regexp) => {
  * @param {string} string - value of property
  * @return {boolean} - result of check
  */
-const isFieldBoolean = (string) => {
+const isValueBoolean = (string) => {
     return string && !(string === 'true' || string === 'false' ) ? false : true;
 };
 
@@ -125,6 +124,16 @@ const removeExtraCharacters = (string) => {
     string = string.replace(/=/g, ' ');
     string = string.replace(/,/g, ' ');
     return string;
+};
+
+/**
+ * Delete dot at the end of string
+ * @param {string} string - source string
+ * @return {*} - string without dot at the end
+ */
+const deleteDotAtTheEnd = (string) => {
+    return string.charAt(string.length - 1) === '.' ?
+        string.slice(0, string.length - 1) : string;
 };
 
 // Export functions
