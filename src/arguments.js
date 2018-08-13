@@ -15,12 +15,25 @@ const getArgumentObject = (object, context) => {
         shortName: getPropertyName(object.arg, context.regexp.argument.short),
         defaultValue: getDefaultValue(
             object.description, context.regexp.defaultValue),
-        description: object.description.trim(),
+        description: unifyDescription(object.description),
     };
     argument.isFlag = !isPropertyTyped(object.arg)
         && isFieldBoolean(argument.defaultValue)
         && (argument.enum === null);
     return argument;
+};
+
+/**
+ * Unify description to one standard
+ * @param {string} description - argument description
+ * @return {string} result - unified description
+ */
+const unifyDescription = (description) => {
+    if (typeof description !== 'string' && description.length === 0) return '';
+    let result = description.trim();
+    result = result.charAt(0).toUpperCase() + result.slice(1);
+    return result.charAt(result.length - 1) === '.' ?
+        result.slice(0, result.length - 1) : result;
 };
 
 /**

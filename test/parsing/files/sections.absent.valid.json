@@ -15,7 +15,7 @@
                 "--help": {
                     "id": "linterhub:help",
                     "type": "null",
-                    "description": "Display this help text.",
+                    "description": "Display this help text",
                     "default": null
                 },
                 "--quiet": {
@@ -27,7 +27,7 @@
                 "--version": {
                     "id": "linterhub:version",
                     "type": "null",
-                    "description": "Print the version.",
+                    "description": "Print the version",
                     "default": null
                 },
                 "--exclude": {
