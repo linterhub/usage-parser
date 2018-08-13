@@ -13,8 +13,8 @@
        to lint [Can be set multiple times]
     --no-esnext
        Don't enforce ES2015+ rules
-    -p, --prettier          Conform to Prettier code style
-    --cwd <dir>             Working directory for files
+    -p, --prettier          conform to Prettier code style
+    --cwd <dir>             Working directory for files.
 
   Flags
     --ignore          Additional paths to ignore [Can be set multiple times]

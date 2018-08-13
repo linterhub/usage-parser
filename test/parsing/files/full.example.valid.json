@@ -78,7 +78,7 @@
             "--arrow-parens": {
                "id": "args:--arrow-parens",
                "type": "string",
-               "description": "Include parentheses around a sole arrow function parameter. Defaults to avoid.",
+               "description": "Include parentheses around a sole arrow function parameter. Defaults to avoid",
                "default": null,
                "enum": [
                   "avoid",
