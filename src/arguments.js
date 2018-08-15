@@ -32,7 +32,7 @@ const unifyDescription = (description) => {
     if (typeof description !== 'string' && description.length === 0) return '';
     let result = description.trim();
     result = result.charAt(0).toUpperCase() + result.slice(1);
-    return deleteDotAtTheEnd(result);
+    return removeExtraSpaces(deleteDotAtTheEnd(result));
 };
 
 /**
@@ -123,6 +123,17 @@ const getValueByRegexp = (string, regexp) => {
 const removeExtraCharacters = (string) => {
     string = string.replace(/=/g, ' ');
     string = string.replace(/,/g, ' ');
+    return string;
+};
+
+/**
+ * Remove extra spaces and tabulation from string
+ * @param {string} string - any string
+ * @return {string} - result string
+ */
+const removeExtraSpaces = (string) => {
+    string = string.replace(/\t/g, ' ');
+    string = string.replace(/[\s]+/g, ' ');
     return string;
 };
 
