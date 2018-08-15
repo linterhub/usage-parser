@@ -23,7 +23,7 @@ const options = (section, context) => {
  * @param {object} context - internal config
  */
 const usage = (section, context) => {
-    const result = arguments.getValueByRegexp(section, context.regexp.filePath);
+    const result = arguments.getValueByRegexp(section, context.regexp.path);
     if (result) {
         let argument = context.get.template.argument();
         argument.longName = '';

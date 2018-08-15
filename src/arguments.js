@@ -54,7 +54,20 @@ const getDefaultValue = (description, regexp) => {
  */
 const getEnum = (string, context) => {
     const result = getValueByRegexp(string, context.regexp.enumValues.enum);
-    return result ? result[1].split(context.regexp.enumValues.split) : null;
+    return result ? removeExtraEnumValues(
+        result[2].split(context.regexp.enumValues.split), context) : null;
+};
+
+/**
+ * Remove extra enum values (such as 'file', 'path', 'folder', etc.)
+ * @param {array} enumArray - array with enum values
+ * @param {object} context - internal config
+ * @return {array} enumArray - enum without extra values or null if it empty
+ */
+const removeExtraEnumValues = (enumArray, context) => {
+    const result = enumArray.filter((value) =>
+        value.toLowerCase().match(context.regexp.path) === null);
+    return result.length === 0 ? null : result;
 };
 
 /**
@@ -121,9 +134,7 @@ const getValueByRegexp = (string, regexp) => {
  * @return {string} - result string
  */
 const removeExtraCharacters = (string) => {
-    string = string.replace(/=/g, ' ');
-    string = string.replace(/,/g, ' ');
-    return string;
+    return string.replace(/=/g, ' ').replace(/,/g, ' ');
 };
 
 /**
@@ -132,9 +143,7 @@ const removeExtraCharacters = (string) => {
  * @return {string} - result string
  */
 const removeExtraSpaces = (string) => {
-    string = string.replace(/\t/g, ' ');
-    string = string.replace(/[\s]+/g, ' ');
-    return string;
+    return string.replace(/\t/g, ' ').replace(/[\s]+/g, ' ');
 };
 
 /**
