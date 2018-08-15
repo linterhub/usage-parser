@@ -32,11 +32,12 @@ const context = {
             start: '\\s[\\s]+',
             end: '[(\n|\r\n)]+(\n|\r\n)?(?:[ \t].*?(?:(\n|\r\n)|$))*',
         },
-        filePath: 'file|path',
+        path: 'file|path|folder|dir|directory',
         delimiter: '-[^ \t(\n|\r\n)]+(\\s|=)[^ \t(\n|\r\n)-]',
         enumValues: {
-            enum: '<(([\\S]+\\|)+[\\S]+)>',
-            split: '|',
+            enum: '(<|\\(|\\")(([\\S]+(\\||\\",\\s\\"|\\sor\\s))+[\\S]+)' +
+            '(>|\\)|\\"|,\\s)',
+            split: /[\|]|\",\s\"|\"\sor\s\"/,
         },
         argument: {
             short: '(\\s|^)-[^-]*?(\\s|=|$)',
