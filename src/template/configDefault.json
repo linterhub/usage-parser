@@ -34,7 +34,7 @@
     },
     "delimiter": "=",
     "prefixes": {
-        "custom": "linterhub:",
-        "nonFlag": "args:"
+        "custom": "linterhub",
+        "nonFlag": "args"
     }
 }

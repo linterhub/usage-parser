@@ -8,18 +8,17 @@
  */
 const getArgumentObject = (object, context) => {
     let argument = context.get.template.argument();
-    object.arg = removeExtraCharacters(object.arg);
     argument = {
         enum: getEnum(object.arg + object.description, context),
         longName: getPropertyName(object.arg, context.regexp.argument.long),
         shortName: getPropertyName(object.arg, context.regexp.argument.short),
         defaultValue: getDefaultValue(
             object.description, context.regexp.defaultValue),
-        description: unifyDescription(object.description),
+        description: unifyDescription(object.description.trim()),
     };
-    argument.isFlag = !isPropertyTyped(object.arg)
-        && isValueBoolean(argument.defaultValue)
-        && (argument.enum === null);
+
+    argument.isFlag = identifyIsFlag(object.arg, argument);
+    argument.type = getPropertyType(object.arg, argument, context);
     return argument;
 };
 
@@ -30,9 +29,8 @@ const getArgumentObject = (object, context) => {
  */
 const unifyDescription = (description) => {
     if (typeof description !== 'string' && description.length === 0) return '';
-    let result = description.trim();
-    result = result.charAt(0).toUpperCase() + result.slice(1);
-    return removeExtraSpaces(deleteDotAtTheEnd(result));
+    const result = description.charAt(0).toUpperCase() + description.slice(1);
+    return removeExtraSpaces(removeDotAtTheEnd(result));
 };
 
 /**
@@ -43,7 +41,7 @@ const unifyDescription = (description) => {
  */
 const getDefaultValue = (description, regexp) => {
     const result = getValueByRegexp(description, regexp);
-    return result ? deleteDotAtTheEnd(result[5].trim()) : null;
+    return result ? removeDotAtTheEnd(result[5].trim()) : null;
 };
 
 /**
@@ -55,19 +53,8 @@ const getDefaultValue = (description, regexp) => {
 const getEnum = (string, context) => {
     const result = getValueByRegexp(string, context.regexp.enumValues.enum);
     return result ? removeExtraEnumValues(
-        result[2].split(context.regexp.enumValues.split), context) : null;
-};
-
-/**
- * Remove extra enum values (such as 'file', 'path', 'folder', etc.)
- * @param {array} enumArray - array with enum values
- * @param {object} context - internal config
- * @return {array} enumArray - enum without extra values or null if it empty
- */
-const removeExtraEnumValues = (enumArray, context) => {
-    const result = enumArray.filter((value) =>
-        value.toLowerCase().match(context.regexp.path) === null);
-    return result.length === 0 ? null : result;
+        result[2].split(context.regexp.enumValues.split), context.regexp.path)
+        : null;
 };
 
 /**
@@ -89,7 +76,7 @@ const getDelimiterValue = (string, regexp) => {
  */
 const getPropertyName = (string, regexp) => {
     const result = getValueByRegexp(string, regexp);
-    return result ? result[0].trim() : null;
+    return result ? removeComaAtTheEnd(result[0].trim()) : null;
 };
 
 /**
@@ -102,39 +89,70 @@ const isValueBoolean = (string) => {
 };
 
 /**
- * Checks if argument string has any types by
- * additional chars after property name
+ * Get type of an argument (string, number, null (for flags), etc.)
  * @param {string} string - argument string without description
- * @return {bool} - result of check
+ * @param {object} argument - argument object with description, names, etc.
+ * @param {object} context - internal parser config
+ * @return {string} argumentType - type of argument
  */
-const isPropertyTyped = (string) => {
-    let isType = false;
-    string.split(/\s+/).map((argumentSubstring) => {
-        argumentSubstring.trim();
-        isType = argumentSubstring.indexOf('-') !== 0 ? true : isType;
+const getPropertyType = (string, argument, context) => {
+    if (argument.isFlag) return null;
+    const typesDictionary = context.get.template.typesDictionary();
+    const argumentAddition = removeExtraArgumentNames(string, argument);
+    const result = Object.keys(typesDictionary)
+        .find((type) => typesDictionary[type]
+            .find((alias) => {
+                return argumentAddition.toLowerCase().indexOf(alias) !== -1;
+            }));
+
+    return result ? result : context.get.template.option().type;
+};
+
+/**
+ * Identify if argument is flag
+ * @param {string} string - argument string without description
+ * @param {object} argument - argument object with description, names, etc.
+ * @return {boolean} isFlag - is argument flag
+ */
+const identifyIsFlag = (string, argument) => {
+    const argumentAddition = removeExtraArgumentNames(string, argument);
+    isFlag = !isValueBoolean(argument.defaultValue) ||
+            argument.enum !== null ||
+            argumentAddition ? false : true;
+    return isFlag;
+};
+
+/**
+ * Remove extra enum values (such as 'file', 'path', 'folder', etc.)
+ * @param {array} enumArray - array with enum values
+ * @param {string} regexp -  regexp for remove
+ * @return {array} enumArray - enum without extra values or null if it empty
+ */
+const removeExtraEnumValues = (enumArray, regexp) => {
+    const result = enumArray.filter((value) => {
+        return value.toLowerCase().match(regexp) === null;
     });
-    return isType;
+    return result.length !== 0 ? result : null;
 };
 
 /**
- * General function for getting some values by regexp
- * @param {string} string - searching string
- * @param {string} regexp - regexp for finding
- * @return {Array} - Array of result
- */
-const getValueByRegexp = (string, regexp) => {
-    const regularExp = new RegExp(regexp, 'gim');
-    const result = regularExp.exec(string);
-    return result ? result : null;
-};
-
-/**
- * Remove coma and sing from string
+ * Remove extra coma from string
  * @param {string} string - any string
  * @return {string} - result string
  */
-const removeExtraCharacters = (string) => {
-    return string.replace(/=/g, ' ').replace(/,/g, ' ');
+const removeExtraComa = (string) => {
+    return removeChar(string, [',']).trim();
+};
+/**
+ * Remove argument names from string
+ * @param {string} string - any string
+ * @param {argument} argument - argument object with description, names, etc.
+ * @return {string} - result string
+ */
+const removeExtraArgumentNames = (string, argument) => {
+    return removeChar(
+        removeExtraComa(string),
+        [argument.longName, argument.shortName]).trim();
 };
 
 /**
@@ -143,17 +161,63 @@ const removeExtraCharacters = (string) => {
  * @return {string} - result string
  */
 const removeExtraSpaces = (string) => {
-    return string.replace(/\t/g, ' ').replace(/[\s]+/g, ' ');
+    return removeChar(string, [/\\t/g, /[\s]+/g]);
 };
 
 /**
- * Delete dot at the end of string
- * @param {string} string - source string
- * @return {*} - string without dot at the end
- */
-const deleteDotAtTheEnd = (string) => {
-    return string.charAt(string.length - 1) === '.' ?
+* Remove extra coma from the end of line
+* @param {string} string - any string
+* @return {string} - result string
+*/
+const removeComaAtTheEnd = (string) => {
+    return removeCharAtTheEnd(string, ',');
+};
+
+/**
+* Remove extra dot from the end of line
+* @param {string} string - any string
+* @return {string} - result string
+*/
+const removeDotAtTheEnd = (string) => {
+    return removeCharAtTheEnd(string, '.');
+};
+
+
+/**
+* Delete char at the end of string
+* @param {string} string - source string
+* @param {char} char - char for remove
+* @return {*} - string without dot at the end
+*/
+const removeCharAtTheEnd = (string, char) => {
+    return string.charAt(string.length - 1) === char ?
         string.slice(0, string.length - 1) : string;
+};
+
+/**
+* Remove all char from array in string
+* @param {string} string - input string for removing
+* @param {array} array - array of char which need to remove
+* @return {string} - result string
+*/
+const removeChar = (string, array) => {
+    let result = string;
+    array.map((char) => {
+        result = result.replace(char, ' ');
+    });
+    return result;
+};
+
+/**
+* General function for getting some values by regexp
+* @param {string} string - searching string
+* @param {string} regexp - regexp for finding
+* @return {Array} - Array of result
+*/
+const getValueByRegexp = (string, regexp) => {
+    const regularExp = new RegExp(regexp, 'gim');
+    const result = regularExp.exec(string);
+    return result ? result : null;
 };
 
 // Export functions

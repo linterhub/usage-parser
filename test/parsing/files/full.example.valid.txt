@@ -28,6 +28,15 @@
     --parser           Which parser to use. <flow|babylon|typescript|css|less|scss|json|json5|json-stringify|graphql|markdown|vue|yaml>
     --arrow-parens <avoid|always>   Include parentheses around a sole arrow function parameter.
                                     Defaults to avoid.
+                                    --reporter         Built in reporter (default, csv, jslint, checkstyle, raw), or module, or path to reporter file
+    --option1          (auto|always|never, default to never)
+    --reporter2        Custom reporter (<PATH>|jslint|checkstyle|unix)
+    --option2          Option 2.          May be: "scss", "sass", "less", "sugarss", "<path>"
+    --option3          Option 3: "json", "string" or "verbose"
+    --config           Path to configuration file         \t              <file|path>
+    -f, --error-filter <path>       a module to filter errors
+    --max-warnings [integer]  Number of warnings to trigger nonzero exit code
+    --parser-options Object        Specify parser options
 
 
   Examples:

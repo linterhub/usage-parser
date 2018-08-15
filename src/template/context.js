@@ -4,10 +4,12 @@ const _ = require('lodash');
 // Import function
 const sections = require('./../sections.js');
 
-// +// Import templates
+// Import templates
 const argument = require('./argument.json');
 const option = require('./option.json');
+const types = require('./types.dictionary.json');
 const args = require('./args.json');
+
 
 // Internal configuration with parsed arguments
 const context = {
@@ -35,9 +37,9 @@ const context = {
         path: 'file|path|folder|dir|directory',
         delimiter: '-[^ \t(\n|\r\n)]+(\\s|=)[^ \t(\n|\r\n)-]',
         enumValues: {
-            enum: '(<|\\(|\\")(([\\S]+(\\||\\",\\s\\"|\\sor\\s))+[\\S]+)' +
-            '(>|\\)|\\"|,\\s)',
-            split: /[\|]|\",\s\"|\"\sor\s\"/,
+            enum: '(<|\\(|\\")(([\\S]+(\\||\\",\\s\\"|\\"\\sor\\s\\"|,\\s))' +
+            '+[\\S]+[^<\\)\\"])(>|\\)|\\"|,\\s)',
+            split: /[\|]|\",\s\"|\"\sor\s\"|,\s/,
         },
         argument: {
             short: '(\\s|^)-[^-]*?(\\s|=|$)',
@@ -51,6 +53,7 @@ const context = {
             args: () => _.cloneDeep(args),
             option: () => _.cloneDeep(option),
             argument: () => _.cloneDeep(argument),
+            typesDictionary: () => _.cloneDeep(types),
         },
     },
 };
