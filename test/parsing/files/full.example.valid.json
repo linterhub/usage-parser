@@ -80,6 +80,65 @@
                   "always"
                ]
             },
+            "--reporter": {
+               "id": "args:--reporter",
+               "type": "string",
+               "description": "Built in reporter (default, csv, jslint, checkstyle, raw), or module, or path to reporter file",
+               "enum": [
+                  "default",
+                  "csv",
+                  "jslint",
+                  "checkstyle",
+                  "raw"
+               ]
+            },
+            "--option1": {
+               "id": "args:--option1",
+               "type": "string",
+               "description": "(auto|always|never, default to never)",
+               "default": "never",
+               "enum": [
+                  "auto",
+                  "always",
+                  "never"
+               ]
+            },
+            "--reporter2": {
+               "id": "args:--reporter2",
+               "type": "string",
+               "description": "Custom reporter (<PATH>|jslint|checkstyle|unix)",
+               "enum": [
+                  "jslint",
+                  "checkstyle",
+                  "unix"
+               ]
+            },
+            "--option2": {
+               "id": "args:--option2",
+               "type": "string",
+               "description": "Option 2. May be: \"scss\", \"sass\", \"less\", \"sugarss\", \"<path>\"",
+               "enum": [
+                  "scss",
+                  "sass",
+                  "less",
+                  "sugarss"
+               ]
+            },
+            "--option3": {
+               "id": "args:--option3",
+               "type": "string",
+               "description": "Option 3: \"json\", \"string\" or \"verbose\"",
+               "enum": [
+                  "json",
+                  "string",
+                  "verbose"
+               ]
+            },
+            "--config": {
+               "id": "linterhub:config",
+               "type": "string",
+               "description": "Path to configuration file <file|path>"
+            },
             "--ignore": {
                "id": "--ignore",
                "type": "string",
