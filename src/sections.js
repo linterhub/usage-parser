@@ -54,7 +54,7 @@ const splitOptionsSection = (section) => {
         if (string.indexOf('-') === 0) {
             result.push(splitStringWithArguments(string));
         } else if (result.length > 0) {
-            result[result.length - 1].description += string;
+            result[result.length - 1].description += string + ' ';
         }
     });
     return result;
