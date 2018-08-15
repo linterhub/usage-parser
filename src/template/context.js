@@ -35,9 +35,9 @@ const context = {
         path: 'file|path|folder|dir|directory',
         delimiter: '-[^ \t(\n|\r\n)]+(\\s|=)[^ \t(\n|\r\n)-]',
         enumValues: {
-            enum: '(<|\\(|\\")(([\\S]+(\\||\\",\\s\\"|\\sor\\s))+[\\S]+)' +
-            '(>|\\)|\\"|,\\s)',
-            split: /[\|]|\",\s\"|\"\sor\s\"/,
+            enum: '(<|\\(|\\")(([\\S]+(\\||\\",\\s\\"|\\"\\sor\\s\\"|,\\s))' +
+            '+[\\S]+[^<\\)\\"])(>|\\)|\\"|,\\s)',
+            split: /[\|]|\",\s\"|\"\sor\s\"|,\s/,
         },
         argument: {
             short: '(\\s|^)-[^-]*?(\\s|=|$)',

@@ -143,7 +143,7 @@ const removeExtraCharacters = (string) => {
  * @return {string} - result string
  */
 const removeExtraSpaces = (string) => {
-    return string.replace(/\t/g, ' ').replace(/[\s]+/g, ' ');
+    return string.replace(/\\t/g, ' ').replace(/[\s]+/g, ' ');
 };
 
 /**
