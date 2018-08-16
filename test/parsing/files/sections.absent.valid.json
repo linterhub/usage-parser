@@ -14,17 +14,17 @@
             "properties": {
                 "--help": {
                     "id": "linterhub:help",
-                    "type": "null",
+                    "type": null,
                     "description": "Display this help text"
                 },
                 "--quiet": {
                     "id": "--quiet",
-                    "type": "string",
+                    "type": null,
                     "description": "Reduce output to errors only"
                 },
                 "--version": {
                     "id": "linterhub:version",
-                    "type": "null",
+                    "type": null,
                     "description": "Print the version"
                 },
                 "--exclude": {
@@ -39,7 +39,7 @@
                 },
                 "--recurse": {
                     "id": "--recurse",
-                    "type": "string",
+                    "type": null,
                     "description": "Recursively search directories"
                 },
                 "--jshint": {
@@ -64,7 +64,7 @@
                 },
                 "--noempty": {
                     "id": "--noempty",
-                    "type": "string",
+                    "type": null,
                     "description": "Skips empty lines from line count"
                 }
             }

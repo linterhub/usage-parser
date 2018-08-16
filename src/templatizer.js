@@ -16,36 +16,36 @@ const templatizer = (context, config) => {
             (option.shortName ? option.shortName : '');
         switch (argumentName) {
             case '--version':
-                optionSchema.id = customPrefix + 'version';
-                optionSchema.type = 'null';
+                optionSchema.id = `${customPrefix}:version`;
+                optionSchema.type = null;
                 break;
             case '--help':
-                optionSchema.id = customPrefix + 'help';
-                optionSchema.type = 'null';
+                optionSchema.id = `${customPrefix}:help`;
+                optionSchema.type = null;
                 break;
             case '--config':
-                optionSchema.id = customPrefix + 'config';
+                optionSchema.id = `${customPrefix}:config`;
                 break;
             case '--stdin':
-                optionSchema.id = customPrefix + 'stdin';
+                optionSchema.id = `${customPrefix}:stdin`;
                 break;
             case '--stdin-filename':
             case '--stdin-filepath':
-                optionSchema.id = customPrefix + 'filename';
+                optionSchema.id = `${customPrefix}:filename`;
                 break;
             case '':
-                optionSchema.id = customPrefix + 'path';
+                optionSchema.id = `${customPrefix}:path`;
                 option.description = 'Path to file or folder to analyze';
                 break;
             default:
-                option.longName =
-                    option.longName ? option.longName : option.shortName;
-                optionSchema.id = (!option.isFlag ? nonFlagPrefix : '')
-                    + option.longName;
+                const prefix = !option.isFlag ? `${nonFlagPrefix}:` : '';
+                optionSchema.id = prefix + argumentName;
+                optionSchema.type = option.type;
         }
         optionSchema.description = option.description;
         if (option.defaultValue) optionSchema.default = option.defaultValue;
         if (option.enum) optionSchema.enum = option.enum;
+
         result.definitions.arguments.properties[argumentName] = optionSchema;
     });
 

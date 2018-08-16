@@ -34,8 +34,9 @@
     --option2          Option 2.          May be: "scss", "sass", "less", "sugarss", "<path>"
     --option3          Option 3: "json", "string" or "verbose"
     --config           Path to configuration file         \t              <file|path>
-
-
+    -f, --error-filter <path>       a module to filter errors
+    --max-warnings [integer]  Number of warnings to trigger nonzero exit code
+    --parser-options Object        Specify parser options
 
 
   Examples:
