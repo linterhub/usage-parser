@@ -37,6 +37,7 @@
     -f, --error-filter <path>       a module to filter errors
     --max-warnings [integer]  Number of warnings to trigger nonzero exit code
     --parser-options Object        Specify parser options
+    --spaces            Spaces.
 
 
   Examples:
@@ -45,9 +46,9 @@
   Examples:
     $ xo index.js
     $ xo *.js !foo.js
-    $ xo --space
+    $ xo --spaces=1
     $ xo --env=node --env=mocha
-    $ xo --init --space
+    $ xo --ignore --i
     $ xo --plugin=react
     $ xo --plugin=html --extension=html
     $ echo 'const x=true' | xo --stdin --fix

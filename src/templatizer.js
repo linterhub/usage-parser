@@ -40,7 +40,7 @@ const templatizer = (context, config) => {
             default:
                 const prefix = !option.isFlag ? `${nonFlagPrefix}:` : '';
                 optionSchema.id = prefix + argumentName;
-                optionSchema.type = option.type;
+                optionSchema.type = option.isFlag ? null : option.type;
         }
         optionSchema.description = option.description;
         if (option.defaultValue) optionSchema.default = option.defaultValue;

@@ -5,9 +5,7 @@
                 "Options"
             ],
             "postfix": [
-                ":",
-                "\n",
-                ":\n"
+                ":"
             ],
             "parseWhole": true
         },
@@ -16,9 +14,7 @@
                 "Usage"
                 ],
             "postfix": [
-                ":",
-                "\n",
-                ":\n"
+                ":"
             ]
         },
         "examples": {
@@ -26,9 +22,7 @@
                 "Examples"
                 ],
             "postfix": [
-                ":",
-                "\n",
-                ":\n"
+                ":"
             ]
         }
     },

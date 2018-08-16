@@ -13,8 +13,8 @@
          "type": "object",
          "properties": {
             "--extension": {
-               "id": "--extension",
-               "type": null,
+               "id": "args:--extension",
+               "type": "string",
                "description": "Additional extension to lint [Can be set multiple times]"
             },
             "--no-esnext": {
@@ -153,6 +153,11 @@
                 "id": "args:--parser-options",
                 "type": "object",
                 "description": "Specify parser options"
+            },
+            "--spaces": {
+               "id": "args:--spaces",
+               "type": "string",
+               "description": "Spaces"
             },
             "--ignore": {
                "id": "--ignore",
