@@ -96,7 +96,6 @@ const isValueBoolean = (string) => {
  * @return {string} argumentType - type of argument
  */
 const getPropertyType = (string, argument, context) => {
-    if (argument.isFlag) return null;
     const typesDictionary = context.get.template.typesDictionary();
     const argumentAddition = removeExtraArgumentNames(string, argument);
     const result = Object.keys(typesDictionary)
@@ -133,6 +132,21 @@ const removeExtraEnumValues = (enumArray, regexp) => {
         return value.toLowerCase().match(regexp) === null;
     });
     return result.length !== 0 ? result : null;
+};
+
+/**
+ * Set argument property isFlag by examples section
+ * @param {string} section - examples section
+ * @param {object} context - internal config
+ */
+const checkFlagsByExamples = (section, context) => {
+    const regularExp = new RegExp(context.regexp.examplesArgument, 'gim');
+    while (match = regularExp.exec(section)) {
+        let option = context.options.find((option) => {
+            return match[1] === (option.longName || option.shortName);
+        });
+        if (option) option.isFlag = false;
+    }
 };
 
 /**
@@ -225,4 +239,5 @@ exports = module.exports = {
     getArgumentObject,
     getDelimiterValue,
     getValueByRegexp,
+    checkFlagsByExamples,
 };

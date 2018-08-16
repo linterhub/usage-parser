@@ -45,6 +45,7 @@ const context = {
             short: '(\\s|^)-[^-]*?(\\s|=|$)',
             long: '--.+?(\\s|=|$)',
         },
+        examplesArgument: '\\s+(-[\\S]+)(\\s|=)[^-\\s]+',
     },
     options: [],
     delimiter: '',

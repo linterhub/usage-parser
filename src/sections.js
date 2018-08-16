@@ -40,6 +40,7 @@ const examples = (section, context) => {
     const delimiter = arguments.getDelimiterValue(
         section, context.regexp.delimiter);
     context.delimiter = delimiter ? delimiter : context.delimiter;
+    arguments.checkFlagsByExamples(section, context);
 };
 
 /**
