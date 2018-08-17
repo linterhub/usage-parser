@@ -17,6 +17,7 @@ const getArgumentObject = (object, context) => {
         description: unifyDescription(object.description.trim()),
     };
 
+    argument.usage = getValueByRegexp(argument.description, context.regexp.usage) ? false : true;
     argument.isFlag = identifyIsFlag(object.arg, argument);
     argument.type = getPropertyType(object.arg, argument, context);
     return argument;
