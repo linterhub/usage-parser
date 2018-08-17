@@ -42,8 +42,8 @@ const context = {
             split: /[\|]|\",\s\"|\"\sor\s\"|,\s/,
         },
         argument: {
-            short: '(\\s|^)-[^-]*?(\\s|=|$)',
-            long: '--.+?(\\s|=|$)',
+            short: '(\\s|^)(-[^-]*?)(\\s|=|$)',
+            long: '()(--.+?)(\\s|=|$)',
         },
         examplesArgument: '\\s+(-[\\S]+)(\\s|=)[^-\\s]+',
     },
