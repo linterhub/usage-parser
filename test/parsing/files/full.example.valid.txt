@@ -23,10 +23,10 @@
   Options:
 
     --ext [String]     Specify JavaScript file extensions - [default: .js]
-    --stdin            Lint code provided on <STDIN> - (default is false)
+    --stdin            Lint code provided on <STDIN> - (default is 'false")
     --SPACE            USE SPACE INDENT INSTEAD OF TABS DEFAULTS TO 2
     --parser           Which parser to use. <flow|babylon|typescript|css|less|scss|json|json5|json-stringify|graphql|markdown|vue|yaml>
-    --arrow-parens <avoid|always>   Include parentheses around a sole arrow function parameter.
+    --arrow-parens=<avoid|always>   Include parentheses around a sole arrow function parameter.
                                     Defaults to avoid.
     --reporter         Built in reporter (default, csv, jslint, checkstyle, raw), or module, or path to reporter file
     --option1          (auto|always|never, default to never)

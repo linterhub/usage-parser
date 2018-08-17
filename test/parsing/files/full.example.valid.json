@@ -41,7 +41,7 @@
             "--stdin": {
                "id": "linterhub:stdin",
                "type": "string",
-               "description": "Lint code provided on <STDIN> - (default is false)",
+               "description": "Lint code provided on <STDIN> - (default is 'false\")",
                "default": "false"
             },
             "--SPACE": {
