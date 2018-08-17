@@ -40,9 +40,13 @@ const unifyDescription = (description) => {
  * @return {string} - default value
  */
 const getDefaultValue = (description, regexp) => {
-    const result = getValueByRegexp(description, regexp);
-    return result ? removeCharAtTheEnd(
-        removeCharAtSides(result[5].trim(), ['\'', '\"', ',']), ['.']) : null;
+    let result = getValueByRegexp(description, regexp);
+    if (result) {
+        result = removeCharAtBegin(result[5].trim(), ['\'', '\"', ',']);
+        result = removeCharAtTheEnd(result, ['\'', '\"', ',', '.']);
+        return result;
+    }
+    return null;
 };
 
 /**
@@ -77,7 +81,7 @@ const getDelimiterValue = (string, regexp) => {
  */
 const getPropertyName = (string, regexp) => {
     const result = getValueByRegexp(string, regexp);
-    return result ? removeCharAtTheEnd(result[0].trim(), [',']) : null;
+    return result ? removeCharAtTheEnd(result[2].trim(), [',']) : null;
 };
 
 /**
@@ -151,23 +155,14 @@ const checkFlagsByExamples = (section, context) => {
 };
 
 /**
- * Remove extra coma from string
- * @param {string} string - any string
- * @return {string} - result string
- */
-const removeExtraComa = (string) => {
-    return removeChar(string, [',']).trim();
-};
-/**
  * Remove argument names from string
  * @param {string} string - any string
  * @param {argument} argument - argument object with description, names, etc.
  * @return {string} - result string
  */
 const removeExtraArgumentNames = (string, argument) => {
-    return removeChar(
-        removeExtraComa(string),
-        [argument.longName, argument.shortName]).trim();
+    return removeChar(string,
+        [',', argument.longName, argument.shortName]).trim();
 };
 
 /**
@@ -200,12 +195,10 @@ const removeCharAtTheEnd = (string, array) => {
 * @param {array} array - char for remove
 * @return {*} - string without chars
 */
-const removeCharAtSides = (string, array) => {
+const removeCharAtBegin = (string, array) => {
     let result = string;
     array.map((char) => {
         result = result.charAt(0) === char ? result.slice(1) : result;
-        result = result.charAt(result.length - 1) === char ?
-            result.slice(0, result.length - 1) : result;
     });
     return result;
 };
