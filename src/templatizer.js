@@ -43,7 +43,9 @@ const templatizer = (context, config) => {
                 optionSchema.type = option.isFlag ? null : option.type;
         }
         optionSchema.description = option.description;
-        if (option.defaultValue) optionSchema.default = option.defaultValue;
+        if (option.defaultValue !== null) {
+            optionSchema.default = option.defaultValue;
+        }
         if (option.enum) optionSchema.enum = option.enum;
 
         result.definitions.arguments.properties[argumentName] = optionSchema;

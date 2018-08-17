@@ -52,7 +52,7 @@ const splitOptionsSection = (section) => {
     let result = [];
     section.split('\n').forEach((string) => {
         string = string.trim();
-        if (string.search(/-[\S]+/) === 0) {
+        if (string.indexOf('-') === 0) {
             result.push(splitStringWithArguments(string));
         } else if (result.length > 0 &&
             string.match(/([\S]|[\S]+[\s][\S]+):$/) === null) {
