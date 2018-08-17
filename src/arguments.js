@@ -16,7 +16,6 @@ const getArgumentObject = (object, context) => {
             object.description, context.regexp.defaultValue),
         description: unifyDescription(object.description.trim()),
     };
-
     argument.isFlag = identifyIsFlag(object.arg, argument);
     argument.type = getPropertyType(object.arg, argument, context);
     return argument;
@@ -44,6 +43,9 @@ const getDefaultValue = (description, regexp) => {
     if (result) {
         result = removeCharAtBegin(result[5].trim(), ['\'', '\"', ',']);
         result = removeCharAtTheEnd(result, ['\'', '\"', ',', '.']);
+        if (result === 'false') result = false;
+        else if (result === 'true') result = true;
+        else if (Number(result)) result = Number(result);
         return result;
     }
     return null;
@@ -90,7 +92,9 @@ const getPropertyName = (string, regexp) => {
  * @return {boolean} - result of check
  */
 const isValueBoolean = (string) => {
-    return string && !(string === 'true' || string === 'false' ) ? false : true;
+    return string !== null &&
+    !(string === ('true'|'false') || typeof string === 'boolean') ?
+        false : true;
 };
 
 /**
@@ -103,12 +107,13 @@ const isValueBoolean = (string) => {
 const getPropertyType = (string, argument, context) => {
     const typesDictionary = context.get.template.typesDictionary();
     const argumentAddition = removeExtraArgumentNames(string, argument);
+    if (typeof argument.defaultValue === 'number') return 'number';
+    if (typeof argument.defaultValue === 'boolean') return 'boolean';
     const result = Object.keys(typesDictionary)
         .find((type) => typesDictionary[type]
             .find((alias) => {
                 return argumentAddition.toLowerCase().indexOf(alias) !== -1;
             }));
-
     return result ? result : context.get.template.option().type;
 };
 

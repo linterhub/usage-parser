@@ -38,6 +38,9 @@
     --max-warnings [integer]  Number of warnings to trigger nonzero exit code
     --parser-options Object        Specify parser options
     --spaces            Spaces.
+    --option4         Automatically fix problems. [default: true]
+    --option5         Automatically fix problems. [default: false]
+
 
 
   Examples:
