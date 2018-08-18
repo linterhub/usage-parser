@@ -28,26 +28,35 @@ const context = {
         },
     },
     regexp: {
-        defaultValue: '(\\[|\\(|[\\s]+)default(s|)' +
-        '(:|[\\s](to|at|is))[\\s]+(.*?)(\\]|\\)|([\\s]+|$))',
-        findSection: {
-            start: '\\s[\\s]+',
-            end: '[(\n|\r\n)]+(\n|\r\n)?(?:[ \t].*?(?:(\n|\r\n)|$))*',
+        delimiter: '[\\s][-]+[^ \t(\n|\r\n)]+(\\s|=)[^ :\t(\n|\r\n)-]',
+        section: {
+            search: {
+                start: '\\s[\\s]+',
+                end: '[(\n|\r\n)]+(\n|\r\n)?(?:[ \t].*?(?:(\n|\r\n)|$))*',
+            },
+            examples: '\\s+(-[\\S]+)(\\s|=)[^-\\s]+',
         },
-        path: 'file|path|folder|dir|directory',
-        delimiter: '-[^ \t(\n|\r\n)]+(\\s|=)[^ \t(\n|\r\n)-]',
-        enumValues: {
-            enum: '(<|\\(|\\")(([\\S]+(\\||\\",\\s\\"|\\"\\sor\\s\\"|,\\s))' +
-            '+[\\S]+[^<\\)\\"])(>|\\)|\\"|,\\s)',
-            split: /[\|]|\",\s\"|\"\sor\s\"|,\s/,
-        },
-        usage: '(\\[|\\()deprecated(\\]|\\))',
         argument: {
             short: '(\\s|^)(-[^-]*?)(\\s|=|$)',
             long: '()(--.+?)(\\s|=|$)',
+            default: '(\\[|\\(|[\\s]+)default(s|)' +
+            '(:|[\\s](to|at|is))[\\s]+(.*?)(\\]|\\)|([\\s]+|$))',
+            enum: {
+                values: '(<|\\(|\\")(([\\S]+(\\||\\",\\s\\"|\\"\\sor\\s\\"|' +
+                ',\\s))+[\\S]+[^\\+<\\)\\"])(>|\\)|\\"|,\\s)',
+                split: /[\|]|\",\s\"|\"\sor\s\"|,\s/,
+            },
+            usage: '(\\[|\\()deprecated.*(\\]|\\))',
         },
-        examplesArgument: '\\s+(-[\\S]+)(\\s|=)[^-\\s]+',
     },
+    pathAlias: [
+        'file',
+        'path',
+        'folder',
+        'dir',
+        'directory',
+        'files',
+    ],
     options: [],
     delimiter: '',
     get: {

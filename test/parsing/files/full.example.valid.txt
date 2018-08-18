@@ -25,7 +25,7 @@
     --ext [String]     Specify JavaScript file extensions - [default: .js]
     --stdin            Lint code provided on <STDIN> - (default is 'false") [deprecated]
     --SPACE            (Deprecated) USE SPACE INDENT INSTEAD OF TABS DEFAULTS TO 2
-    --parser           Which parser to use. <flow|babylon|typescript|css|less|scss|json|json5|json-stringify|graphql|markdown|vue|yaml>
+    --parser           Which parser to use. <flow|babylon|typescript|css|less|scss|json-file|json5|json-stringify|graphql|markdown|vue|yaml>
     --arrow-parens=<avoid|always>   Include parentheses around a sole arrow function parameter.
                                     Defaults to avoid.
     --reporter         Built in reporter (default, csv, jslint, checkstyle, raw), or module, or path to reporter file
@@ -40,6 +40,7 @@
     --spaces            Spaces.
     --option4         Automatically fix problems. [default: true]
     --option5         Automatically fix problems. [default: false]
+    --option6         Option 6. Defaults to [].
 
 
 

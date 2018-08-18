@@ -55,7 +55,7 @@
             "--parser": {
                "id": "args:--parser",
                "type": "string",
-               "description": "Which parser to use. <flow|babylon|typescript|css|less|scss|json|json5|json-stringify|graphql|markdown|vue|yaml>",
+               "description": "Which parser to use. <flow|babylon|typescript|css|less|scss|json-file|json5|json-stringify|graphql|markdown|vue|yaml>",
                "enum": [
                   "flow",
                   "babylon",
@@ -63,7 +63,7 @@
                   "css",
                   "less",
                   "scss",
-                  "json",
+                  "json-file",
                   "json5",
                   "json-stringify",
                   "graphql",
@@ -172,6 +172,11 @@
                "type": null,
                "description": "Automatically fix problems. [default: false]",
                "default": false
+            },
+            "--option6": {
+               "id": "--option6",
+               "type": null,
+               "description": "Option 6. Defaults to []"
             },
             "--ignore": {
                "id": "--ignore",
