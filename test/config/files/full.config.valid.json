@@ -1,0 +1,30 @@
+{
+    "section": {
+        "options": {
+            "names": [
+                "Options"
+            ],
+            "postfix": [
+                ":",
+                "\n",
+                ":\n"
+            ],
+            "parseWhole": true
+        },
+        "usage": {
+            "names": [
+                "Usage"
+            ],
+            "postfix": ":"
+        },
+        "examples": {
+            "names": "Examples",
+            "postfix": [
+                ":",
+                "\n",
+                ":\n"
+            ]
+        }
+    },
+    "delimiter": " "
+}

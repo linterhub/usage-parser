@@ -1,0 +1,5 @@
+  Usage:
+    $ xo [<glob> ...]
+
+  Options:
+   --ignore, -i          Additional paths to ignore [Can be set multiple times]

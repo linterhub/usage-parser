@@ -1,0 +1,21 @@
+version: 2
+
+# Group settings to apply to all groups by default
+group_defaults:
+  approve_by_comment:
+    approve_regex: '^(Approved|:shipit:|:\+1:|LGTM)'
+    enabled: true
+    reject_regex: '^(Rejected|:-1:)'
+  github_reviews:
+    enabled: true
+  required: 1
+  reset_on_push:
+    enabled: true
+  reset_on_reopened:
+    enabled: true
+
+# Groups of reviewers and their respective settings
+groups:
+  reviewers:
+    teams:
+      - maintainers

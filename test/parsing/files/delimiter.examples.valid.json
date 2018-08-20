@@ -1,0 +1,12 @@
+{
+    "arguments": [
+        {
+            "name": "--ignore",
+            "type": null,
+            "description": "Additional paths to ignore [Can be set multiple times]",
+            "flag": true,
+            "alias": "-i"
+        }
+    ],
+    "delimiter": " "
+}

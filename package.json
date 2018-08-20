@@ -1,0 +1,54 @@
+{
+    "author": "linterhub <hi@linterhub.com>",
+    "name": "@linterhub/usage-parser",
+    "version": "0.0.0-development",
+    "description": "Simple parser for usage page in CLI",
+    "license": "MIT",
+    "repository": "linterhub/usage-parser",
+    "bugs": "https://github.com/linterhub/usage-parser/issues",
+    "bin": {
+        "usage-parser": "bin.js"
+    },
+    "keywords": [
+        "linterhub"
+    ],
+    "main": "index.js",
+    "scripts": {
+        "eslint": "./node_modules/.bin/eslint",
+        "parse": "node bin.js",
+        "lint": "eslint .",
+        "test": "mocha",
+        "semantic-release": "semantic-release"
+    },
+    "files": [
+        "src/",
+        "bin.js",
+        "README.md"
+    ],
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run lint && npm run test"
+        }
+    },
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/",
+        "tag": "latest",
+        "access": "public"
+    },
+    "devDependencies": {
+        "@semantic-release/changelog": "^3.0.0",
+        "@semantic-release/git": "^7.0.1",
+        "chai": "^4.1.2",
+        "mocha": "^5.2.0",
+        "husky": "^0.14.3",
+        "assert": "^1.4.1",
+        "eslint": "^5.1.0",
+        "eslint-config-google": "^0.9.1",
+        "semantic-release": "^15.9.5"
+    },
+    "dependencies": {
+        "commander": "^2.17.1",
+        "jsonschema": "^1.2.4",
+        "lodash": "^4.17.10"
+    }
+}

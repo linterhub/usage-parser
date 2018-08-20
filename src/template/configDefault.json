@@ -1,0 +1,34 @@
+{
+    "section": {
+        "options": {
+            "names": [
+                "Options"
+            ],
+            "postfix": [
+                ":"
+            ],
+            "parseWhole": true
+        },
+        "usage": {
+            "names": [
+                "Usage"
+                ],
+            "postfix": [
+                ":"
+            ]
+        },
+        "examples": {
+            "names": [
+                "Examples"
+                ],
+            "postfix": [
+                ":"
+            ]
+        }
+    },
+    "delimiter": "=",
+    "prefixes": {
+        "custom": "linterhub",
+        "nonFlag": "args"
+    }
+}

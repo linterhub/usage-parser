@@ -1,0 +1,15 @@
+language: node_js
+node_js: stable
+install: npm install
+
+jobs:
+  include:
+    - stage: tests
+      node_js: stable
+      script:
+        - npm run lint
+        - npm run test
+    - stage: semantic release
+      if: branch = master AND type = push
+      node_js: stable
+      script: npm run semantic-release
