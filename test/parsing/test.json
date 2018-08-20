@@ -2,19 +2,19 @@
     "description": "tests of parsing",
     "tests": [
         {
-            "description": "with equal delimiter",
+            "description": "with space delimiter in Examples",
             "data": {
-                "doc": "./test/parsing/files/delimiter.equal.valid.txt",
-                "result": "./parsing/files/delimiter.equal.valid.json"
+                "doc": "./test/parsing/files/delimiter.examples.valid.txt",
+                "result": "./parsing/files/delimiter.examples.valid.json"
             },
             "valid": true,
             "object": "result"
         },
         {
-            "description": "with space delimiter",
+            "description": "with space delimiter in Options",
             "data": {
-                "doc": "./test/parsing/files/delimiter.space.valid.txt",
-                "result": "./parsing/files/delimiter.space.valid.json"
+                "doc": "./test/parsing/files/delimiter.options.valid.txt",
+                "result": "./parsing/files/delimiter.options.valid.json"
             },
             "valid": true,
             "object": "result"

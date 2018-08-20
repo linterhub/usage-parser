@@ -1,5 +1,0 @@
-  Options:
-   --ignore, -i          Additional paths to ignore [Can be set multiple times]
-
-  Examples:
-    $ xo --env=node

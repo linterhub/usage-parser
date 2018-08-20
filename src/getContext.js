@@ -58,8 +58,8 @@ const getContext = (help, config) => {
  */
 const findSection = (sectionName, help, context) => {
     try {
-        const regularExp = new RegExp(context.regexp.findSection.start +
-            sectionName + context.regexp.findSection.end, 'gmi');
+        const regularExp = new RegExp(context.regexp.section.search.start +
+            sectionName + context.regexp.section.search.end, 'gmi');
         const matches = help.match(regularExp);
         return matches ? matches.map((match) => match.trim()) : [];
     } catch (error) {

@@ -7,14 +7,14 @@
          "$ref": "#/definitions/arguments"
       }
    ],
-   "delimiter": "=",
+   "delimiter": " ",
    "definitions": {
       "arguments": {
          "type": "object",
          "properties": {
             "--ignore": {
-               "id": "--ignore",
-               "type": null,
+               "id": "args:--ignore",
+               "type": "string",
                "description": "Additional paths to ignore [Can be set multiple times]"
             }
          }

@@ -12,6 +12,9 @@ const options = (section, context) => {
             const argument = arguments.getArgumentObject(object, context);
             context.options.push(argument);
         });
+        const delimiter = arguments.getDelimiterValue(
+            section, context.regexp.delimiter);
+        context.delimiter = delimiter ? delimiter : context.delimiter;
     } catch (error) {
         throw error;
     }
@@ -23,8 +26,9 @@ const options = (section, context) => {
  * @param {object} context - internal config
  */
 const usage = (section, context) => {
-    const result = arguments.getValueByRegexp(section, context.regexp.path);
-    if (result) {
+    const matches = arguments.getValueByRegexp(
+        section, context.pathAlias.join('|'));
+    if (matches) {
         let argument = context.get.template.argument();
         argument.longName = '';
         context.options.push(argument);

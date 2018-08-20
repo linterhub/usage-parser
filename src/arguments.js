@@ -13,12 +13,12 @@ const getArgumentObject = (object, context) => {
         longName: getPropertyName(object.arg, context.regexp.argument.long),
         shortName: getPropertyName(object.arg, context.regexp.argument.short),
         defaultValue: getDefaultValue(
-            object.description, context.regexp.defaultValue),
+            object.description, context.regexp.argument.default),
         description: unifyDescription(object.description.trim()),
     };
 
-    argument.usage = getValueByRegexp(
-        argument.description, context.regexp.usage) ? false : true;
+    argument.usage = !getValueByRegexp(
+        argument.description, context.regexp.argument.usage);
     argument.isFlag = identifyIsFlag(object.arg, argument);
     argument.type = getPropertyType(object.arg, argument, context);
     return argument;
@@ -42,16 +42,25 @@ const unifyDescription = (description) => {
  * @return {string} - default value
  */
 const getDefaultValue = (description, regexp) => {
-    let result = getValueByRegexp(description, regexp);
-    if (result) {
-        result = removeCharAtBegin(result[5].trim(), ['\'', '\"', ',']);
-        result = removeCharAtTheEnd(result, ['\'', '\"', ',', '.']);
-        if (result === 'false') result = false;
-        else if (result === 'true') result = true;
-        else if (Number(result)) result = Number(result);
-        return result;
+    let matches = getValueByRegexp(description, regexp);
+    if (!matches) return null;
+    let extraChars = ['\'', '\"', ',', '['];
+    let result = removeChar(matches[5].trim(), extraChars);
+    result = removeCharAtTheEnd(result.trim(), ['.']);
+    switch (result.toLowerCase()) {
+        case 'false':
+            result = false;
+            break;
+        case 'true':
+            result = true;
+            break;
+        case 'infinity':
+            result = null;
+            break;
+        default:
+            if (Number(result)) result = Number(result);
     }
-    return null;
+    return result !== '' ? result : null;
 };
 
 /**
@@ -61,10 +70,11 @@ const getDefaultValue = (description, regexp) => {
  * @return {array} - enum values of argument
  */
 const getEnum = (string, context) => {
-    const result = getValueByRegexp(string, context.regexp.enumValues.enum);
-    return result ? removeExtraEnumValues(
-        result[2].split(context.regexp.enumValues.split), context.regexp.path)
-        : null;
+    let matches = getValueByRegexp(string, context.regexp.argument.enum.values);
+    if (!matches) return null;
+    let enums = matches[2].split(context.regexp.argument.enum.split)
+        .map((value) => removeChar(value, ['<', '>', '\'', '\"']).trim());
+    return removeExtraEnumValues(enums, context);
 };
 
 /**
@@ -137,12 +147,14 @@ const identifyIsFlag = (string, argument) => {
 /**
  * Remove extra enum values (such as 'file', 'path', 'folder', etc.)
  * @param {array} enumArray - array with enum values
- * @param {string} regexp -  regexp for remove
+ * @param {object} context - internal config
  * @return {array} enumArray - enum without extra values or null if it empty
  */
-const removeExtraEnumValues = (enumArray, regexp) => {
-    const result = enumArray.filter((value) => {
-        return value.toLowerCase().match(regexp) === null;
+const removeExtraEnumValues = (enumArray, context) => {
+    const result = enumArray.filter((enumValue) => {
+        return !context.pathAlias.find((alias) => {
+            return enumValue.toLowerCase() === alias;
+        });
     });
     return result.length !== 0 ? result : null;
 };
@@ -153,7 +165,7 @@ const removeExtraEnumValues = (enumArray, regexp) => {
  * @param {object} context - internal config
  */
 const checkFlagsByExamples = (section, context) => {
-    const regularExp = new RegExp(context.regexp.examplesArgument, 'gim');
+    const regularExp = new RegExp(context.regexp.section.examples, 'gim');
     while (match = regularExp.exec(section)) {
         let option = context.options.find((option) => {
             return match[1] === (option.longName || option.shortName);
@@ -193,20 +205,6 @@ const removeCharAtTheEnd = (string, array) => {
     array.map((char) => {
         result = result.charAt(result.length - 1) === char ?
             result.slice(0, result.length - 1) : result;
-    });
-    return result;
-};
-
-/**
-* Delete chars at the beggining and at the end of string
-* @param {string} string - source string
-* @param {array} array - char for remove
-* @return {*} - string without chars
-*/
-const removeCharAtBegin = (string, array) => {
-    let result = string;
-    array.map((char) => {
-        result = result.charAt(0) === char ? result.slice(1) : result;
     });
     return result;
 };
