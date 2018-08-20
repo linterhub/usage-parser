@@ -1,7 +1,6 @@
 {
-    "shortName": null,
-    "longName": null,
-    "isFlag": true,
-    "default": null,
-    "description": null
+    "name": null,
+    "type": "string",
+    "flag": true,
+    "description": ""
 }

@@ -15,7 +15,7 @@ The header has a special format that includes a [type](#type) and a [subject](#s
 <footer>
 ```
 
-> Note: Also you can use exactly [Conventional Commits 1.0.0-beta.2](#conventional_commits)
+> Note: Also you can use exactly [Conventional Commits 1.0.0-beta.2][conventional_commits]
 
 ## Type
 

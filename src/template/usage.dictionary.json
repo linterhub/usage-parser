@@ -1,0 +1,21 @@
+{
+    "version": [
+        "--version"
+    ],
+    "help": [
+        "--help"
+    ],
+    "config": [
+        "--config"
+    ],
+    "stdin": [
+        "--stdin"
+    ],
+    "stdin-filename": [
+        "--stdin-filename",
+        "--stdin-filepath"
+    ],
+    "path": [
+        ""
+    ]
+}

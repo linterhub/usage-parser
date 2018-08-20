@@ -1,39 +1,12 @@
 {
-   "$schema": "https://repometric.github.io/linterhub/schema/args.json",
-   "name": "",
-   "type": "object",
-   "allOf": [
-      {
-         "$ref": "#/definitions/arguments"
-      }
-   ],
-   "delimiter": " ",
-   "definitions": {
-      "arguments": {
-         "type": "object",
-         "properties": {
-            "--ignore": {
-               "id": "args:--ignore",
-               "type": "string",
-               "description": "Additional paths to ignore [Can be set multiple times]"
-            }
-         }
-      },
-      "section": {
-         "type": "object",
-         "description": "The engine configuration section",
-         "properties": {
-            "name": {
-               "type": "string",
-               "description": "The engine name",
-               "enum": ""
-            },
-            "options": {
-               "type": "object",
-               "description": "The engine configuration",
-               "$ref": "#/definitions/arguments"
-            }
-         }
-      }
-   }
+    "arguments": [
+        {
+            "name": "--ignore",
+            "type": "string",
+            "description": "Additional paths to ignore [Can be set multiple times]",
+            "flag": false,
+            "alias": "-i"
+        }
+    ],
+    "delimiter": " "
 }

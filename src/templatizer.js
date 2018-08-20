@@ -3,56 +3,54 @@
 /**
  * Fill template schema with parsed arguments and return it
  * @param {object} context - internal config with parsed arguments
- * @param {object} config - user config
  * @return {object} - filled template schema with parsed arguments
  */
-const templatizer = (context, config) => {
-    let result = context.get.template.args();
-    const customPrefix = config.prefixes.custom;
-    const nonFlagPrefix = config.prefixes.nonFlag;
+const templatizer = (context) => {
+    let result = {
+        arguments: [],
+        delimiter: context.delimiter,
+    };
     context.options.map((option) => {
-        let optionSchema = context.get.template.option();
-        const argumentName = option.longName ? option.longName :
-            (option.shortName ? option.shortName : '');
-        switch (argumentName) {
-            case '--version':
-                optionSchema.id = `${customPrefix}:version`;
-                optionSchema.type = null;
-                break;
-            case '--help':
-                optionSchema.id = `${customPrefix}:help`;
-                optionSchema.type = null;
-                break;
-            case '--config':
-                optionSchema.id = `${customPrefix}:config`;
-                break;
-            case '--stdin':
-                optionSchema.id = `${customPrefix}:stdin`;
-                break;
-            case '--stdin-filename':
-            case '--stdin-filepath':
-                optionSchema.id = `${customPrefix}:filename`;
-                break;
-            case '':
-                optionSchema.id = `${customPrefix}:path`;
-                option.description = 'Path to file or folder to analyze';
-                break;
-            default:
-                const prefix = !option.isFlag ? `${nonFlagPrefix}:` : '';
-                optionSchema.id = prefix + argumentName;
-                optionSchema.type = option.isFlag ? null : option.type;
+        let argument = context.get.template.argument();
+        argument = {
+            name: option.longName ? option.longName :
+                (option.shortName ? option.shortName : ''),
+            type: option.flag ? null : option.type,
+            description: option.description,
+            flag: option.flag,
+        };
+        if (option.longName && option.shortName) {
+            argument.alias = option.shortName;
         }
-        optionSchema.description = option.description;
+        let usage = getUsage(context, option, argument.name);
+        if (usage) argument.usage = usage;
         if (option.defaultValue !== null) {
-            optionSchema.default = option.defaultValue;
+            argument.default = option.defaultValue;
         }
-        if (option.enum) optionSchema.enum = option.enum;
-        if (!option.usage) optionSchema.usage = option.usage;
-        result.definitions.arguments.properties[argumentName] = optionSchema;
+        if (option.enum) argument.enum = option.enum;
+
+        result.arguments.push(argument);
     });
 
-    result.delimiter = context.delimiter;
     return result;
+};
+
+/**
+ * Get usage property of an argument
+ * @param {object} context - internal config
+ * @param {object} option - parsed argument
+ * @param {string} argumentName - name of an argument
+ * @return {string} usage - argument usage
+ */
+const getUsage = (context, option, argumentName) => {
+    const usageDictionary = context.get.dictionary.usage();
+    if (!option.usage) return 'none';
+    let usage = Object.keys(usageDictionary).find((arg) => {
+        return usageDictionary[arg].find((name) => {
+            return argumentName.toLowerCase() === name;
+        });
+    });
+    return usage ? usage : null;
 };
 
 // Export function
