@@ -2,13 +2,16 @@
     "author": "linterhub <hi@linterhub.com>",
     "name": "@linterhub/usage-parser",
     "version": "0.0.0-development",
-    "description": "Simple parser for usage page",
+    "description": "Simple parser for usage page in CLI",
     "license": "MIT",
     "repository": "linterhub/usage-parser",
     "bugs": "https://github.com/linterhub/usage-parser/issues",
     "bin": {
         "usage-parser": "bin.js"
     },
+    "keywords": [
+        "linterhub"
+    ],
     "main": "index.js",
     "scripts": {
         "eslint": "./node_modules/.bin/eslint",
