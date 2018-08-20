@@ -31,6 +31,10 @@ const usage = (section, context) => {
     if (matches) {
         let argument = context.get.template.argument();
         argument.longName = '';
+        argument.type = 'string';
+        argument.flag = false;
+        argument.usage = 'path';
+        argument.description = 'Path to file or folder to analyze';
         context.options.push(argument);
     }
 };

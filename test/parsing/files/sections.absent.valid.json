@@ -1,89 +1,84 @@
 {
-    "$schema": "https://repometric.github.io/linterhub/schema/args.json",
-    "name": "",
-    "type": "object",
-    "allOf": [
+    "arguments": [
         {
-            "$ref": "#/definitions/arguments"
+            "name": "--help",
+            "type": null,
+            "description": "Display this help text",
+            "flag": true,
+            "alias": "-h",
+            "usage": "help"
+        },
+        {
+            "name": "--quiet",
+            "type": null,
+            "description": "Reduce output to errors only",
+            "flag": true,
+            "alias": "-q"
+        },
+        {
+            "name": "--version",
+            "type": null,
+            "description": "Print the version",
+            "flag": true,
+            "alias": "-v",
+            "usage": "version"
+        },
+        {
+            "name": "--exclude",
+            "type": "string",
+            "description": "File exclusion regex",
+            "flag": false,
+            "alias": "-x"
+        },
+        {
+            "name": "--dir",
+            "type": "string",
+            "description": "The output directory",
+            "flag": false,
+            "alias": "-d"
+        },
+        {
+            "name": "--recurse",
+            "type": null,
+            "description": "Recursively search directories",
+            "flag": true,
+            "alias": "-r"
+        },
+        {
+            "name": "--jshint",
+            "type": "string",
+            "description": "Specify a jshintrc file for JSHint linting",
+            "flag": false,
+            "alias": "-l"
+        },
+        {
+            "name": "--eslint",
+            "type": "string",
+            "description": "Specify a eslintrc file for ESLint linting",
+            "flag": false,
+            "alias": "-e"
+        },
+        {
+            "name": "--title",
+            "type": "string",
+            "description": "Title of the report",
+            "flag": false,
+            "alias": "-t"
+        },
+        {
+            "name": "--date",
+            "type": "string",
+            "description": "Time to use as the report date (seconds, > 9999999999 assumed to be ms)",
+            "flag": false,
+            "alias": "-D"
+        },
+        {
+            "name": "--noempty",
+            "type": null,
+            "description": "Skips empty lines from line count",
+            "flag": true,
+            "alias": "-n"
         }
     ],
-    "delimiter": "=",
-    "definitions": {
-        "arguments": {
-            "type": "object",
-            "properties": {
-                "--help": {
-                    "id": "linterhub:help",
-                    "type": null,
-                    "description": "Display this help text"
-                },
-                "--quiet": {
-                    "id": "--quiet",
-                    "type": null,
-                    "description": "Reduce output to errors only"
-                },
-                "--version": {
-                    "id": "linterhub:version",
-                    "type": null,
-                    "description": "Print the version"
-                },
-                "--exclude": {
-                    "id": "args:--exclude",
-                    "type": "string",
-                    "description": "File exclusion regex"
-                },
-                "--dir": {
-                    "id": "args:--dir",
-                    "type": "string",
-                    "description": "The output directory"
-                },
-                "--recurse": {
-                    "id": "--recurse",
-                    "type": null,
-                    "description": "Recursively search directories"
-                },
-                "--jshint": {
-                    "id": "args:--jshint",
-                    "type": "string",
-                    "description": "Specify a jshintrc file for JSHint linting"
-                },
-                "--eslint": {
-                    "id": "args:--eslint",
-                    "type": "string",
-                    "description": "Specify a eslintrc file for ESLint linting"
-                },
-                "--title": {
-                    "id": "args:--title",
-                    "type": "string",
-                    "description": "Title of the report"
-                },
-                "--date": {
-                    "id": "args:--date",
-                    "type": "string",
-                    "description": "Time to use as the report date (seconds, > 9999999999 assumed to be ms)"
-                },
-                "--noempty": {
-                    "id": "--noempty",
-                    "type": null,
-                    "description": "Skips empty lines from line count"
-                }
-            }
-        },
-        "section": {
-            "type": "object",
-            "description": "The engine configuration section",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "The engine name",
-                    "enum": ""
-                },
-                "options": {
-                    "type": "object",
-                    "description": "The engine configuration",
-                    "$ref": "#/definitions/arguments"
-                }
-            }
-        }
-    }
+    "delimiter": "="
 }

@@ -92,7 +92,7 @@ git checkout -b type/issue-short-name
 
 Where:
 
-- `type` - is a [semantic type](#type) for commits
+- `type` - is a [semantic type][github-url-commit-message] for commits
 - `issue-short-name` - is a short name of issue. Please use `-` delimiters.
 
 > Note: Do not combine fixes for multiple issues into one branch
@@ -114,13 +114,13 @@ git commit
 ```
 
 Commit your changes using a descriptive commit message that follows
-our [commit message conventions](github-url-commit-message).
+our [commit message conventions][github-url-commit-message].
 
 ### STEP 6: Double check your submission
 
 Make sure your commit has the right format:
 
-- The commit message is [properly formatted](github-url-commit-message).
+- The commit message is [properly formatted][github-url-commit-message].
 - The change causes no functional regression. Be sure to run a test to verify your changes before submitting a pull request.
 - All changes must be accompanied by tests, even if the feature you’re working on previously had no tests.
 - All user-facing changes must be accompanied by the correspondent documentation.

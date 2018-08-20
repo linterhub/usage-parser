@@ -6,9 +6,8 @@ const sections = require('./../sections.js');
 
 // Import templates
 const argument = require('./argument.json');
-const option = require('./option.json');
 const types = require('./types.dictionary.json');
-const args = require('./args.json');
+const usage = require('./usage.dictionary.json');
 
 
 // Internal configuration with parsed arguments
@@ -61,10 +60,11 @@ const context = {
     delimiter: '',
     get: {
         template: {
-            args: () => _.cloneDeep(args),
-            option: () => _.cloneDeep(option),
             argument: () => _.cloneDeep(argument),
-            typesDictionary: () => _.cloneDeep(types),
+        },
+        dictionary: {
+            types: () => _.cloneDeep(types),
+            usage: () => _.cloneDeep(usage),
         },
     },
 };

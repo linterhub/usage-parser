@@ -19,7 +19,7 @@ const getArgumentObject = (object, context) => {
 
     argument.usage = !getValueByRegexp(
         argument.description, context.regexp.argument.usage);
-    argument.isFlag = identifyIsFlag(object.arg, argument);
+    argument.flag = identifyIsFlag(object.arg, argument);
     argument.type = getPropertyType(object.arg, argument, context);
     return argument;
 };
@@ -118,16 +118,16 @@ const isValueBoolean = (string) => {
  * @return {string} argumentType - type of argument
  */
 const getPropertyType = (string, argument, context) => {
-    const typesDictionary = context.get.template.typesDictionary();
+    const types = context.get.dictionary.types();
     const argumentAddition = removeExtraArgumentNames(string, argument);
     if (typeof argument.defaultValue === 'number') return 'number';
     if (typeof argument.defaultValue === 'boolean') return 'boolean';
-    const result = Object.keys(typesDictionary)
-        .find((type) => typesDictionary[type]
+    const result = Object.keys(types)
+        .find((type) => types[type]
             .find((alias) => {
                 return argumentAddition.toLowerCase().indexOf(alias) !== -1;
             }));
-    return result ? result : context.get.template.option().type;
+    return result ? result : context.get.template.argument().type;
 };
 
 /**
@@ -168,9 +168,9 @@ const checkFlagsByExamples = (section, context) => {
     const regularExp = new RegExp(context.regexp.section.examples, 'gim');
     while (match = regularExp.exec(section)) {
         let option = context.options.find((option) => {
-            return match[1] === (option.longName || option.shortName);
+            return match[1] === (option.longName || option.alias);
         });
-        if (option) option.isFlag = false;
+        if (option) option.flag = false;
     }
 };
 

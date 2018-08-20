@@ -1,215 +1,214 @@
 {
-   "$schema": "https://repometric.github.io/linterhub/schema/args.json",
-   "name": "",
-   "type": "object",
-   "allOf": [
-      {
-         "$ref": "#/definitions/arguments"
-      }
-   ],
-   "delimiter": "=",
-   "definitions": {
-      "arguments": {
-         "type": "object",
-         "properties": {
-            "--extension": {
-               "id": "args:--extension",
-               "type": "string",
-               "description": "Additional extension to lint [Can be set multiple times]"
-            },
-            "--no-esnext": {
-               "id": "--no-esnext",
-               "type": null,
-               "description": "Don't enforce ES2015+ rules"
-            },
-            "--prettier": {
-               "id": "--prettier",
-               "type": null,
-               "description": "Conform to Prettier code style"
-            },
-            "--cwd": {
-               "id": "args:--cwd",
-               "type": "string",
-               "description": "Working directory for files"
-            },
-            "--ext": {
-               "id": "args:--ext",
-               "type": "string",
-               "description": "Specify JavaScript file extensions - [default: .js]",
-               "default": ".js"
-            },
-            "--stdin": {
-               "id": "linterhub:stdin",
-               "type": "string",
-               "description": "Lint code provided on <STDIN> - (default is 'false\") [deprecated]",
-               "default": false,
-               "usage": false
-            },
-            "--SPACE": {
-               "id": "args:--SPACE",
-               "type": "number",
-               "description": "(Deprecated) USE SPACE INDENT INSTEAD OF TABS DEFAULTS TO 2",
-               "default": 2,
-               "usage": false
-            },
-            "--parser": {
-               "id": "args:--parser",
-               "type": "string",
-               "description": "Which parser to use. <flow|babylon|typescript|css|less|scss|json-file|json5|json-stringify|graphql|markdown|vue|yaml>",
-               "enum": [
-                  "flow",
-                  "babylon",
-                  "typescript",
-                  "css",
-                  "less",
-                  "scss",
-                  "json-file",
-                  "json5",
-                  "json-stringify",
-                  "graphql",
-                  "markdown",
-                  "vue",
-                  "yaml"
-               ]
-            },
-            "--arrow-parens": {
-               "id": "args:--arrow-parens",
-               "type": "string",
-               "description": "Include parentheses around a sole arrow function parameter. Defaults to avoid",
-               "default": "avoid",
-               "enum": [
-                  "avoid",
-                  "always"
-               ]
-            },
-            "--reporter": {
-                "id": "args:--reporter",
-                "type": "string",
-                "description": "Built in reporter (default, csv, jslint, checkstyle, raw), or module, or path to reporter file",
-                "enum": [
-                   "default",
-                   "csv",
-                   "jslint",
-                   "checkstyle",
-                   "raw"
-                ]
-            },
-            "--option1": {
-                "id": "args:--option1",
-                "type": "string",
-                "description": "(auto|always|never, default to never)",
-                "default": "never",
-                "enum": [
-                   "auto",
-                   "always",
-                   "never"
-                ]
-            },
-            "--reporter2": {
-                "id": "args:--reporter2",
-                "type": "string",
-                "description": "Custom reporter (<PATH>|jslint|checkstyle|unix)",
-                "enum": [
-                   "jslint",
-                   "checkstyle",
-                   "unix"
-                ]
-            },
-            "--option2": {
-                "id": "args:--option2",
-                "type": "string",
-                "description": "Option 2. May be: \"scss\", \"sass\", \"less\", \"sugarss\", \"<path>\"",
-                "enum": [
-                   "scss",
-                   "sass",
-                   "less",
-                   "sugarss"
-                ]
-            },
-            "--option3": {
-                "id": "args:--option3",
-                "type": "string",
-                "description": "Option 3: \"json\", \"string\" or \"verbose\"",
-                "enum": [
-                   "json",
-                   "string",
-                   "verbose"
-               ]
-            },
-            "--config": {
-                "id": "linterhub:config",
-                "type": "string",
-                "description": "Path to configuration file <file|path>"
-            },
-            "--error-filter": {
-                "id": "args:--error-filter",
-                "type": "string",
-                "description": "A module to filter errors"
-            },
-            "--max-warnings": {
-                "id": "args:--max-warnings",
-                "type": "number",
-                "description": "Number of warnings to trigger nonzero exit code"
-            },
-            "--parser-options": {
-                "id": "args:--parser-options",
-                "type": "object",
-                "description": "Specify parser options"
-            },
-            "--spaces": {
-               "id": "args:--spaces",
-               "type": "string",
-               "description": "Spaces"
-            },
-            "--option4": {
-               "id": "--option4",
-               "type": null,
-               "description": "Automatically fix problems. [default: true]",
-               "default": true
-            },
-            "--option5": {
-               "id": "--option5",
-               "type": null,
-               "description": "Automatically fix problems. [default: false]",
-               "default": false
-            },
-            "--option6": {
-               "id": "--option6",
-               "type": null,
-               "description": "Option 6. Defaults to []"
-            },
-            "--ignore": {
-               "id": "--ignore",
-               "type": null,
-               "description": "Additional paths to ignore [Can be set multiple times]"
-            },
-            "-i": {
-               "id": "-i",
-               "type": null,
-               "description": "Additional paths to ignore [Can be set multiple times]"
-            },
-            "": {
-               "id": "linterhub:path",
-               "type": "string",
-               "description": "Path to file or folder to analyze"
-            }
-         }
-      },
-      "section": {
-         "type": "object",
-         "description": "The engine configuration section",
-         "properties": {
-            "name": {
-               "type": "string",
-               "description": "The engine name",
-               "enum": ""
-            },
-            "options": {
-               "type": "object",
-               "description": "The engine configuration",
-               "$ref": "#/definitions/arguments"
-            }
-         }
-      }
-   }
+    "arguments": [
+        {
+            "name": "--extension",
+            "type": "string",
+            "description": "Additional extension to lint [Can be set multiple times]",
+            "flag": false
+        },
+        {
+            "name": "--no-esnext",
+            "type": null,
+            "description": "Don't enforce ES2015+ rules",
+            "flag": true
+        },
+        {
+            "name": "--prettier",
+            "type": null,
+            "description": "Conform to Prettier code style",
+            "flag": true,
+            "alias": "-p"
+        },
+        {
+            "name": "--cwd",
+            "type": "string",
+            "description": "Working directory for files",
+            "flag": false
+        },
+        {
+            "name": "--ext",
+            "type": "string",
+            "description": "Specify JavaScript file extensions - [default: .js]",
+            "flag": false,
+            "default": ".js"
+        },
+        {
+            "name": "--stdin",
+            "type": null,
+            "description": "Lint code provided on <STDIN> - (default is 'false\") [deprecated]",
+            "flag": true,
+            "usage": "none",
+            "default": false
+        },
+        {
+            "name": "--SPACE",
+            "type": "number",
+            "description": "(Deprecated) USE SPACE INDENT INSTEAD OF TABS DEFAULTS TO 2",
+            "flag": false,
+            "usage": "none",
+            "default": 2
+        },
+        {
+            "name": "--parser",
+            "type": "string",
+            "description": "Which parser to use. <flow|babylon|typescript|css|less|scss|json-file|json5|json-stringify|graphql|markdown|vue|yaml>",
+            "flag": false,
+            "enum": [
+                "flow",
+                "babylon",
+                "typescript",
+                "css",
+                "less",
+                "scss",
+                "json-file",
+                "json5",
+                "json-stringify",
+                "graphql",
+                "markdown",
+                "vue",
+                "yaml"
+            ]
+        },
+        {
+            "name": "--arrow-parens",
+            "type": "string",
+            "description": "Include parentheses around a sole arrow function parameter. Defaults to avoid",
+            "flag": false,
+            "default": "avoid",
+            "enum": [
+                "avoid",
+                "always"
+            ]
+        },
+        {
+            "name": "--reporter",
+            "type": "string",
+            "description": "Built in reporter (default, csv, jslint, checkstyle, raw), or module, or path to reporter file",
+            "flag": false,
+            "enum": [
+                "default",
+                "csv",
+                "jslint",
+                "checkstyle",
+                "raw"
+            ]
+        },
+        {
+            "name": "--option1",
+            "type": "string",
+            "description": "(auto|always|never, default to never)",
+            "flag": false,
+            "default": "never",
+            "enum": [
+                "auto",
+                "always",
+                "never"
+            ]
+        },
+        {
+            "name": "--reporter2",
+            "type": "string",
+            "description": "Custom reporter (<PATH>|jslint|checkstyle|unix)",
+            "flag": false,
+            "enum": [
+                "jslint",
+                "checkstyle",
+                "unix"
+            ]
+        },
+        {
+            "name": "--option2",
+            "type": "string",
+            "description": "Option 2. May be: \"scss\", \"sass\", \"less\", \"sugarss\", \"<path>\"",
+            "flag": false,
+            "enum": [
+                "scss",
+                "sass",
+                "less",
+                "sugarss"
+            ]
+        },
+        {
+            "name": "--option3",
+            "type": "string",
+            "description": "Option 3: \"json\", \"string\" or \"verbose\"",
+            "flag": false,
+            "enum": [
+                "json",
+                "string",
+                "verbose"
+            ]
+        },
+        {
+            "name": "--config",
+            "type": null,
+            "description": "Path to configuration file <file|path>",
+            "flag": true,
+            "usage": "config"
+        },
+        {
+            "name": "--error-filter",
+            "type": "string",
+            "description": "A module to filter errors",
+            "flag": false,
+            "alias": "-f"
+        },
+        {
+            "name": "--max-warnings",
+            "type": "number",
+            "description": "Number of warnings to trigger nonzero exit code",
+            "flag": false
+        },
+        {
+            "name": "--parser-options",
+            "type": "object",
+            "description": "Specify parser options",
+            "flag": false
+        },
+        {
+            "name": "--spaces",
+            "type": "string",
+            "description": "Spaces",
+            "flag": false
+        },
+        {
+            "name": "--option4",
+            "type": null,
+            "description": "Automatically fix problems. [default: true]",
+            "flag": true,
+            "default": true
+        },
+        {
+            "name": "--option5",
+            "type": null,
+            "description": "Automatically fix problems. [default: false]",
+            "flag": true,
+            "default": false
+        },
+        {
+            "name": "--option6",
+            "type": null,
+            "description": "Option 6. Defaults to []",
+            "flag": true
+        },
+        {
+            "name": "--ignore",
+            "type": null,
+            "description": "Additional paths to ignore [Can be set multiple times]",
+            "flag": true
+        },
+        {
+            "name": "-i",
+            "type": null,
+            "description": "Additional paths to ignore [Can be set multiple times]",
+            "flag": true
+        },
+        {
+            "name": "",
+            "type": "string",
+            "description": "Path to file or folder to analyze",
+            "flag": false
+        }
+    ],
+    "delimiter": "="
 }
