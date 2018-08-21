@@ -28,15 +28,7 @@ const options = (section, context) => {
 const usage = (section, context) => {
     const matches = arguments.getValueByRegexp(
         section, context.pathAlias.join('|'));
-    if (matches) {
-        let argument = context.get.template.argument();
-        argument.longName = '';
-        argument.type = 'string';
-        argument.flag = false;
-        argument.usage = 'path';
-        argument.description = 'Path to file or folder to analyze';
-        context.options.push(argument);
-    }
+    if (matches) context.options.push(setPathArgument());
 };
 
 /**
@@ -86,6 +78,22 @@ const splitStringWithArguments = (string) => {
         }
     });
     return result;
+};
+
+/**
+ * Set path argument. This is an argument, which used for analyzing
+ * directory/files with CLI w/o additional commands and arguments
+ * Example: $ eslint ~/js/my_project
+ * @return {object} argument - path argument
+ */
+const setPathArgument = () => {
+    return {
+        longName: '',
+        type: 'string',
+        flag: false,
+        usage: 'path',
+        description: 'Path to file or folder to analyze',
+    };
 };
 
 // Export functions

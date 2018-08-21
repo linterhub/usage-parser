@@ -50,21 +50,16 @@ const getContext = (help, config) => {
 };
 
 /**
- * Search for all sections with given name in documentation and return it
+ * Searches for section by regexp
  * @param {string} sectionName - name of section
  * @param {string} help - documentation of cli
- * @param {object} context - internal config
  * @return {array} - found sections
  */
-const findSection = (sectionName, help, context) => {
-    try {
-        const regularExp = new RegExp(context.regexp.section.search.start +
-            sectionName + context.regexp.section.search.end, 'gmi');
-        const matches = help.match(regularExp);
-        return matches ? matches.map((match) => match.trim()) : [];
-    } catch (error) {
-        throw error;
-    }
+const findSection = (sectionName, help) => {
+    const regularExp = new RegExp(context.regexp.section.search.start +
+        sectionName + context.regexp.section.search.end, 'gmi');
+    let matches = help.match(regularExp);
+    return matches ? matches.map((match) => match.trim()) : [];
 };
 
 /**
