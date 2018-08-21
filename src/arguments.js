@@ -1,3 +1,6 @@
+// Import npm package
+const _ = require('lodash');
+
 /**
  * Get object with array of argument property and description, then convert
  * it to arguments template
@@ -7,11 +10,10 @@
  * @return {Object} - argument template
  */
 const getArgumentObject = (object, context) => {
-    let argument = context.get.template.argument();
-    argument = {
+    let argument = {
         enum: getEnum(object.arg + object.description, context),
-        longName: getPropertyName(object.arg, context.regexp.argument.long),
-        shortName: getPropertyName(object.arg, context.regexp.argument.short),
+        longNames: getPropertyNames(object.arg, context.regexp.argument.long),
+        shortNames: getPropertyNames(object.arg, context.regexp.argument.short),
         defaultValue: getDefaultValue(
             object.description, context.regexp.argument.default),
         description: unifyDescription(object.description.trim()),
@@ -44,7 +46,7 @@ const unifyDescription = (description) => {
 const getDefaultValue = (description, regexp) => {
     let matches = getValueByRegexp(description, regexp);
     if (!matches) return null;
-    let extraChars = ['\'', '\"', ',', '['];
+    let extraChars = ['\'', '\"', ',', '\\['];
     let result = removeChar(matches[5].trim(), extraChars);
     result = removeCharAtTheEnd(result.trim(), ['.']);
     switch (result.toLowerCase()) {
@@ -92,11 +94,13 @@ const getDelimiterValue = (string, regexp) => {
  * Find property name in argument string by regexp
  * @param {string} string - argument string without description
  * @param {string} regexp - regexp for identity property
- * @return {string} - property name
+ * @return {Array} - array with property names
  */
-const getPropertyName = (string, regexp) => {
-    const result = getValueByRegexp(string, regexp);
-    return result ? removeCharAtTheEnd(result[2].trim(), [',']) : null;
+const getPropertyNames = (string, regexp) => {
+    const regularExp = new RegExp(regexp, 'gmi');
+    let matches = string.match(regularExp);
+    return matches ? matches.map((match) =>
+        removeCharAtTheEnd(match.trim(), [',', '='])) : null;
 };
 
 /**
@@ -137,10 +141,11 @@ const getPropertyType = (string, argument, context) => {
  * @return {boolean} isFlag - is argument flag
  */
 const identifyIsFlag = (string, argument) => {
-    const argumentAddition = removeExtraArgumentNames(string, argument);
-    isFlag = !isValueBoolean(argument.defaultValue) ||
+    const argumentAddition =
+        removeExtraArgumentNames(string, argument);
+    isFlag = !(!isValueBoolean(argument.defaultValue) ||
             argument.enum !== null ||
-            argumentAddition ? false : true;
+            argumentAddition);
     return isFlag;
 };
 
@@ -167,8 +172,10 @@ const removeExtraEnumValues = (enumArray, context) => {
 const checkFlagsByExamples = (section, context) => {
     const regularExp = new RegExp(context.regexp.section.examples, 'gim');
     while (match = regularExp.exec(section)) {
-        let option = context.options.find((option) => {
-            return match[1] === (option.longName || option.alias);
+        const argument = match[1];
+        option = context.options.find((option) => {
+            return _.indexOf(option.longNames, argument) !== -1 ||
+                _.indexOf(option.shortNames, argument) !== -1;
         });
         if (option) option.flag = false;
     }
@@ -181,8 +188,8 @@ const checkFlagsByExamples = (section, context) => {
  * @return {string} - result string
  */
 const removeExtraArgumentNames = (string, argument) => {
-    return removeChar(string,
-        [',', argument.longName, argument.shortName]).trim();
+    let remove = _.union([','], argument.longNames, argument.shortNames);
+    return removeChar(string, remove).trim();
 };
 
 /**
@@ -218,7 +225,8 @@ const removeCharAtTheEnd = (string, array) => {
 const removeChar = (string, array) => {
     let result = string;
     array.map((char) => {
-        result = result.replace(char, ' ');
+        let regularExp = new RegExp(char, 'g');
+        result = result.replace(regularExp, ' ');
     });
     return result;
 };

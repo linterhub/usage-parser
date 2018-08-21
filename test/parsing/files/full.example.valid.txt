@@ -41,6 +41,7 @@
     --option4         Automatically fix problems. [default: true]
     --option5         Automatically fix problems. [default: false]
     --option6         Option 6. Defaults to [].
+    --color, --no-color, --nc, -c           Force enabling/disabling of color
 
 
 
