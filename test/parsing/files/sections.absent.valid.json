@@ -78,6 +78,12 @@
             "description": "Skips empty lines from line count",
             "flag": true,
             "alias": "-n"
+        },
+        {
+            "name": "",
+            "type": "string",
+            "description": "Path to file or folder to analyze",
+            "flag": false
         }
     ],
     "delimiter": "="

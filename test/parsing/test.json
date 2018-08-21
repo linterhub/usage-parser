@@ -46,6 +46,15 @@
             },
             "valid": true,
             "object": "result"
+        },
+        {
+            "description": "sections are at one line",
+            "data": {
+                "doc": "./test/parsing/files/sections.oneline.valid.txt",
+                "result": "./parsing/files/sections.oneline.valid.json"
+            },
+            "valid": true,
+            "object": "result"
         }
     ]
 }

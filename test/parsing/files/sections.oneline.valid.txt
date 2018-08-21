@@ -1,0 +1,8 @@
+USAGE: $ xo [<file|glob> ...]
+
+
+
+  Options:
+    --extension             Additional extension to lint
+    -p, --prettier          conform to Prettier code style
+    --cwd <dir>             Working directory for files.
