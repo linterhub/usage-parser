@@ -30,8 +30,8 @@ const context = {
         delimiter: '[\\s][-]+[^ \t(\n|\r\n)]+(\\s|=)[^ :\t(\n|\r\n)-]',
         section: {
             search: {
-                start: '\\s[\\s]+',
-                end: '[(\n|\r\n)]+(\n|\r\n)?(?:[ \t].*?(?:(\n|\r\n)|$))*',
+                start: '(?:^[\\s]*|(?:\n|\r\n)+[\\s]+)',
+                end: '[\n|\r\n]*(?:[ \t].*?(?:(\n|\r\n)|$))+',
             },
             examples: '\\s+(-[\\S]+)(\\s|=)[^-\\s]+',
         },
