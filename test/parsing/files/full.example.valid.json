@@ -192,6 +192,17 @@
             "flag": true
         },
         {
+            "name": "--color",
+            "type": null,
+            "description": "Force enabling/disabling of color",
+            "flag": true,
+            "alias": [
+                "--no-color",
+                "--nc",
+                "-c"
+            ]
+        },
+        {
             "name": "--ignore",
             "type": null,
             "description": "Additional paths to ignore [Can be set multiple times]",
