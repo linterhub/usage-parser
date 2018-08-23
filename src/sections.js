@@ -1,5 +1,6 @@
 // Import functions
 const arguments = require('./arguments.js');
+const util = require('./util.js');
 
 /**
  * Parse section Options and add arguments to context
@@ -7,17 +8,13 @@ const arguments = require('./arguments.js');
  * @param {object} context - internal config
  */
 const options = (section, context) => {
-    try {
-        splitOptionsSection(section).forEach((object) => {
-            const argument = arguments.getArgumentObject(object, context);
-            context.options.push(argument);
-        });
-        const delimiter = arguments.getDelimiterValue(
-            section, context.regexp.delimiter);
-        context.delimiter = delimiter ? delimiter : context.delimiter;
-    } catch (error) {
-        throw error;
-    }
+    splitOptionsSection(section).forEach((object) => {
+        const argument = arguments.getArgumentObject(object, context);
+        context.options.push(argument);
+    });
+    const delimiter =
+        util.getFirstValueByRegexp(section, context.regexp.delimiter);
+    context.delimiter = delimiter ? delimiter[1] : context.delimiter;
 };
 
 /**
@@ -26,9 +23,9 @@ const options = (section, context) => {
  * @param {object} context - internal config
  */
 const usage = (section, context) => {
-    const matches = arguments.getValueByRegexp(
+    const match = util.getFirstValueByRegexp(
         section, context.pathAlias.join('|'));
-    if (matches) context.options.push(setPathArgument());
+    if (match) context.options.push(setPathArgument());
 };
 
 /**
@@ -37,9 +34,9 @@ const usage = (section, context) => {
  * @param {object} context - internal config
  */
 const examples = (section, context) => {
-    const delimiter = arguments.getDelimiterValue(
-        section, context.regexp.delimiter);
-    context.delimiter = delimiter ? delimiter : context.delimiter;
+    const delimiter =
+        util.getFirstValueByRegexp(section, context.regexp.delimiter);
+    context.delimiter = delimiter ? delimiter[1] : context.delimiter;
     arguments.checkFlagsByExamples(section, context);
 };
 

@@ -1,6 +1,9 @@
 // Import npm package
 const _ = require('lodash');
 
+// Import functions
+const util = require('./util.js');
+
 /**
  * Get object with array of argument property and description, then convert
  * it to arguments template
@@ -14,12 +17,11 @@ const getArgumentObject = (object, context) => {
         enum: getEnum(object.arg + object.description, context),
         longNames: getPropertyNames(object.arg, context.regexp.argument.long),
         shortNames: getPropertyNames(object.arg, context.regexp.argument.short),
-        defaultValue: getDefaultValue(
-            object.description, context.regexp.argument.default),
+        defaultValue: getDefaultValue(object.description, context),
         description: unifyDescription(object.description.trim()),
     };
 
-    argument.usage = !getValueByRegexp(
+    argument.usage = !util.getFirstValueByRegexp(
         argument.description, context.regexp.argument.usage);
     argument.flag = identifyIsFlag(object.arg, argument);
     argument.type = getPropertyType(object.arg, argument, context);
@@ -34,21 +36,21 @@ const getArgumentObject = (object, context) => {
 const unifyDescription = (description) => {
     if (typeof description !== 'string' && description.length === 0) return '';
     const result = description.charAt(0).toUpperCase() + description.slice(1);
-    return removeExtraSpaces(removeCharAtTheEnd(result, ['.']));
+    return util.removeExtraSpaces(util.removeCharAtTheEnd(result, ['.']));
 };
 
 /**
  * Find default value in argument description by regexp
  * @param {string} description - string with argument description
- * @param {string} regexp - regexp for identity default value
+ * @param {object} context - internal config
  * @return {string} - default value
  */
-const getDefaultValue = (description, regexp) => {
-    let matches = getValueByRegexp(description, regexp);
-    if (!matches) return null;
-    let extraChars = ['\'', '\"', ',', '\\['];
-    let result = removeChar(matches[5].trim(), extraChars);
-    result = removeCharAtTheEnd(result.trim(), ['.']);
+const getDefaultValue = (description, context) => {
+    let match = util.getFirstValueByRegexp(
+        description, context.regexp.argument.default);
+    if (!match) return null;
+    let result = util.removeExtraChars(match[1].trim());
+    result = util.removeCharAtTheEnd(result.trim(), ['.']);
     switch (result.toLowerCase()) {
         case 'false':
             result = false;
@@ -72,22 +74,12 @@ const getDefaultValue = (description, regexp) => {
  * @return {array} - enum values of argument
  */
 const getEnum = (string, context) => {
-    let matches = getValueByRegexp(string, context.regexp.argument.enum.values);
-    if (!matches) return null;
-    let enums = matches[2].split(context.regexp.argument.enum.split)
-        .map((value) => removeChar(value, ['<', '>', '\'', '\"']).trim());
+    let match = util.getFirstValueByRegexp(
+        string, context.regexp.argument.enum.values);
+    if (!match) return null;
+    let enums = match[2].split(context.regexp.argument.enum.split)
+        .map((value) => util.removeExtraChars(value).trim());
     return removeExtraEnumValues(enums, context);
-};
-
-/**
- * Find delimiter char in string by regexp
- * @param {string} string - string for search delimiter
- * @param {string} regexp - regexp for identity delimiter
- * @return {string} - delimiter
- */
-const getDelimiterValue = (string, regexp) => {
-    const result = getValueByRegexp(string, regexp);
-    return result ? result[1] : null;
 };
 
 /**
@@ -97,21 +89,9 @@ const getDelimiterValue = (string, regexp) => {
  * @return {Array} - array with property names
  */
 const getPropertyNames = (string, regexp) => {
-    const regularExp = new RegExp(regexp, 'gmi');
-    let matches = string.match(regularExp);
-    return matches ? matches.map((match) =>
-        removeCharAtTheEnd(match.trim(), [',', '='])) : null;
-};
-
-/**
- * Checks is given property of argument boolean
- * @param {string} string - value of property
- * @return {boolean} - result of check
- */
-const isValueBoolean = (string) => {
-    return string !== null &&
-    !(string === ('true'|'false') || typeof string === 'boolean') ?
-        false : true;
+    let matches = util.getAllFirstCapturingGroupsByRegexp(string, regexp);
+    return matches.length ? matches.map((match) =>
+        util.removeCharAtTheEnd(match, [','])) : null;
 };
 
 /**
@@ -143,10 +123,9 @@ const getPropertyType = (string, argument, context) => {
 const identifyIsFlag = (string, argument) => {
     const argumentAddition =
         removeExtraArgumentNames(string, argument);
-    isFlag = !(!isValueBoolean(argument.defaultValue) ||
+    return !(!util.isValueBoolean(argument.defaultValue) ||
             argument.enum !== null ||
             argumentAddition);
-    return isFlag;
 };
 
 /**
@@ -170,83 +149,30 @@ const removeExtraEnumValues = (enumArray, context) => {
  * @param {object} context - internal config
  */
 const checkFlagsByExamples = (section, context) => {
-    const regularExp = new RegExp(context.regexp.section.examples, 'gim');
-    while (match = regularExp.exec(section)) {
-        const argument = match[1];
-        option = context.options.find((option) => {
-            return _.indexOf(option.longNames, argument) !== -1 ||
-                _.indexOf(option.shortNames, argument) !== -1;
+    const matches = util.getAllFirstCapturingGroupsByRegexp(
+        section, context.regexp.argument.examples);
+    matches.forEach((match) => {
+        let option = context.options.find((option) => {
+            return _.indexOf(option.longNames, match) !== -1 ||
+                _.indexOf(option.shortNames, match) !== -1;
         });
         if (option) option.flag = false;
-    }
+    });
 };
 
 /**
  * Remove argument names from string
  * @param {string} string - any string
- * @param {argument} argument - argument object with description, names, etc.
+ * @param {object} argument - argument object with description, names, etc.
  * @return {string} - result string
  */
 const removeExtraArgumentNames = (string, argument) => {
     let remove = _.union([','], argument.longNames, argument.shortNames);
-    return removeChar(string, remove).trim();
-};
-
-/**
- * Remove extra spaces and tabulation from string
- * @param {string} string - any string
- * @return {string} - result string
- */
-const removeExtraSpaces = (string) => {
-    return removeChar(string, [/\\t/g, /[\s]+/g]);
-};
-
-/**
- * Delete chars at the end of string
- * @param {string} string - source string
- * @param {array} array - char for remove
- * @return {*} - string without chars
- */
-const removeCharAtTheEnd = (string, array) => {
-    let result = string;
-    array.map((char) => {
-        result = result.charAt(result.length - 1) === char ?
-            result.slice(0, result.length - 1) : result;
-    });
-    return result;
-};
-
-/**
-* Remove all char from array in string
-* @param {string} string - input string for removing
-* @param {array} array - array of char which need to remove
-* @return {string} - result string
-*/
-const removeChar = (string, array) => {
-    let result = string;
-    array.map((char) => {
-        let regularExp = new RegExp(char, 'g');
-        result = result.replace(regularExp, ' ');
-    });
-    return result;
-};
-
-/**
-* General function for getting some values by regexp
-* @param {string} string - searching string
-* @param {string} regexp - regexp for finding
-* @return {Array} - Array of result
-*/
-const getValueByRegexp = (string, regexp) => {
-    const regularExp = new RegExp(regexp, 'gim');
-    const result = regularExp.exec(string);
-    return result ? result : null;
+    return util.removeChar(string, remove).trim();
 };
 
 // Export functions
 exports = module.exports = {
     getArgumentObject,
-    getDelimiterValue,
-    getValueByRegexp,
     checkFlagsByExamples,
 };

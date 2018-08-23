@@ -3,6 +3,9 @@
 // Import internal config
 const context = require('./template/context.js');
 
+// Import functions
+const util = require('./util.js');
+
 /**
  * Parse whole documentation and fill context
  * @param {string} help - documentation of cli
@@ -50,15 +53,15 @@ const getContext = (help, config) => {
 };
 
 /**
- * Searches for section by regexp
+ * Searches for sections matches regexp
  * @param {string} sectionName - name of section
  * @param {string} help - documentation of cli
  * @return {array} - found sections
  */
-const findSection = (sectionName, help) => {
-    const regularExp = new RegExp(context.regexp.section.search.start +
-        sectionName + context.regexp.section.search.end, 'gmi');
-    let matches = help.match(regularExp);
+const findSections = (sectionName, help) => {
+    let matches = util.getValuesByRegexpGlobally(help,
+        context.regexp.section.search.start + sectionName +
+        context.regexp.section.search.end);
     return matches ? matches.map((match) => match.trim()) : [];
 };
 
@@ -73,22 +76,22 @@ const findSection = (sectionName, help) => {
  * @return {array} data - data from context where all found sections are added
  */
 const setSectionByNames = (name, data, help, context, configSection) => {
-    let section = findSection(name, help, context);
-    return validateSection(section) ? data.concat(section) :
+    let sections = findSections(name, help);
+    return validateSections(sections) ? data.concat(sections) :
         Array.isArray(configSection.postfix) ?
             setSectionWithPostfixArray(
-                name, help, context, configSection, data) :
+                name, help, configSection, data) :
             setSectionWithPostfixSingle(
-                name, help, context, configSection.postfix, data);
+                name, help, configSection.postfix, data);
 };
 
 /**
- * Check if found section contains text
- * @param {String} section - found section
- * @return {Boolean} - is section valid
+ * Check if found section or array of sections contains text
+ * @param {Array} sections - found sections
+ * @return {Boolean} - is section or sections valid
  */
-const validateSection = (section) => {
-    return section.length > 0;
+const validateSections = (sections) => {
+    return sections.length > 0;
 };
 
 /**
@@ -96,16 +99,15 @@ const validateSection = (section) => {
  * adds it to data [Postfix is array]
  * @param {string} name - name of section
  * @param {string} help - documentation of cli
- * @param {object} context - internal config
  * @param {object} configSection - section from user configuration
  * @param {array} data - data from context where all found sections are added
  * @return {array} data - data from context where all found sections are added
  */
 const setSectionWithPostfixArray =
-    (name, help, context, configSection, data) => {
+    (name, help, configSection, data) => {
         for (let postfix of configSection.postfix) {
-            let section = findSection(name + postfix, help, context);
-            if (validateSection(section)) {
+            let section = findSections(name + postfix, help);
+            if (validateSections(section)) {
                 data = data.concat(section);
             }
         }
@@ -117,14 +119,13 @@ const setSectionWithPostfixArray =
  * adds it to data [Postfix is string]
  * @param {string} name - name of section
  * @param {string} help - documentation of cli
- * @param {object} context - internal config
  * @param {object} postfix - postfix for name from user configuration
  * @param {array} data - data from context where all found sections are added
  * @return {array} data - data from context where all found sections are added
  */
-const setSectionWithPostfixSingle = (name, help, context, postfix, data) => {
-    let section = findSection(name + postfix, help, context);
-    return validateSection(section) ? data.concat(section) : data;
+const setSectionWithPostfixSingle = (name, help, postfix, data) => {
+    let section = findSections(name + postfix, help);
+    return validateSections(section) ? data.concat(section) : data;
 };
 
 // Export function
