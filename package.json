@@ -6,23 +6,16 @@
     "license": "MIT",
     "repository": "linterhub/usage-parser",
     "bugs": "https://github.com/linterhub/usage-parser/issues",
-    "bin": {
-        "usage-parser": "bin.js"
-    },
     "keywords": [
         "linterhub"
     ],
-    "main": "index.js",
     "scripts": {
-        "eslint": "./node_modules/.bin/eslint",
-        "parse": "node bin.js",
-        "lint": "eslint .",
-        "test": "mocha",
+        "build": "tsc -p .",
+        "lint": "tslint -c tslint.json --project . -t codeFrame",
+        "test": "npm run build && nyc mocha -r ts-node/register ./test/*.test.ts",
         "semantic-release": "semantic-release"
     },
     "files": [
-        "src/",
-        "bin.js",
         "README.md"
     ],
     "husky": {
@@ -35,20 +28,46 @@
         "tag": "latest",
         "access": "public"
     },
+    "nyc": {
+        "check-coverage": true,
+        "lines": 70,
+        "statements": 70,
+        "functions": 70,
+        "branches": 70,
+        "extension": [
+            ".ts",
+            ".tsx"
+        ],
+        "exclude": [
+            "coverage/**/*",
+            "test/**/*",
+            "dist/**/*",
+            "src/index.ts",
+            "src/config.ts"
+        ],
+        "reporter": [
+            "html",
+            "text-summary"
+        ],
+        "all": true,
+        "require": [
+            "ts-node/register"
+        ]
+    },
     "devDependencies": {
         "@semantic-release/changelog": "^3.0.0",
         "@semantic-release/git": "^7.0.1",
-        "chai": "^4.1.2",
-        "mocha": "^5.2.0",
-        "husky": "^0.14.3",
+        "@types/mocha": "^5.2.5",
+        "@types/node": "^10.12.5",
+        "@types/sinon": "^5.0.5",
         "assert": "^1.4.1",
-        "eslint": "^5.1.0",
-        "eslint-config-google": "^0.9.1",
+        "husky": "^0.14.3",
+        "mocha": "^5.2.0",
+        "nyc": "^13.1.0",
+        "sinon": "^7.1.1",
+        "ts-node": "^7.0.1",
+        "tslint": "^5.11.0",
+        "typescript": "^3.1.6",
         "semantic-release": "^15.9.5"
-    },
-    "dependencies": {
-        "commander": "^2.17.1",
-        "jsonschema": "^1.2.4",
-        "lodash": "^4.17.10"
     }
 }
