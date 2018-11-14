@@ -1,11 +1,15 @@
 {
-    "spellright.language": "en",
+    "spellright.language": [
+        "en",
+        "ru"
+    ],
     "spellright.documentTypes": [
         "markdown",
         "latex",
         "plaintext",
-        "json",
-        "javascript"
+        "javascript",
+        "typescript",
+        "json"
     ],
     "spellright.ignoreFiles": [
         "**/.gitignore",
@@ -23,8 +27,7 @@
         ".git/**/**": true
     },
     "javascript.validate.enable": false,
-    "eslint.enable": true,
-    "eslint.provideLintTask": true,
+    "tslint.enable": true,
     "files.exclude": {
         "**/.git": false
     }
