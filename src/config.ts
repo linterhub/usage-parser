@@ -1,5 +1,8 @@
 export const config  = {
     settings: {
+        blackList: {
+            section: ['example'],
+        },
         line: {
             breaker: /\n|\r/gim,
             join: '  ',

@@ -9,7 +9,7 @@ export class Group {
      * The Name of group
      * @type {string | undefined}
      */
-    name: string | undefined;
+    name?: string | undefined;
 
     /**
      * The Array of lines
@@ -41,11 +41,11 @@ export class Group {
 
     /**
      * Create Group with name and array of lines
-     * @param {string | undefined } name - The name of group
+     * @param {string | undefined } [name="undefined"] - The name of group, default is `undefined`
      * @param {string[]} [lines="[]"] - The array of lines, default is `[]`
      * @return {Group} - The Group
      */
-    static create(name : string | undefined, lines: string[] = []) : Group {
+    static create(name : string | undefined = undefined, lines: string[] = []) : Group {
         return new Group(name, lines);
     }
 }
