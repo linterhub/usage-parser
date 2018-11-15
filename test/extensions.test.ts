@@ -12,10 +12,8 @@ describe('String extension', () => {
         it('if input line is undefined', () => {
             // arrange
             const input = '\d';
-
             // act
             const result = input.firstMatch(undefined);
-
             // assert
             sandbox.assert.match(result, undefined);
         });
@@ -23,10 +21,8 @@ describe('String extension', () => {
             // arrange
             const input = '\d';
             sandbox.stub(String.prototype, 'match').returns(undefined);
-
             // act
             const result = input.firstMatch('2');
-
             // assert
             sandbox.assert.match(result, undefined);
         });
@@ -34,10 +30,8 @@ describe('String extension', () => {
             // arrange
             const input = '\d';
             sandbox.stub(String.prototype, 'match').returns(['2', '2']);
-
             // act
             const result = input.firstMatch('2');
-
             // assert
             sandbox.assert.match(result, '2');
         });

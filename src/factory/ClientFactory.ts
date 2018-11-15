@@ -1,5 +1,6 @@
 import {Usage} from './../models/usage';
 import {Group} from './../models/group';
+import {Section} from './../models/section';
 
 import {config} from './../config';
 import './../interface/String';
@@ -40,13 +41,35 @@ class ClientFactory {
     }
 
     /**
-     * Create Usage object with groups and delimiter
-     * @param {Group[]} groups - The array groups for usage
+     * Create sections from groups
+     * @param groupsArray - The array of groups
+     * @return {Section[]} - The array of sections
+     */
+    static createSections (groupsArray: Group[]) : Section[] {
+        return groupsArray.reduce((acum, group) => {
+            if (group.lines.length) {
+                const section =  Section.create(group.name, group.lines);
+                acum.push(section);
+            }
+            return acum;
+        }, Array<Section>());
+    }
+
+
+    /**
+     * Create Usage object with sections and delimiter
+     * @param {Section[]} sectionsArray - The array sections for usage
      * @param {string} [delimiter="undefined"] - The usage delimiter
      * @return {Usage | undefined} - The usage or undefined, if array groups is empty
      */
-    static createUsage(groups: Group[], delimiter: string | undefined = undefined) : Usage | undefined {
-        return groups.length ? Usage.create(groups, delimiter) : undefined;
+    static createUsage(sectionsArray: Section[], delimiter: string | undefined = undefined) : Usage | undefined {
+        const ignoredSectionRegExp = new RegExp(config.settings.blackList.section.join('|'), 'i');
+        const sectionsClear = sectionsArray.filter((item) => {
+            // TODO: не получиться заблокировать `undefined`
+            return item.name ? item.name.search(ignoredSectionRegExp) === -1 : true;
+        });
+        const usage = sectionsClear.length ? Usage.create(sectionsClear, delimiter) : undefined;
+        return usage;
     }
 }
 

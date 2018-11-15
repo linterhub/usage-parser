@@ -1,15 +1,15 @@
-import { Group } from './group';
+import { Section } from './section';
 
 /**
- * The Usage is a Object which contains Groups of doc
+ * The Usage is a Object which contains Section of doc
  */
 export class Usage {
 
     /**
-     * Array of Group object
-     * @type {Group[]}
+     * Array of Section object
+     * @type {Section[]}
      */
-    groups: Group[];
+    sections: Section[];
 
     /**
      * Global delimiter of usage's doc
@@ -19,21 +19,21 @@ export class Usage {
 
     /**
      * @constructor
-     * @param {Group[]} groups - The array of Groups
+     * @param {Section[]} sections - The array of Sections
      * @param {string | undefined} delimiter - The delimiter of usage
      */
-    constructor(groups: Group[], delimiter: string | undefined) {
+    constructor(sections: Section[], delimiter: string | undefined) {
         this.delimiter = delimiter;
-        this.groups = groups;
+        this.sections = sections;
     }
 
     /**
      * Create The Usage class
-     * @param {Groups[]} groups - The array of Groups
-     * @param {string | undefined} delimiter - The delimiter of usage
+     * @param {Section[]} sections - The array of Sections
+     * @param {string | undefined} [delimiter="undefined"] - The delimiter of usage, default is `undefined`
      * @return {Usage} - The Usage
      */
-    static create(groups: Group[], delimiter: string | undefined) : Usage {
-        return new Usage(groups, delimiter);
+    static create(sections: Section[], delimiter: string | undefined = undefined) : Usage {
+        return new Usage(sections, delimiter);
     }
 }

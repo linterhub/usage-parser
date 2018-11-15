@@ -31,9 +31,10 @@ class Client {
     parse() : Usage | undefined {
         const lines = ClientFactory.splitLine(this.input);
         const groups = ClientFactory.createGroups(lines);
+        const sections = ClientFactory.createSections(groups);
 
         const delimiter = config.reg.delimiter.firstMatch(this.input);
-        const usage = ClientFactory.createUsage(groups, delimiter);
+        const usage = ClientFactory.createUsage(sections, delimiter);
         return usage;
     }
 }
