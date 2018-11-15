@@ -1,11 +1,11 @@
-import mocha from 'mocha';
+import 'mocha';
 import sinon from 'sinon';
 
 import { Group } from '../src/models/group';
 import { Usage } from './../src/models/usage';
 import { Client } from './../src/client';
-import { ClientFactory } from './../src/factory/ClientFactory';
 import { Section } from '../src/models/section';
+import { ClientFactory } from './../src/factory/ClientFactory';
 
 const sandbox = sinon.createSandbox();
 

@@ -8,7 +8,6 @@
         "latex",
         "plaintext",
         "javascript",
-        "typescript",
         "json"
     ],
     "spellright.ignoreFiles": [
