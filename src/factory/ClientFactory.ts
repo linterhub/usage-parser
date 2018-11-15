@@ -1,6 +1,7 @@
 import {Usage} from './../models/usage';
 import {Group} from './../models/group';
 import {Section} from './../models/section';
+import {Argument} from './../models/argument';
 
 import {config} from './../config';
 import './../interface/String';
@@ -37,7 +38,27 @@ class ClientFactory {
                 acum[acum.length - 1].addLine(line);
             }
             return acum;
-        }, Array<Group>());
+        }, new Array<Group>());
+    }
+
+    /**
+     * Create Arguments from the lines. Each of line is splitting to 2 parts before create Argument
+     * @param {string[]} lines - The lines which contains argument and description
+     * @return {Argument[]} - The array of arguments with properties
+     */
+    static createArguments = (lines: string[]) : Argument[]  => {
+        return lines.reduce((acum, line) => {
+            const cleanLine = line.trimEnd(config.settings.trimEnd);
+            const parts = cleanLine
+                .split(config.reg.tabulation)
+                .filter((x: string) => x !== '');
+            if (!parts.length) { return acum; }
+            const argsLine = parts[0].includes(config.reg.arg.start) ? parts.shift() : undefined;
+            const descLine = parts.join(config.settings.line.join).unify();
+            const arg = Argument.create(argsLine, descLine);
+            acum.push(arg);
+            return acum;
+        }, new Array<Argument>());
     }
 
     /**
@@ -47,12 +68,15 @@ class ClientFactory {
      */
     static createSections (groupsArray: Group[]) : Section[] {
         return groupsArray.reduce((acum, group) => {
-            if (group.lines.length) {
-                const section =  Section.create(group.name, group.lines);
+            const argsArray = ClientFactory.createArguments(group.lines);
+            const argsClear = argsArray.filter((arg) =>
+                !(arg.longName === undefined && arg.shortName === undefined));
+            if (argsClear.length) {
+                const section =  Section.create(group.name, argsClear);
                 acum.push(section);
             }
             return acum;
-        }, Array<Section>());
+        }, new Array<Section>());
     }
 
 

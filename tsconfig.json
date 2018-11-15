@@ -1,5 +1,7 @@
 {
     "compilerOptions": {
+        "rootDir": "./src",
+        "sourceMap": true,
         "target": "ES6",
         "module": "commonjs",
         "declaration": true,
@@ -15,9 +17,9 @@
         "esModuleInterop": true
     },
     "include": [
-        "src/**/*", "test/index.1.test1.ts"
+        "src/**/*"
     ],
     "exclude": [
         "test/**/*"
-    ],
+    ]
 }
