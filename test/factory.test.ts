@@ -20,9 +20,7 @@ describe('Client Factory', () => {
         sandbox.stub(Group.prototype, 'addLine').returns(groupInstanceStub);
         sandbox.stub(String.prototype, 'firstMatch').returns(undefined);
     });
-    afterEach(() => {
-        sandbox.restore();
-    });
+    afterEach(() => { sandbox.restore(); });
 
     describe('Create Groups', () => {
         afterEach(() => {sandbox.reset();});
