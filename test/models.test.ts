@@ -74,21 +74,25 @@ describe('Models', () => {
                 // arrange
                 const descLine = undefined;
                 const argsLine = 'Description';
-                sandbox.stub(String.prototype, 'firstMatch').returns(undefined);
+                const firstMatchStub = sandbox.stub(String.prototype, 'firstMatch').returns(undefined);
                 // act
                 const result = argument._getValues(argsLine, descLine);
                 // assert
                 sandbox.assert.match(result, undefined);
+
+                firstMatchStub.restore();
             });
             it('Values are exist', () => {
                 // arrange
                 const descLine = '[one or false]';
                 const argsLine = undefined;
-                sandbox.stub(String.prototype, 'firstMatch').returns(descLine);
+                const firstMatch = sandbox.stub(String.prototype, 'firstMatch').returns(descLine);
                 // act
                 const result = argument._getValues(argsLine, descLine);
                 // assert
                 sandbox.assert.match(result, ['one', 'false']);
+
+                firstMatch.restore();
            });
         });
         describe('Get Type', () => {
@@ -114,20 +118,25 @@ describe('Models', () => {
             it('Default value is exist', () => {
                 // arrange
                 argument.default = '2';
-                sandbox.stub(String.prototype, 'convert').returns(2);
-                sandbox.stub(ArgumentTypes.prototype, 'indetifyType').returns(ArgumentType.number);
+                const convertStub = sandbox.stub(String.prototype, 'convert').returns(2);
+                const indetifyTypeStub = sandbox.stub(ArgumentTypes.prototype, 'indetifyType').returns(ArgumentType.number);
                 // act
                 const result = argument._getType(argsLine);
                 // assert
                 sandbox.assert.match(result, ArgumentType.number);
+
+                convertStub.restore();
+                indetifyTypeStub.restore();
             });
             it('Is Undefined', () => {
                 // arrange
-                sandbox.stub(ArgumentTypes.prototype, 'indetifyType').returns(ArgumentType.undefined);
+                const indetityTypeStub = sandbox.stub(ArgumentTypes.prototype, 'indetifyType').returns(ArgumentType.undefined);
                 // act
                 const result = argument._getType(argsLine);
                 // assert
                 sandbox.assert.match(result, ArgumentType.undefined);
+
+                indetityTypeStub.restore();
             });
         });
     });
