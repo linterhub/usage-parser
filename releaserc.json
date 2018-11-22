@@ -13,6 +13,10 @@
     "analyzeCommits": {
         "releaseRules": [
             {
+                "type": "test",
+                "release": "patch"
+            },
+            {
                 "type": "docs",
                 "scope": ".*md",
                 "release": "patch"
@@ -22,16 +26,16 @@
                 "release": "patch"
             },
             {
-                "type": "new",
-                "release": "minor"
-            },
-            {
                 "type": "perf",
                 "release": "patch"
             },
             {
                 "type": "ci",
                 "release": "patch"
+            },
+            {
+                "type": "new",
+                "release": "minor"
             },
             {
                 "type": "feat",
