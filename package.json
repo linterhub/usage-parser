@@ -51,8 +51,9 @@
             "test/**/*",
             "dist/**/*",
             "src/client.ts",
-            "src/index.ts",
-            "src/config.ts"
+            "src/config.ts",
+            "index.ts",
+            "bin.ts"
         ],
         "reporter": [
             "html",

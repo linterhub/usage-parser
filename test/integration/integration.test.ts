@@ -2,7 +2,7 @@ import 'mocha';
 import fs from 'fs';
 import path from 'path';
 import {assert} from 'chai';
-import UsageParser from '../../src/index';
+import UsageParser from '../../index';
 
 const inputs = 'inputs/';
 const results = 'results/';

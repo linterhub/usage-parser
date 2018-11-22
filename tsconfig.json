@@ -19,7 +19,6 @@
     "include": [
         "bin.ts",
         "index.ts",
-        "typings/json.d.ts",
         "src/**/*"
     ],
     "exclude": [

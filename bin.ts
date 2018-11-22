@@ -2,7 +2,6 @@ import fs from 'fs';
 import commander from 'commander';
 import UsageParser from './index';
 import {execSync} from 'child_process';
-import packageJson from './../package.json';
 
 const runParser = (doc: string) => {
     const usage = new UsageParser(doc);
@@ -10,7 +9,7 @@ const runParser = (doc: string) => {
 };
 
 commander
-    .version(packageJson.version)
+    .version('2.0.0')
     .usage('[options] <binary>')
     .option(
         '-d, --docs <docs>',
@@ -24,7 +23,7 @@ commander
     )
     .arguments('<binary>')
     .action((binary) => {
-        commander.docs = execSync(`${binary} --help`).toString();
+        commander.docs = execSync(`npx ${binary} --help`).toString();
     })
     .description(
         'Parse help page specifying binary as argument or content as option')

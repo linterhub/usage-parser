@@ -21,10 +21,6 @@ to [docopt][docopt-url] approach.
 
 ## Install
 
-Requirements:
-
-- [Node.js][node-js-url] 4+
-
 ```bash
 npm install @linterhub/usage-parser
 ```
@@ -41,16 +37,37 @@ Parse help doc and output result to console:
 ### JavaScript
 
 ```javascript
-const parser = require('@linterhub/usage-parser');
-console.log(parser('help doc'));
+const usageParser = require('@linterhub/usage-parser');
+
+const usage = new UsageParser('Help doc from CLI');
+console.log(usage.parse());
+```
+
+```typescript
+import UsageParser from '@linterhub/usage-parser';
+
+const usage = new UsageParser('Help doc from CLI');
+console.log(usage.parse());
 ```
 
 ### CLI
 
-Before run add `node_modules/.bin/usage-parser` to script in package.json
+```text
+Usage: bin [options] <binary>
 
-```bash
-npm run parse "help doc"
+Parse help page specifying binary as argument or content as option
+
+Options:
+  -V, --version      output the version number
+  -d, --docs <docs>  The help page content (pass without <binary> argument)
+  -f, --file <file>  Path to a file with CLI docs
+  -h, --help         output usage information
+
+Examples:
+  $ usage-parser mocha   // Parser runs help command for `mocha` and parse output
+  $ usage-parser eslint  // Parser runs help command for `eslint` and parse output
+  $ usage-parser --file "usage-file.txt"
+  $ usage-parser --docs "usage text"
 ```
 
 ## Contribute
