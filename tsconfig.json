@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "rootDir": "./src",
+        "rootDir": "./",
         "sourceMap": true,
         "target": "ES6",
         "module": "commonjs",
@@ -17,6 +17,9 @@
         "esModuleInterop": true
     },
     "include": [
+        "bin.ts",
+        "index.ts",
+        "typings/json.d.ts",
         "src/**/*"
     ],
     "exclude": [
