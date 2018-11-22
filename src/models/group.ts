@@ -29,7 +29,7 @@ export class Group {
 
     /**
      * Added line to Group. If it not contain argument, then join it with last line on the Group
-     * @param {String} line - The Input line for add
+     * @param {string} line - The Input line for add
      * @return {Group} - The current Group with added line
      */
     addLine(line: string) : Group {
@@ -41,7 +41,7 @@ export class Group {
 
     /**
      * Create Group with name and array of lines
-     * @param {string | undefined } [name="undefined"] - The name of group, default is `undefined`
+     * @param {string | undefined} [name="undefined"] - The name of group, default is `undefined`
      * @param {string[]} [lines="[]"] - The array of lines, default is `[]`
      * @return {Group} - The Group
      */

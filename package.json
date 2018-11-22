@@ -11,6 +11,7 @@
     ],
     "scripts": {
         "build": "tsc -p .",
+        "doc": "jsdoc2md --files ./src/**/*.ts --configure ./config/jsdoc2md.json > ./docs/API.md",
         "lint": "tslint -c tslint.json --project . -t codeFrame",
         "test:unit": "nyc mocha -r ts-node/register ./test/unit/*.test.ts",
         "test:integration": "mocha -r ts-node/register ./test/integration/*.test.ts",
@@ -22,7 +23,7 @@
     ],
     "husky": {
         "hooks": {
-            "pre-commit": "npm run lint && npm run test"
+            "pre-commit": "npm run doc && npm run test"
         }
     },
     "publishConfig": {
@@ -58,6 +59,11 @@
         ]
     },
     "devDependencies": {
+        "@babel/cli": "^7.1.5",
+        "@babel/core": "^7.1.6",
+        "@babel/plugin-proposal-class-properties": "^7.1.0",
+        "@babel/preset-env": "^7.1.6",
+        "@babel/preset-typescript": "^7.1.0",
         "@semantic-release/changelog": "^3.0.0",
         "@semantic-release/git": "^7.0.1",
         "@types/chai": "^4.1.7",
@@ -67,6 +73,8 @@
         "assert": "^1.4.1",
         "chai": "^4.2.0",
         "husky": "^0.14.3",
+        "jsdoc-babel": "^0.5.0",
+        "jsdoc-to-markdown": "^4.0.1",
         "mocha": "^5.2.0",
         "nyc": "^13.1.0",
         "semantic-release": "^15.9.5",

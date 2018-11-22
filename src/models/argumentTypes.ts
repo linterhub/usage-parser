@@ -8,12 +8,13 @@ export class ArgumentTypes {
 
     /**
      * The Map which include type of argument and his aliases.
+     * @type {Map<ArgumentType, string[]>}
      */
     map: Map<ArgumentType, string[]>;
 
     /**
      * @constructor
-     * @param {Map<ArgumentType, string[]} map - The Map which include type of argument and his aliases.
+     * @param {Map<ArgumentType, string[]>} map - The Map which include type of argument and his aliases.
      */
     constructor(map : Map<ArgumentType, string[]>) {
         this.map = map;
@@ -21,7 +22,7 @@ export class ArgumentTypes {
 
     /**
      * Try to find ArgumentType in the line, default is `ArgumentType.undefined`
-     * @param line - The line in which need to find ArgumentType
+     * @param {string | undefined} line - The line in which need to find ArgumentType
      * @return {ArgumentType} - The ArgumentType which find in line
      */
     indetifyType(line: string | undefined) : ArgumentType {
@@ -36,7 +37,7 @@ export class ArgumentTypes {
 
     /**
      * Create Argument Type with map, which include type and aliases.
-     * @param {Map<ArgumentType, string[]>} [map="undefined"] - The Map which include type of argument and his aliases.
+     * @param {Map<ArgumentType, string[]> | undefined} [map="undefined"] - The Map which include type of argument and his aliases.
      * If map is `undefined`, get map from config. Default is `undefined`
      * @return {ArgumentTypes} - The Argument Type class with map
      */
