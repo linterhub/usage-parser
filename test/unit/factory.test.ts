@@ -1,10 +1,10 @@
 import 'mocha';
 import sinon, { SinonStub } from 'sinon';
 
-import { Group } from '../src/models/group';
-import { Section } from '../src/models/section';
-import { Argument } from '../src/models/argument';
-import { ClientFactory } from './../src/factory/ClientFactory';
+import { Group } from '../../src/models/group';
+import { Section } from '../../src/models/section';
+import { Argument } from '../../src/models/argument';
+import { ClientFactory } from '../../src/factory/ClientFactory';
 
 const sandbox = sinon.createSandbox();
 

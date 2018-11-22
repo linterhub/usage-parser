@@ -32,6 +32,6 @@ export class Section {
      * @return {Section} - The Section
      */
     static create(name: string | undefined = undefined, args: Argument[] = []) : Section {
-        return new Section(name, args);
+        return new Section(name ? name.unify() : name, args);
     }
 }
