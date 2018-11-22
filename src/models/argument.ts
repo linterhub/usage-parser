@@ -92,7 +92,8 @@ export class Argument {
      * @return {true | undefined} - If argument is value return `true`, else `undefined`
      */
     _isValue() : true | undefined {
-        return (this.type === ArgumentType.undefined || this.type === ArgumentType.boolean) ? true : undefined;
+        return (this.type !== ArgumentType.undefined && this.type !== ArgumentType.boolean)
+            ? true : undefined;
     }
 
     /**

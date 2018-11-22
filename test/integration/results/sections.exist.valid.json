@@ -1,0 +1,225 @@
+{
+    "delimiter": " ",
+    "sections": [
+        {
+            "name": "Options",
+            "args": [
+                {
+                    "longName": "--extension",
+                    "description": "Additional extension to lint [Can be set multiple times]",
+                    "type": "undefined"
+                },
+                {
+                    "longName": "--no-esnext",
+                    "description": "Don't enforce ES2015+ rules",
+                    "type": "undefined"
+                },
+                {
+                    "longName": "--prettier",
+                    "shortName": "-p",
+                    "description": "Conform to Prettier code style",
+                    "type": "undefined"
+                },
+                {
+                    "longName": "--cwd",
+                    "description": "Working directory for files",
+                    "delimiter": " ",
+                    "type": "string",
+                    "hasValue": true
+                }
+            ]
+        },
+        {
+            "name": "Flags",
+            "args": [
+                {
+                    "longName": "--ignore",
+                    "description": "Additional paths to ignore [Can be set multiple times]",
+                    "type": "undefined"
+                },
+                {
+                    "shortName": "-i",
+                    "description": "Additional paths to ignore [Can be set multiple times]",
+                    "type": "undefined"
+                }
+            ]
+        },
+        {
+            "name": "Options",
+            "args": [
+                {
+                    "longName": "--ext",
+                    "description": "Specify JavaScript file extensions - [default: .js]",
+                    "default": ".js",
+                    "delimiter": " ",
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--stdin",
+                    "description": "Lint code provided on <STDIN> - (default is 'false\") [deprecated]",
+                    "default": "false",
+                    "deprecated": true,
+                    "type": "boolean"
+                },
+                {
+                    "longName": "--SPACE",
+                    "description": "(Deprecated) USE SPACE INDENT INSTEAD OF TABS DEFAULTS TO 2",
+                    "default": "2",
+                    "deprecated": true,
+                    "type": "number",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--parser",
+                    "description": "Which parser to use. <flow|babylon|typescript|css|less|scss|json-file|json5|json-stringify|graphql|markdown|vue|yaml>",
+                    "values": [
+                        "flow",
+                        "babylon",
+                        "typescript",
+                        "css",
+                        "less",
+                        "scss",
+                        "json-file",
+                        "json5",
+                        "json-stringify",
+                        "graphql",
+                        "markdown",
+                        "vue",
+                        "yaml"
+                    ],
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--arrow-parens",
+                    "description": "Include parentheses around a sole arrow function parameter. Defaults to avoid",
+                    "values": [
+                        "avoid",
+                        "always"
+                    ],
+                    "default": "avoid",
+                    "delimiter": "=",
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--reporter",
+                    "description": "Built in reporter (default, csv, jslint, checkstyle, raw), or module, or path to reporter file",
+                    "values": [
+                        "default",
+                        "csv",
+                        "jslint",
+                        "checkstyle",
+                        "raw",
+                        "module"
+                    ],
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--option1",
+                    "description": "(auto|always|never, default to never)",
+                    "values": [
+                        "auto",
+                        "always",
+                        "never"
+                    ],
+                    "default": "never",
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--reporter2",
+                    "description": "Custom reporter (<PATH>|jslint|checkstyle|unix)",
+                    "values": [
+                        "PATH",
+                        "jslint",
+                        "checkstyle",
+                        "unix"
+                    ],
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--option2",
+                    "description": "Option 2. May be: \"scss\", \"sass\", \"less\", \"sugarss\", \"<path>\"",
+                    "values": [
+                        "scss",
+                        "sass",
+                        "less",
+                        "sugarss",
+                        "path"
+                    ],
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--option3",
+                    "description": "Option 3: \"json\", \"string\" or \"verbose\"",
+                    "values": [
+                        "json",
+                        "string",
+                        "verbose"
+                    ],
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--config",
+                    "description": "Path to configuration file <file|path>",
+                    "values": [
+                        "file",
+                        "path"
+                    ],
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--error-filter",
+                    "shortName": "-f",
+                    "description": "A module to filter errors",
+                    "delimiter": " ",
+                    "type": "string",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--max-warnings",
+                    "description": "Number of warnings to trigger nonzero exit code",
+                    "delimiter": " ",
+                    "type": "number",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--parser-options",
+                    "description": "Specify parser options",
+                    "delimiter": " ",
+                    "type": "object",
+                    "hasValue": true
+                },
+                {
+                    "longName": "--spaces",
+                    "description": "Spaces",
+                    "type": "undefined"
+                },
+                {
+                    "longName": "--option4",
+                    "description": "Automatically fix problems. [default: true]",
+                    "default": "true",
+                    "type": "boolean"
+                },
+                {
+                    "longName": "--option5",
+                    "description": "Automatically fix problems. [default: false]",
+                    "default": "false",
+                    "type": "boolean"
+                },
+                {
+                    "longName": "--option6",
+                    "description": "Option 6. Defaults to []",
+                    "type": "undefined"
+                }
+            ]
+        }
+    ]
+}

@@ -1,10 +1,10 @@
 import 'mocha';
 import sinon from 'sinon';
 
-import { Group } from '../src/models/group';
-import { Argument } from '../src/models/argument';
-import { ArgumentType } from '../src/types/argumentType';
-import { ArgumentTypes } from '../src/models/argumentTypes';
+import { Group } from '../../src/models/group';
+import { Argument } from '../../src/models/argument';
+import { ArgumentType } from '../../src/types/argumentType';
+import { ArgumentTypes } from '../../src/models/argumentTypes';
 
 const sandbox = sinon.createSandbox();
 
@@ -47,7 +47,7 @@ describe('Models', () => {
                 // act
                 const result = argument._isValue();
                 // assert
-                sandbox.assert.match(result, true);
+                sandbox.assert.match(result, undefined);
             });
             it('Type is boolean', () => {
                 // arrange
@@ -55,7 +55,7 @@ describe('Models', () => {
                 // act
                 const result = argument._isValue();
                 // assert
-                sandbox.assert.match(result, true);
+                sandbox.assert.match(result, undefined);
             });
             it('Another type', () => {
                 // arrange
@@ -63,7 +63,7 @@ describe('Models', () => {
                 // act
                 const result = argument._isValue();
                 // assert
-                sandbox.assert.match(result, undefined);
+                sandbox.assert.match(result, true);
             });
         });
         describe('Get Values', () => {

@@ -1,7 +1,7 @@
 import 'mocha';
 import sinon from 'sinon';
 
-import './../src/extensions/String';
+import '../../src/extensions/String';
 
 const sandbox = sinon.createSandbox();
 

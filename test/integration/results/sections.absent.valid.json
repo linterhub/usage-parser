@@ -1,0 +1,81 @@
+{
+    "sections": [
+        {
+            "args": [
+                {
+                    "description": "Display this help text",
+                    "longName": "--help",
+                    "shortName": "-h",
+                    "type": "undefined"
+                },
+                {
+                    "description": "Reduce output to errors only",
+                    "longName": "--quiet",
+                    "shortName": "-q",
+                    "type": "undefined"
+                },
+                {
+                    "description": "Print the version",
+                    "longName": "--version",
+                    "shortName": "-v",
+                    "type": "undefined"
+                },
+                {
+                    "description": "File exclusion regex",
+                    "hasValue": true,
+                    "longName": "--exclude",
+                    "shortName": "-x",
+                    "type": "string"
+                },
+                {
+                    "description": "The output directory",
+                    "hasValue": true,
+                    "longName": "--dir",
+                    "required": true,
+                    "shortName": "-d",
+                    "type": "string"
+                },
+                {
+                    "description": "Recursively search directories",
+                    "longName": "--recurse",
+                    "shortName": "-r",
+                    "type": "undefined"
+                },
+                {
+                    "description": "Specify a jshintrc file for JSHint linting",
+                    "hasValue": true,
+                    "longName": "--jshint",
+                    "shortName": "-l",
+                    "type": "string"
+                },
+                {
+                    "description": "Specify a eslintrc file for ESLint linting",
+                    "hasValue": true,
+                    "longName": "--eslint",
+                    "shortName": "-e",
+                    "type": "string"
+                },
+                {
+                    "description": "Title of the report",
+                    "hasValue": true,
+                    "longName": "--title",
+                    "shortName": "-t",
+                    "type": "string"
+                },
+                {
+                    "description": "Time to use as the report date (seconds, > 9999999999 assumed to be ms)",
+                    "hasValue": true,
+                    "longName": "--date",
+                    "shortName": "-D",
+                    "type": "string"
+                },
+                {
+                    "description": "Skips empty lines from line count",
+                    "longName": "--noempty",
+                    "shortName": "-n",
+                    "type": "undefined"
+                }
+            ]
+        }
+    ]
+}

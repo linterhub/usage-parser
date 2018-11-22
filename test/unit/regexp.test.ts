@@ -1,8 +1,8 @@
 import 'mocha';
 import sinon from 'sinon';
 
-import './../src/extensions/String';
-import { config } from './../src/config';
+import '../../src/extensions/String';
+import { config } from '../../src/config';
 
 const sandbox = sinon.createSandbox();
 
@@ -58,7 +58,7 @@ describe('RegExp', () => {
             sandbox.assert.match(result, identity);
         });
         it('four words', () => {
-            const line = ' So long section name:';
+            const line = 'So long section name:';
             const result = runMatch(line, config.reg.section);
             sandbox.assert.match(result, identity);
         });
