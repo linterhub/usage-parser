@@ -10,14 +10,23 @@ import './../interface/String';
  * The client factory with describe how to work with main data in Usage Parser
  */
 class ClientFactory {
-    constructor() {}
+
+    /**
+     * Examples of usage
+     * @type {?string[] | undefined}
+     */
+    examples?: string[] | undefined;
+
+    constructor() {
+        this.examples = undefined;
+    }
 
     /**
      * Split input by regExp from config and returns array of lines
      * @param {string} input - input via string
      * @return {string[]} - The array of lines
      */
-    static splitLine(input: string) {
+    splitLine(input: string) {
         const linesArray = input.split(config.settings.line.breaker);
         const linesClear = linesArray.filter((x) => x !== '');
         return linesClear;
@@ -28,7 +37,7 @@ class ClientFactory {
      * @param {string[]} linesClear - The array of lines
      * @return {Group[]} - The array of groups
      */
-    static createGroups(linesClear: string[]) : Group[] {
+    createGroups(linesClear: string[]) : Group[] {
         return linesClear.reduce((acum, line) => {
             const section = config.reg.section.firstMatch(line);
 
@@ -46,7 +55,7 @@ class ClientFactory {
      * @param {string[]} lines - The lines which contains argument and description
      * @return {Argument[]} - The array of arguments with properties
      */
-    static createArguments = (lines: string[]) : Argument[]  => {
+    createArguments = (lines: string[]) : Argument[]  => {
         return lines.reduce((acum, line) => {
             const cleanLine = line.trimEnd(config.settings.trimEnd);
             const parts = cleanLine
@@ -66,9 +75,14 @@ class ClientFactory {
      * @param {Group[]} groupsArray - The array of groups
      * @return {Section[]} - The array of sections
      */
-    static createSections (groupsArray: Group[]) : Section[] {
+    createSections (groupsArray: Group[]) : Section[] {
+        const exampleRegExp = new RegExp(config.settings.example, 'i');
         return groupsArray.reduce((acum, group) => {
-            const argsArray = ClientFactory.createArguments(group.lines);
+            if (group.name && group.name.search(exampleRegExp) !== -1) {
+                this.examples = group.lines;
+                return acum;
+            }
+            const argsArray = this.createArguments(group.lines);
             const argsClear = argsArray.filter((arg) =>
                 !(arg.longName === undefined && arg.shortName === undefined));
             if (argsClear.length) {
@@ -86,12 +100,12 @@ class ClientFactory {
      * @param {string} [delimiter="undefined"] - The usage delimiter
      * @return {Usage | undefined} - The usage or undefined, if array groups is empty
      */
-    static createUsage(sectionsArray: Section[], delimiter: string | undefined = undefined) : Usage | undefined {
+    createUsage(sectionsArray: Section[], delimiter: string | undefined = undefined) : Usage | undefined {
         const ignoredSectionRegExp = new RegExp(config.settings.blackList.section.join('|'), 'i');
         const sectionsClear = sectionsArray.filter((item) => {
             return item.name ? item.name.search(ignoredSectionRegExp) === -1 : true;
         });
-        const usage = sectionsClear.length ? Usage.create(sectionsClear, delimiter) : undefined;
+        const usage = sectionsClear.length ? Usage.create(sectionsClear, delimiter, this.examples) : undefined;
         return usage;
     }
 }

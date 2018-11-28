@@ -1,5 +1,14 @@
 {
     "delimiter": " ",
+    "examples": [
+        "$ xo index.js      $ xo *.js !foo.js",
+        "$ xo --spaces=1",
+        "$ xo --env=node --env=mocha",
+        "$ xo --ignore --i",
+        "$ xo --plugin=react",
+        "$ xo --plugin=html --extension=html",
+        "$ echo 'const x=true' | xo --stdin --fix"
+    ],
     "sections": [
         {
             "name": "Options",

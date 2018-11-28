@@ -9,6 +9,7 @@ import { ClientFactory } from '../../src/factory/ClientFactory';
 const sandbox = sinon.createSandbox();
 
 describe('Client Factory', () => {
+    const clientFactory = new ClientFactory();
     const groupInstanceStub = sandbox.createStubInstance(Group);
     const sectionInstanceStub = sandbox.createStubInstance(Section);
     const argumentInstanceStub = sandbox.createStubInstance(Argument);
@@ -29,7 +30,7 @@ describe('Client Factory', () => {
             // arrange
             const lines = new Array<string>();
             // act
-            const result = ClientFactory.createGroups(lines);
+            const result = clientFactory.createGroups(lines);
             // assert
             sandbox.assert.match(result, []);
         });
@@ -37,7 +38,7 @@ describe('Client Factory', () => {
             // arrange
             const lines = ['', ''];
             // act
-            const result = ClientFactory.createGroups(lines);
+            const result = clientFactory.createGroups(lines);
             // assert
             sandbox.assert.match(result.length, 1);
         });
@@ -59,7 +60,7 @@ describe('Client Factory', () => {
             trimEnd.returns(line);
             unify.returns(line);
             // act
-            const result = ClientFactory.createArguments(lines);
+            const result = clientFactory.createArguments(lines);
             // assert
             sandbox.assert.match(result, []);
         });
@@ -70,7 +71,7 @@ describe('Client Factory', () => {
             trimEnd.returns(line);
             unify.returns(line);
             // act
-            const result = ClientFactory.createArguments(lines);
+            const result = clientFactory.createArguments(lines);
             // assert
             sandbox.assert.match(result, [argumentInstanceStub]);
         });
@@ -82,7 +83,7 @@ describe('Client Factory', () => {
             // arrange
             const groups = Array<Group>();
             // act
-            const result = ClientFactory.createSections(groups);
+            const result = clientFactory.createSections(groups);
             // assert
             sandbox.assert.match(result, []);
         });
@@ -90,9 +91,9 @@ describe('Client Factory', () => {
             // arrange
             groupInstanceStub.lines = [''];
             argumentInstanceStub.longName = '-s';
-            sandbox.stub(ClientFactory, 'createArguments').returns([argumentInstanceStub]);
+            sandbox.stub(clientFactory, 'createArguments').returns([argumentInstanceStub]);
             // act
-            const result = ClientFactory.createSections([groupInstanceStub]);
+            const result = clientFactory.createSections([groupInstanceStub]);
             // assert
             sandbox.assert.match(result, [sectionInstanceStub]);
         });
@@ -104,7 +105,7 @@ describe('Client Factory', () => {
             // arrange
             const sections = new Array<Section>();
             // act
-            const result = ClientFactory.createUsage(sections);
+            const result = clientFactory.createUsage(sections);
             // assert
             sandbox.assert.match(result, undefined);
         });
@@ -112,7 +113,7 @@ describe('Client Factory', () => {
             // arrange
             const sections = [sectionInstanceStub];
             // act
-            const result = ClientFactory.createUsage(sections);
+            const result = clientFactory.createUsage(sections);
             // assert
             sandbox.assert.match(result!.sections, sections);
         });
