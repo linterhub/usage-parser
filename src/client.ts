@@ -29,12 +29,13 @@ class Client {
      * @return {Usage} - The Usage with sections and arguments
      */
     parse() : Usage | undefined {
-        const lines = ClientFactory.splitLine(this.input);
-        const groups = ClientFactory.createGroups(lines);
-        const sections = ClientFactory.createSections(groups);
+        const clientFactory = new ClientFactory();
+        const lines = clientFactory.splitLine(this.input);
+        const groups = clientFactory.createGroups(lines);
+        const sections = clientFactory.createSections(groups);
 
         const delimiter = config.reg.delimiter.firstMatch(this.input);
-        const usage = ClientFactory.createUsage(sections, delimiter);
+        const usage = clientFactory.createUsage(sections, delimiter);
         return usage;
     }
 }

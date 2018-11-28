@@ -18,13 +18,24 @@ export class Usage {
     delimiter?: string | undefined;
 
     /**
+     * Examples of usage
+     * @type {?string[] | undefined}
+     */
+    examples?: string[] | undefined;
+
+    /**
      * @constructor
      * @param {Section[]} sections - The array of Sections
      * @param {string | undefined} delimiter - The delimiter of usage
      */
-    constructor(sections: Section[], delimiter: string | undefined) {
+    constructor(
+        sections: Section[],
+        delimiter: string | undefined,
+        examaples : string[] | undefined
+    ) {
         this.delimiter = delimiter;
         this.sections = sections;
+        this.examples = examaples;
     }
 
     /**
@@ -33,7 +44,12 @@ export class Usage {
      * @param {string | undefined} [delimiter="undefined"] - The delimiter of usage, default is `undefined`
      * @return {Usage} - The Usage
      */
-    static create(sections: Section[], delimiter: string | undefined = undefined) : Usage {
-        return new Usage(sections, delimiter);
+    static create(
+        sections: Section[],
+        delimiter: string | undefined = undefined,
+        examples: string[] | undefined = undefined
+    ) : Usage {
+        const examaplesClear = examples ? examples.map((str) => str.trim()) : undefined;
+        return new Usage(sections, delimiter, examaplesClear);
     }
 }

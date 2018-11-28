@@ -1,6 +1,7 @@
 export const config  = {
     settings: {
         trimEnd: '.',
+        example: 'example',
         blackList: {
             section: ['example'],
         },

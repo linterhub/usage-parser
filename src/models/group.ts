@@ -34,7 +34,7 @@ export class Group {
      */
     addLine(line: string) : Group {
         const readyLine = line.includes(config.reg.arg.start) ?
-            line : this.lines.pop() + config.settings.line.join + line;
+            line : (this.lines.pop() || '') + config.settings.line.join + line;
         this.lines.push(readyLine);
         return this;
     }
