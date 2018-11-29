@@ -1,6 +1,6 @@
-import {Usage} from './models/usage';
 import {config} from './config';
-import {ClientFactory} from './factory/ClientFactory';
+import {Usage} from './models/usage';
+import {ClientFactory} from './factory/сlientFactory';
 
 import './extensions/String';
 

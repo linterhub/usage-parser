@@ -1,7 +1,11 @@
 {
     "delimiter": " ",
     "examples": [
-        "$ xo index.js      $ xo *.js !foo.js",
+        "$ xo [flags]",
+        "$ xo [<file|glob> ...]",
+        "$ xo",
+        "$ xo index.js",
+        "$ xo *.js !foo.js",
         "$ xo --spaces=1",
         "$ xo --env=node --env=mocha",
         "$ xo --ignore --i",
@@ -12,7 +16,7 @@
     "sections": [
         {
             "name": "Options",
-            "args": [
+            "properties": [
                 {
                     "longName": "--extension",
                     "description": "Additional extension to lint [Can be set multiple times]",
@@ -40,7 +44,7 @@
         },
         {
             "name": "Flags",
-            "args": [
+            "properties": [
                 {
                     "longName": "--ignore",
                     "description": "Additional paths to ignore [Can be set multiple times]",
@@ -55,7 +59,7 @@
         },
         {
             "name": "Options",
-            "args": [
+            "properties": [
                 {
                     "longName": "--ext",
                     "description": "Specify JavaScript file extensions - [default: .js]",
@@ -102,7 +106,7 @@
                 },
                 {
                     "longName": "--arrow-parens",
-                    "description": "Include parentheses around a sole arrow function parameter. Defaults to avoid",
+                    "description": "Include parentheses around a sole arrow function parameter Defaults to avoid",
                     "values": [
                         "avoid",
                         "always"

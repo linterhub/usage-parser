@@ -1,10 +1,13 @@
 import 'mocha';
 import sinon, { SinonStub } from 'sinon';
 
-import { Group } from '../../src/models/group';
-import { Section } from '../../src/models/section';
-import { Argument } from '../../src/models/argument';
-import { ClientFactory } from '../../src/factory/ClientFactory';
+import {Group} from '../../src/models/group';
+import {Section} from '../../src/models/section';
+import {Command} from '../../src/models/command';
+import {Argument} from '../../src/models/argument';
+import {LineType} from '../../src/types/lineType';
+import {LineParts} from './../../src/models/lineParts';
+import {ClientFactory} from '../../src/factory/сlientFactory';
 
 const sandbox = sinon.createSandbox();
 
@@ -12,12 +15,14 @@ describe('Client Factory', () => {
     const clientFactory = new ClientFactory();
     const groupInstanceStub = sandbox.createStubInstance(Group);
     const sectionInstanceStub = sandbox.createStubInstance(Section);
+    const commandInstanceStub = sandbox.createStubInstance(Command);
     const argumentInstanceStub = sandbox.createStubInstance(Argument);
+    const linePartsInstanceStub = sandbox.createStubInstance(LineParts);
 
     beforeEach(() => {
         sandbox.stub(Group, 'create').returns(groupInstanceStub);
         sandbox.stub(Section, 'create').returns(sectionInstanceStub);
-        sandbox.stub(Argument, 'create').returns(argumentInstanceStub);
+        sandbox.stub(LineParts, 'create').returns(linePartsInstanceStub);
         sandbox.stub(Group.prototype, 'addLine').returns(groupInstanceStub);
         sandbox.stub(String.prototype, 'firstMatch').returns(undefined);
     });
@@ -43,40 +48,46 @@ describe('Client Factory', () => {
             sandbox.assert.match(result.length, 1);
         });
     });
-    describe('Create Arguments', () => {
-        let trimEnd : SinonStub;
-        let unify : SinonStub;
-
+    describe('Create Properties', () => {
         beforeEach(() => {
-            trimEnd = sandbox.stub(String.prototype, 'trimEnd');
-            unify = sandbox.stub(String.prototype, 'unify');
+            sandbox.stub(Command, 'create').returns(commandInstanceStub);
+            sandbox.stub(Argument, 'create').returns(argumentInstanceStub);
+            sandbox.stub(String.prototype, 'unify').returns('');
         });
-        afterEach(() => {sandbox.reset();});
+        afterEach(() => { sandbox.reset(); });
 
         it('Empty lines', () => {
             // arrange
-            const line = '';
-            const lines = [line];
-            trimEnd.returns(line);
-            unify.returns(line);
+            const lines = [linePartsInstanceStub];
             // act
-            const result = clientFactory.createArguments(lines);
+            const result = clientFactory.createProperties(lines);
             // assert
             sandbox.assert.match(result, []);
         });
-        it('Exists lines', () => {
+        it('Command', () => {
             // arrange
-            const line = '-s  Description';
-            const lines = [line];
-            trimEnd.returns(line);
-            unify.returns(line);
+            linePartsInstanceStub.type = LineType.command;
+            const lines = [linePartsInstanceStub];
             // act
-            const result = clientFactory.createArguments(lines);
+            const result = clientFactory.createProperties(lines);
+            // assert
+            sandbox.assert.match(result, [commandInstanceStub]);
+        });
+        it('Argument', () => {
+            // arrange
+            linePartsInstanceStub.type = LineType.argument;
+            const lines = [linePartsInstanceStub];
+            // act
+            const result = clientFactory.createProperties(lines);
             // assert
             sandbox.assert.match(result, [argumentInstanceStub]);
         });
     });
     describe('Create Sections', () => {
+        beforeEach(() => {
+            sandbox.stub(clientFactory, 'createExamples').returns(undefined);
+            sandbox.stub(clientFactory, 'createProperties').returns([argumentInstanceStub]);
+        });
         afterEach(() => {sandbox.reset();});
 
         it('Empty Groups', () => {
@@ -89,14 +100,38 @@ describe('Client Factory', () => {
         });
         it('Exists Groups', () => {
             // arrange
-            groupInstanceStub.lines = [''];
+            groupInstanceStub.lines = [linePartsInstanceStub];
             argumentInstanceStub.longName = '-s';
-            sandbox.stub(clientFactory, 'createArguments').returns([argumentInstanceStub]);
             // act
             const result = clientFactory.createSections([groupInstanceStub]);
+            sectionInstanceStub.name = undefined;
+            sectionInstanceStub.properties = [argumentInstanceStub];
             // assert
             sandbox.assert.match(result, [sectionInstanceStub]);
         });
+    });
+
+    describe('Create Examples', () => {
+        afterEach(() => {sandbox.reset();});
+
+        it('Empty Examples', () => {
+            // arrange
+            groupInstanceStub.lines = [];
+            // act
+            clientFactory.createExamples(groupInstanceStub);
+            // assert
+            sandbox.assert.match(clientFactory.examples, []);
+        });
+        it('Exist Examples', () => {
+            // arrange
+            linePartsInstanceStub.right = 'text';
+            groupInstanceStub.lines = [linePartsInstanceStub];
+            // act
+            clientFactory.createExamples(groupInstanceStub);
+            // assert
+            sandbox.assert.match(clientFactory.examples, ["text"]);
+        });
+
     });
     describe('Create Usage', () => {
         afterEach(() => {sandbox.reset();});

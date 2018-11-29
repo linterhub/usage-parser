@@ -1,7 +1,7 @@
 {
     "sections": [
         {
-            "args": [
+            "properties": [
                 {
                     "description": "Display this help text",
                     "longName": "--help",

@@ -1,5 +1,6 @@
-import { ArgumentType } from '../types/argumentType';
-import { config } from './../config';
+import {config} from '../config';
+import {ArgumentType} from '../types/argumentType';
+
 
 /**
  * The Argument Type class which include type and aliases, also method for indentify

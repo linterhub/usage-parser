@@ -1,6 +1,8 @@
-import { Argument } from "./argument";
+import {UsageProperty} from "../interface/UsageProperty";
 
-/** The section with arguments of usage's doc */
+import '../interface/String';
+
+/** The section with properties of usage's doc */
 export class Section {
 
     /**
@@ -10,28 +12,28 @@ export class Section {
     name?: string | undefined;
 
     /**
-     * Array of arguments
+     * Array of properties
      * @type {string[]}
      */
-    args: Argument[];
+    properties: UsageProperty[];
 
     /**
      * @constructor
      * @param {string | undefined} name - The name of section
-     * @param {Argument[]} args - The array of arguments
+     * @param {UsageProperty[]} properties - The array of properties
      */
-    constructor(name: string | undefined, args: Argument[]) {
+    constructor(name: string | undefined, properties: UsageProperty[]) {
         this.name = name;
-        this.args = args;
+        this.properties = properties;
     }
 
     /**
-     * Create the section with arguments of usage's doc
+     * Create the section with properties of usage's doc
      * @param {string | undefined} [name="undefined"] - The name of section, default is `undefined`
-     * @param {Argument[]} [args="[]"] - The array of lines, default is `[]`
+     * @param {UsageProperty[]} [properties="[]"] - The array of lines, default is `[]`
      * @return {Section} - The Section
      */
-    static create(name: string | undefined = undefined, args: Argument[] = []) : Section {
-        return new Section(name ? name.unify() : name, args);
+    static create(name: string | undefined = undefined, properties: UsageProperty[] = []) : Section {
+        return new Section(name !== undefined ? name.unify() : name, properties);
     }
 }

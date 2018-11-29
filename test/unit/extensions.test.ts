@@ -33,6 +33,18 @@ describe('String extension', () => {
         });
     });
 
+    describe('unify', () => {
+        afterEach(() => { sandbox.reset(); });
+
+        it('UpperCase', () => {
+            // arrange
+            const input = 'text  ';
+            // act
+            const result = input.unify();
+            // assert
+            sandbox.assert.match(result, 'Text');
+        });
+    });
     describe('convert', () => {
         afterEach(() => { sandbox.reset(); });
 

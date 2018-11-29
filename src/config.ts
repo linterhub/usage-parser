@@ -1,18 +1,18 @@
 export const config  = {
     settings: {
         trimEnd: '.',
-        example: 'example',
+        example: ['example', 'usage'],
         blackList: {
             section: ['example'],
         },
         line: {
-            breaker: /\n|\r/gim,
+            breaker: /\r\n|\r|\n/gim,
             join: '  ',
         }
     },
     reg: {
         arg: {
-            start: '-',
+            start: '(?:^|^ *)((-[^-]|--).*?)(?:\\s|=|$|,)',
             long: '(--(?:\\w|-|$)*)',
             short: '(?:\\s|^)(-[^-]*?)(?:\\s|=|$|,)',
         },
@@ -20,6 +20,7 @@ export const config  = {
             values: '(?:[<(\["])(([\\S]+([|,]|\\sor\\s|,\\s))+[\\S]{1,})(?:[>)\\]"]|,\\s|$)',
             split: /\||<|>|\(|\)|\[|\]|\"|\'|,|\s|or/
         },
+        command: '(?:^)(?:((?:\\w*\\s*){1,1})(?: |$))$',
         section: '(?:^)(?:((?:\\w*\\s*){1,2})(?::| |$)|(?:\\w*\\s*){3,4}(?::|$))$',
         delimiter: '[\\s]*[-]+[^ \t(\n|\r\n)]+(\\s|=)[^ :\t(\n|\r\n)-]',
         tabulation: /\\s\\s|\\t|  /,

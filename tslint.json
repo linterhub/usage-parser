@@ -1,5 +1,6 @@
 {
     "rules": {
+      "no-console": [true, "log", "error"],
       "array-type": [true, "array-simple"],
       "arrow-return-shorthand": true,
       "ban": [true,
@@ -50,5 +51,8 @@
         "allow-leading-underscore",
         "allow-trailing-underscore"
       ]
+    },
+    "linterOptions": {
+      "exclude": ["bin.ts"]
     }
   }
