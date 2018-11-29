@@ -1,4 +1,4 @@
-import { Section } from './section';
+import {Section} from './section';
 
 /**
  * The Usage is a Object which contains Section of doc

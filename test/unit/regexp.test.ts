@@ -2,7 +2,7 @@ import 'mocha';
 import sinon from 'sinon';
 
 import '../../src/extensions/String';
-import { config } from '../../src/config';
+import {config} from '../../src/config';
 
 const sandbox = sinon.createSandbox();
 

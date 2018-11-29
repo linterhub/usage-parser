@@ -1,10 +1,12 @@
 import 'mocha';
 import sinon from 'sinon';
 
-import { Group } from '../../src/models/group';
-import { Argument } from '../../src/models/argument';
-import { ArgumentType } from '../../src/types/argumentType';
-import { ArgumentTypes } from '../../src/models/argumentTypes';
+import {Group} from '../../src/models/group';
+import {Argument} from '../../src/models/argument';
+import {LineType} from '../../src/types/lineType';
+import {LineParts} from '../../src/models/lineParts';
+import {ArgumentType} from '../../src/types/argumentType';
+import {ArgumentTypes} from '../../src/models/argumentTypes';
 
 const sandbox = sinon.createSandbox();
 
@@ -22,18 +24,72 @@ describe('Models', () => {
             sandbox.assert.match(result, ArgumentType.string);
         });
     });
+    describe('Line Parts', () => {
+        let lineParts : LineParts;
+        beforeEach(() => {
+            lineParts = sandbox.createStubInstance(LineParts);
+        });
+        afterEach(() => { sandbox.reset(); });
+        after(() => { sandbox.restore(); });
+
+        it('argument', () => {
+            // arrange
+            const line = '-s  Description';
+            lineParts.left = '-s';
+            lineParts.right = 'Description';
+            lineParts.type = LineType.argument;
+            // act
+            const result = LineParts.create(line);
+            // assert
+            sandbox.assert.match(result, lineParts);
+        });
+        it('command', () => {
+            // arrange
+            const line = 'command  Description';
+            lineParts.left = 'command';
+            lineParts.right = 'Description';
+            lineParts.type = LineType.command;
+            // act
+            const result = LineParts.create(line);
+            // assert
+            sandbox.assert.match(result, lineParts);
+        });
+
+        it('update', () => {
+            // arange
+            const arrangeLineParts = LineParts.create('');
+            // act
+            const result = arrangeLineParts.update(lineParts);
+            // assert
+            sandbox.assert.match(result, lineParts);
+        });
+    });
+
     describe('Group', () => {
+        let lineParts : LineParts;
+
+        beforeEach(() => {
+            lineParts = sandbox.createStubInstance(LineParts);
+            sinon.stub(LineParts, 'create').returns(lineParts);
+        });
+        afterEach(() => { sandbox.reset(); });
+        after(() => { sandbox.restore(); });
+
         it('line consist a lot of parts', () => {
             // arrange
             const lines = [
                 '-a  Description',
                 'Description part 2'
             ];
+            lineParts.left = '-a';
+            lineParts.right = 'Description  Description part 2';
+            lineParts.type = LineType.argument;
+
             // act
             const group =  Group.create();
             lines.forEach((line) => group.addLine(line));
             // assert
-            sandbox.assert.match(group.lines[0], '-a  Description  Description part 2');
+            sandbox.assert.match(group.lines[0], lineParts);
         });
     });
     describe('Argument', () => {

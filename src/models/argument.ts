@@ -1,11 +1,12 @@
-import {config} from './../config';
-import { ArgumentType } from '../types/argumentType';
-import { ArgumentTypes } from './argumentTypes';
+import {config} from '../config';
+import {ArgumentType} from '../types/argumentType';
+import {ArgumentTypes} from './argumentTypes';
+import {UsageProperty} from '../interface/UsageProperty';
 
-import './../extensions/String';
+import '../extensions/String';
 
 /** Argument object of usage's doc */
-export class Argument {
+export class Argument implements UsageProperty {
     /**
      * The full name of the argument
      * @type {?string | undefined}
@@ -71,7 +72,7 @@ export class Argument {
      * @param {string | undefined} argsLine - The line which include anything but description
      * @param {string } descLine - The line which include only description
      */
-    constructor(argsLine: string | undefined, descLine: string) {
+    constructor(argsLine: string | undefined, descLine: string | undefined) {
         this.longName = config.reg.arg.long.firstMatch(argsLine);
         this.shortName = config.reg.arg.short.firstMatch(argsLine);
         this.description = descLine;
@@ -114,7 +115,7 @@ export class Argument {
      * @param {string} descLine - The string which contains only description of argument
      * @return {string[] | undefined} - The array strings or undefined. Undefined if values cannot identify
      */
-    _getValues(argsLine: string | undefined, descLine: string) : string[] | undefined {
+    _getValues(argsLine: string | undefined, descLine: string | undefined) : string[] | undefined {
         const fullLine = (argsLine || '') + config.reg.tabulation + descLine;
         const valuesLine = config.reg.enums.values.firstMatch(fullLine);
         const valuesArray = valuesLine ? valuesLine
@@ -129,7 +130,7 @@ export class Argument {
      * @param {string} descLine - The line which include only description
      * @return {Argument} - The Argument
      */
-    static create(argsLine: string | undefined, descLine: string) {
+    static create(argsLine: string | undefined, descLine: string | undefined) {
         return new Argument(argsLine, descLine);
     }
 }

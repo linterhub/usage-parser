@@ -35,4 +35,14 @@ describe('Integration', () => {
 
         assert.deepEqual(actual, expected);
     });
+    it('Commands', () => {
+        const input = fs.readFileSync(path.join(testFolder, inputs, 'commands.exist.valid.txt')).toString();
+        const answer = fs.readFileSync(path.join(testFolder, results, 'commands.exist.valid.json')).toString();
+
+        const result = new UsageParser(input.toString()).parse();
+        const actual = JSON.parse(JSON.stringify(result, null, 4));
+        const expected = JSON.parse(answer);
+
+        assert.deepEqual(actual, expected);
+    });
 });
