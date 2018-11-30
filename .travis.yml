@@ -11,4 +11,6 @@ jobs:
     - stage: semantic release
       if: branch = master AND type = push
       node_js: stable
-      script: npm run semantic-release
+      script:
+        - npm run build
+        - npm run semantic-release
