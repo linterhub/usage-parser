@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import fs from 'fs';
 import commander from 'commander';
 import UsageParser from './index';
