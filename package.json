@@ -7,27 +7,28 @@
     "repository": "linterhub/usage-parser",
     "bugs": "https://github.com/linterhub/usage-parser/issues",
     "bin": {
-        "usage-parser": "bin.js"
+        "usage-parser": "dist/bin.js"
     },
     "keywords": [
         "linterhub"
     ],
-    "main": "index.js",
+    "main": "dist/index.js",
     "scripts": {
-        "eslint": "./node_modules/.bin/eslint",
-        "parse": "node bin.js",
-        "lint": "eslint .",
-        "test": "mocha",
+        "build": "tsc -p .",
+        "doc": "jsdoc2md --files ./src/**/*.ts --configure ./config/jsdoc2md.json > ./docs/API.md",
+        "lint": "tslint -c tslint.json --project . -t codeFrame",
+        "test:unit": "nyc mocha -r ts-node/register ./test/unit/*.test.ts",
+        "test:integration": "mocha -r ts-node/register ./test/integration/*.test.ts",
+        "test": "npm run lint && npm run build && npm run test:unit && npm run test:integration",
         "semantic-release": "semantic-release"
     },
     "files": [
-        "src/",
-        "bin.js",
+        "dist/",
         "README.md"
     ],
     "husky": {
         "hooks": {
-            "pre-commit": "npm run lint && npm run test"
+            "pre-commit": "npm run doc && npm run test"
         }
     },
     "publishConfig": {
@@ -35,20 +36,59 @@
         "tag": "latest",
         "access": "public"
     },
+    "nyc": {
+        "check-coverage": true,
+        "lines": 70,
+        "statements": 70,
+        "functions": 70,
+        "branches": 70,
+        "extension": [
+            ".ts",
+            ".tsx"
+        ],
+        "exclude": [
+            "coverage/**/*",
+            "test/**/*",
+            "dist/**/*",
+            "src/client.ts",
+            "src/config.ts",
+            "index.ts",
+            "bin.ts"
+        ],
+        "reporter": [
+            "html",
+            "text-summary"
+        ],
+        "all": true,
+        "require": [
+            "ts-node/register"
+        ]
+    },
     "devDependencies": {
+        "@babel/cli": "^7.1.5",
+        "@babel/core": "^7.1.6",
+        "@babel/plugin-proposal-class-properties": "^7.1.0",
+        "@babel/preset-env": "^7.1.6",
+        "@babel/preset-typescript": "^7.1.0",
         "@semantic-release/changelog": "^3.0.0",
         "@semantic-release/git": "^7.0.1",
-        "chai": "^4.1.2",
-        "mocha": "^5.2.0",
-        "husky": "^0.14.3",
+        "@types/chai": "^4.1.7",
+        "@types/commander": "^2.12.2",
+        "@types/mocha": "^5.2.5",
+        "@types/node": "^10.12.5",
+        "@types/sinon": "^5.0.5",
         "assert": "^1.4.1",
-        "eslint": "^5.1.0",
-        "eslint-config-google": "^0.9.1",
-        "semantic-release": "^15.9.5"
-    },
-    "dependencies": {
-        "commander": "^2.17.1",
-        "jsonschema": "^1.2.4",
-        "lodash": "^4.17.10"
+        "chai": "^4.2.0",
+        "commander": "^2.19.0",
+        "husky": "^0.14.3",
+        "jsdoc-babel": "^0.5.0",
+        "jsdoc-to-markdown": "^4.0.1",
+        "mocha": "^5.2.0",
+        "nyc": "^13.1.0",
+        "semantic-release": "^15.9.5",
+        "sinon": "^7.1.1",
+        "ts-node": "^7.0.1",
+        "tslint": "^5.11.0",
+        "typescript": "^3.1.6"
     }
 }
