@@ -1,6 +1,6 @@
 {
     "recommendations": [
-        "dbaeumer.vscode-eslint",
+        "eg2.tslint",
         "ban.spellright",
         "eg2.vscode-npm-script"
     ]

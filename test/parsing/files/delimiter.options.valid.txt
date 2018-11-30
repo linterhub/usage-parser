@@ -1,2 +1,0 @@
-  Options:
-   -i, --ignore <PATH>         Additional paths to ignore [Can be set multiple times]
