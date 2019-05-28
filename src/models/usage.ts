@@ -1,9 +1,10 @@
 import {Section} from './section';
+import { UsageInterface } from '../interface/Usage';
 
 /**
  * The Usage is a Object which contains Section of doc
  */
-export class Usage {
+export class Usage implements UsageInterface {
 
     /**
      * Array of Section object
