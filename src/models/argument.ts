@@ -1,12 +1,12 @@
 import {config} from '../config';
 import {ArgumentType} from '../types/argumentType';
 import {ArgumentTypes} from './argumentTypes';
-import {UsageProperty} from '../interface/UsageProperty';
+import { ArgumentInterface } from '../interface/Argument';
 
 import '../extensions/String';
 
 /** Argument object of usage's doc */
-export class Argument implements UsageProperty {
+export class Argument implements ArgumentInterface {
     /**
      * The full name of the argument
      * @type {?string | undefined}

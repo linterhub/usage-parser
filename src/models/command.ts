@@ -1,10 +1,10 @@
 import {Usage} from "./usage";
-import {UsageProperty} from '../interface/UsageProperty';
+import { CommandInterface } from "../interface/Command";
 
 /**
  * The command with name, description and usage, if they exist
  */
-class Command implements UsageProperty  {
+class Command implements CommandInterface  {
 
     /**
      * The command name
