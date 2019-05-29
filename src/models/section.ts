@@ -1,9 +1,10 @@
 import {UsageProperty} from "../interface/UsageProperty";
+import { SectionInterface } from "../interface/Section";
 
 import '../interface/String';
 
 /** The section with properties of usage's doc */
-export class Section {
+export class Section implements SectionInterface {
 
     /**
      * Name of section
